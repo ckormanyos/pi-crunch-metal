@@ -18,4 +18,5 @@ Pi-crunch-metal project running on a
 [RaspberryPi(R)-Zero](https://www.raspberrypi.org/products/raspberry-pi-zero)
 in bare-metal mode is provided as a fully worked-out example.
 
+# Under Construction
 TBD: Image, circuit description and pin connections.
