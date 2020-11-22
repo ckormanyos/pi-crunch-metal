@@ -14,9 +14,9 @@ float back end provides the big-number engine for pi-crunch-metal.
 Computation progress can be displayed on either the console (for PC systems)
 or on a simple industry-standard LCD character display.
 
-Pi-crunch-metal project running on a
+The fully-worked-out pi-crunch-metal prototype example project runs on a
 [RaspberryPi(R)-Zero](https://www.raspberrypi.org/products/raspberry-pi-zero)
-in bare-metal mode is provided as a fully worked-out example.
+driven out-of-the-box in OS-less bare-metal mode.
 
 # Under Construction
 TBD: Image, circuit description and pin connections.
