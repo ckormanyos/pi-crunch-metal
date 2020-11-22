@@ -1,0 +1,13 @@
+"--endian=little" 
+
+"--cpu=ARM1176J-S" 
+
+"--fpu=VFPv2" 
+
+"--semihosting=none" 
+
+"--multicore_nr_of_cores=1" 
+
+
+
+
