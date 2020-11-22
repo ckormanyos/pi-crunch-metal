@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "C:\Users\User\Documents\Ks\uC_Software\Boards\test_armv6\settings\test_armv6.Debug.general.xcl" --backend -f "C:\Users\User\Documents\Ks\uC_Software\Boards\test_armv6\settings\test_armv6.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\settings\pi-crunch-metal.Debug.general.xcl" --backend -f "C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\settings\pi-crunch-metal.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "C:\Users\User\Documents\Ks\uC_Software\Boards\test_armv6\settings\test_armv6.Debug.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\User\Documents\Ks\uC_Software\Boards\test_armv6\settings\test_armv6.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.4\common\bin\cspybat" -f "C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\settings\pi-crunch-metal.Debug.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\settings\pi-crunch-metal.Debug.driver.xcl" 
 
 @echo off 
 :end

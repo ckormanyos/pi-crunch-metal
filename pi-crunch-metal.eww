@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspace>
     <project>
-        <path>$WS_DIR$\test_armv6.ewp</path>
+        <path>$WS_DIR$\pi-crunch-metal.ewp</path>
     </project>
     <batchBuild />
 </workspace>

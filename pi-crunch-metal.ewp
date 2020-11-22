@@ -773,7 +773,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$\test_armv6.icf</state>
+                    <state>$PROJ_DIR$\pi-crunch-metal.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -1006,7 +1006,7 @@
                 </option>
                 <option>
                     <name>IlinkTrustzoneImportLibraryOut</name>
-                    <state>test_armv6_import_lib.o</state>
+                    <state>pi-crunch-metal_import_lib.o</state>
                 </option>
                 <option>
                     <name>OILinkExtraOption</name>
