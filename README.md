@@ -47,3 +47,7 @@ are shown in the table below.
 | GPIO16/H36    | in 10/9, out 8  | CS            |
 | GPIO18/H12    | in 1/2, out 3   | SCK           |
 | GPIO19/H35    | in 4/5, out 6   | MOSI          |
+
+The LCD pin connections and the
+input/output connections of the port expander chip are clearly
+identifiable in the image.
