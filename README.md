@@ -14,6 +14,26 @@ float back end provides the big-number engine for pi-crunch-metal.
 Computation progress can be displayed on either the console (for PC systems)
 or on a simple industry-standard LCD character display.
 
+# Software Details
+
+Pi is computed with a quadratically converging Gauss arithmetic geometric mean
+iteration. Memory management uses a custom C++ allocator that manages
+memory slots aligned to the size of the limb-storage of the individual
+multiprecision type.
+
+Multiplication is the hot-spot of this program and the multiprecision
+implemntation uses a combination of school multiplication for low
+precision, switching directly over to an FFT multiplication scheme
+for higher precision. Intermediate advanced multiplication
+schemes such as Karatsuba and Toom-Cook are not implemented at the moment.
+
+The microcontroller boots and performs static initialization via self-written
+startup code.
+
+Compact code size is in focus and the entire project fits within about 30k
+of program code, with slight variations depending on the target system selected.
+The calculation does, however, require ample RAM of about 16 Mbyte.
+
 # Prototype Project
 
 This repo features a fully-worked-out pi-crunch-metal prototype example project
