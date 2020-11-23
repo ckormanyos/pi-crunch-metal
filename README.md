@@ -1,5 +1,7 @@
 # pi-crunch-metal
-Computes a million digits of pi on selected bare-metal microcontroller systems.
+
+pi-crunch-metal computes a million digits of pi
+on a bare-metal RaspberryPi(R)-Zero (and other systems).
 
 This fascinating, educational and fun project combines the domain
 of high-performance numerical computing with the raw simplicity of
@@ -13,6 +15,26 @@ The [wide-decimal](https://github.com/ckormanyos/wide-decimal) multiprecision
 float back end provides the big-number engine for pi-crunch-metal.
 Computation progress can be displayed on either the console (for PC systems)
 or on a simple industry-standard LCD character display.
+
+# Software Details
+
+Pi is computed with a quadratically converging Gauss arithmetic geometric mean
+iteration. Memory management uses a custom C++ allocator that manages
+memory slots aligned to the size of the limb-storage of the individual
+multiprecision type.
+
+Multiplication is the hot-spot of this program. The multiplication
+implementation uses a combination of school multiplication for low
+precision, switching directly over to an FFT multiplication scheme
+for higher precision. Intermediate precision advanced multiplication
+schemes such as Karatsuba and Toom-Cook are not implemented at the moment.
+
+The microcontroller boots and performs static initialization via self-written
+startup code.
+
+Compact code size is in focus and the entire project fits within about 30k
+of program code, with slight variations depending on the target system selected.
+The calculation does, however, require ample RAM of about 16 Mbyte.
 
 # Prototype Project
 
@@ -30,6 +52,10 @@ mega-digit pi calculation and is almost done with a second one.
 
 Traditional wire-wrapping techniques connect the pins on a self-made
 breakout board to a solderless prototyping breadboard.
+Double and quadruple strands of skinny wire are used on the
+power and ground pins, as these might typically carry up to 150mA
+of current in this setup.
+
 Bit banging is used to implement an all-software SPI-compatible
 driver which controls a port expander chip. The port
 expander chip is used to control the pins on an industry-standard
