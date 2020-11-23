@@ -21,10 +21,10 @@ iteration. Memory management uses a custom C++ allocator that manages
 memory slots aligned to the size of the limb-storage of the individual
 multiprecision type.
 
-Multiplication is the hot-spot of this program and the multiprecision
-implemntation uses a combination of school multiplication for low
+Multiplication is the hot-spot of this program. The multiplication
+implementation uses a combination of school multiplication for low
 precision, switching directly over to an FFT multiplication scheme
-for higher precision. Intermediate advanced multiplication
+for higher precision. Intermediate precision advanced multiplication
 schemes such as Karatsuba and Toom-Cook are not implemented at the moment.
 
 The microcontroller boots and performs static initialization via self-written
