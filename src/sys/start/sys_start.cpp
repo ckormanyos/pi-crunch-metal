@@ -70,6 +70,8 @@ void sys_start_callback_for_pi_digits10(const std::uint32_t d10)
   mcal::lcd::lcd0().write_n(pstr, (std::uint_fast8_t) (pend - pstr), 1U, true);
 }
 
+int main() __attribute__((noreturn));
+
 int main()
 {
   mcal::irq::init(nullptr);
