@@ -23,6 +23,20 @@ This powerful single-board computer is driven in OS-less, bare-metal mode
 directly out-of-the-box.
 
 The hardware setup is pictured in the image below.
+In this image, the system has successfully completed one full
+mega-digit pi calculation and is almost done with a second one.
+
 ![](./images/pi_crunch_rpi_zero.jpg)
 
-TBD: Circuit description and pin connections.
+Traditional wire-wrapping techniques connect the pins on a self-made
+breakout board to a solderless prototyping breadboard.
+Bit banging is used to implement an all-software SPI-compatible
+driver which controls a port expander chip. The port
+expander chip is used to control the pins on an industry-standard
+LCD character display.
+
+A classic logic-AND gate converts 3.3V to TTL 5V level.
+A little sawed out aluminum chunk is used as a heat-sink to cool
+the processor.
+
+TBD: Pin connections.
