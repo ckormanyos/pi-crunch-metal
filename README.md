@@ -50,6 +50,10 @@ mega-digit pi calculation and is almost done with a second one.
 
 Traditional wire-wrapping techniques connect the pins on a self-made
 breakout board to a solderless prototyping breadboard.
+Double and quadruple strands of skinny wire are used on the
+power and ground pins, as these might typically carry up to 150mA
+of current in this setup.
+
 Bit banging is used to implement an all-software SPI-compatible
 driver which controls a port expander chip. The port
 expander chip is used to control the pins on an industry-standard
