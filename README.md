@@ -1,5 +1,7 @@
 # pi-crunch-metal
-Computes a million digits of pi on selected bare-metal microcontroller systems.
+
+pi-crunch-metal computes a million digits of pi
+on a bare-metal RaspberryPi(R)-Zero (and other systems).
 
 This fascinating, educational and fun project combines the domain
 of high-performance numerical computing with the raw simplicity of
