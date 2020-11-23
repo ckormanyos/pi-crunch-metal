@@ -2934,6 +2934,9 @@
                 </file>
             </group>
             <file>
+                <name>$PROJ_DIR$\src\mcal\mcal_cxx_completion.cpp</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\src\mcal\mcal_helper.h</name>
             </file>
             <file>
