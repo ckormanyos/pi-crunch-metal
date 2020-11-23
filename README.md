@@ -42,8 +42,8 @@ the processor.
 The output pin connections from the Rpi-Zero to the logic-AND gate
 are shown in the table below.
 
-| Rpi-Zero PIN                               | AND-gate        | SPI Function  |
-| ------------------------------------------ | --------------- | ------------- |
-| GPIO16/H36 (via AND-gate in 10/9, out 8)   | in 10/9, out 8  | CS            |
-| GPIO18/H12 (via AND-gate in 1/2, out 3)    | in 1/2, out 3   | SCK           |
-| GPIO19/H35 (via AND-gate in 4/5, out 6)    | in 4/5, out 6   | MOSI          |
+| Rpi-Zero PIN  | AND-gate PINS   | SPI Function  |
+| ------------- | --------------- | ------------- |
+| GPIO16/H36    | in 10/9, out 8  | CS            |
+| GPIO18/H12    | in 1/2, out 3   | SCK           |
+| GPIO19/H35    | in 4/5, out 6   | MOSI          |
