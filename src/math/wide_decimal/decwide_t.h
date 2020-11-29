@@ -1843,6 +1843,42 @@
 
       return val;
     }
+
+    explicit operator long double() const
+    {
+      return extract_long_double();
+    }
+
+    explicit operator double() const
+    {
+      return extract_double();
+    }
+
+    explicit operator float() const
+    {
+      return (float) extract_double();
+    }
+
+    explicit operator signed long long() const
+    {
+      return extract_signed_long_long();
+    }
+
+    explicit operator unsigned long long() const
+    {
+      return extract_unsigned_long_long();
+    }
+
+    explicit operator signed int() const
+    {
+      return (int) extract_signed_long_long();
+    }
+
+    explicit operator unsigned int() const
+    {
+      return (unsigned int) extract_unsigned_long_long();
+    }
+
     #endif // !WIDE_DECIMAL_DISABLE_CONVERSION_TO_BUILTINS
 
   private:
@@ -2098,7 +2134,8 @@
         if((p_fft & UINT32_C(0x0000000C)) != UINT32_C(0)) { p_fft >>=  2U; n_fft |= UINT8_C( 2); }
         if((p_fft & UINT32_C(0x00000002)) != UINT32_C(0)) { p_fft >>=  1U; n_fft |= UINT8_C( 1); }
 
-        // We now have the needed FFT size doubled (and doubled again).
+        // We now obtain the needed FFT size doubled (and doubled again),
+        // with the added condition of needing to be a power of 2.
         n_fft = (std::uint32_t) (1UL << n_fft);
 
         if(n_fft < (std::uint32_t) ((p * 2L) * 2L))
@@ -3980,9 +4017,15 @@
     return v1 - (n * v2);
   }
 
-  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> double to_double(const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>& x)              { return x.extract_double(); }
+  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> double to_double(const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>& x)
+  {
+    return x.extract_double();
+  }
 
-  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> std::int64_t to_int64(const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>& x)              { return static_cast<std::int64_t>(x.extract_signed_long_long()); }
+  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> std::int64_t to_int64(const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>& x)
+  {
+    return static_cast<std::int64_t>(x.extract_signed_long_long());
+  }
 
   template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> std::int32_t to_int32(const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>& x)
   {
@@ -3999,6 +4042,8 @@
   bool example002a_pi_small_limb();
   bool example002b_pi_100k      ();
   bool example003_zeta          ();
+  bool example004_bessel_recur  ();
+  bool example005_polylog_series();
 
   } } // namespace math::wide_decimal
 
