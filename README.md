@@ -30,7 +30,9 @@ for higher precision. Intermediate precision advanced multiplication
 schemes such as Karatsuba and Toom-Cook are not implemented at the moment.
 
 The microcontroller boots and performs static initialization via self-written
-startup code.
+startup code. Hardware setup including clock initialization,
+FPU enable, instruction caching, etc. is carried out with self-written
+hybrid assembly/C++ code shortly after reaching `main()`.
 
 Compact code size is in focus and the entire project fits within about 30k
 of program code, with slight variations depending on the target system selected.
@@ -76,4 +78,5 @@ are shown in the table below.
 
 The LCD pin connections and the
 input/output connections of the port expander chip are clearly
-identifiable in the image.
+identifiable in the image. The port expander chip uses
+hardware addressing and is hard-wired to address 2.
