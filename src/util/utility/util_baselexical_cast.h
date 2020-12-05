@@ -44,7 +44,7 @@
       {
         c = c + (output_value_type) '0';
       }
-      else if((c >= (output_value_type) 0xAU) && (c <= (output_value_type) 0xFU))
+      else if((c >= (output_value_type) 0xA) && (c <= (output_value_type) 0xF))
       {
         c =   (UpperCase ? (output_value_type) 'A' : (output_value_type) 'a')
             + (output_value_type) (c - (output_value_type) 0xA);

@@ -42,10 +42,6 @@
 
     using slot_array_type = std::array<T, slot_width>;
 
-    static slot_array_type                      slot_array_memory[slot_count];
-    static std::array<std::uint8_t, slot_count> slot_flags;
-    static std::size_t                          slot_max_index;
-
   public:
     using size_type       = std::size_t;
     using value_type      = typename slot_array_type::value_type;
@@ -66,7 +62,7 @@
 
     size_type max_size() const
     {
-      return 0U;
+      return sizeof(slot_array_type) * slot_count;
     }
 
           pointer address(      reference x) const { return &x; }
@@ -97,7 +93,11 @@
       return p;
     }
 
-    void construct(pointer p, const value_type& x) { }
+    void construct(pointer p, const value_type& x)
+    {
+      (void) p;
+      (void) x;
+    }
 
     void destroy(pointer p) { }
 
@@ -113,6 +113,11 @@
         }
       }
     }
+
+  private:
+    static slot_array_type                      slot_array_memory[slot_count];
+    static std::array<std::uint8_t, slot_count> slot_flags;
+    static std::size_t                          slot_max_index;
   };
 
   template<typename T,

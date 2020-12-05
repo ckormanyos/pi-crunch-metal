@@ -2120,7 +2120,7 @@
             <group>
                 <name>constants</name>
                 <file>
-                    <name>$PROJ_DIR$\src\math\constants\pi_control_head_and_tail.h</name>
+                    <name>$PROJ_DIR$\src\math\constants\constants_pi_control_for_decwide_t.h</name>
                 </file>
             </group>
             <group>

@@ -1,8 +1,10 @@
-#ifndef PI_CONTROL_HEAD_AND_TAIL_2020_11_21_H_
-  #define PI_CONTROL_HEAD_AND_TAIL_2020_11_21_H_
+#ifndef CONSTANTS_PI_CONTROL_FOR_DECWIDE_T_2020_11_21_H_
+  #define CONSTANTS_PI_CONTROL_FOR_DECWIDE_T_2020_11_21_H_
 
   #include <cstdint>
   #include <initializer_list>
+
+  namespace math { namespace constants {
 
   template<typename UnsignedIntegralType>
   constexpr std::initializer_list<UnsignedIntegralType> const_pi_control_head();
@@ -147,4 +149,6 @@
     };
   }
 
-#endif // PI_CONTROL_HEAD_AND_TAIL_2020_11_21_H_
+  } } //   namespace math::constants
+
+#endif // CONSTANTS_PI_CONTROL_FOR_DECWIDE_T_2020_11_21_H_
