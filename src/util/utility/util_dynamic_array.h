@@ -30,7 +30,7 @@
       using const_iterator         = const value_type*;
       using pointer                =       value_type*;
       using const_pointer          = const value_type*;
-      using size_type              =       std::size_t;
+      using size_type              =       std::uint_fast32_t;
       using difference_type        =       std::ptrdiff_t;
       using reverse_iterator       =       std::reverse_iterator<iterator>;
       using const_reverse_iterator =       std::reverse_iterator<const_iterator>;
@@ -39,9 +39,15 @@
       constexpr dynamic_array() : elem_count(0U),
                                   elems     (nullptr) { }
 
-      constexpr dynamic_array(size_type count)
+      dynamic_array(size_type count)
         : elem_count(count),
-          elems     (elem_count > 0U ? allocator_type().allocate(elem_count) : nullptr) { }
+          elems     (elem_count > 0U ? allocator_type().allocate(elem_count) : nullptr)
+      {
+        for(size_type i = 0U; i < elem_count; i++)
+        {
+          allocator_type().construct(&elems[i], value_type());
+        }
+      }
 
       dynamic_array(size_type count,
                     const value_type& v,
@@ -88,6 +94,15 @@
       // Destructor.
       virtual ~dynamic_array()
       {
+        pointer p = elems;
+
+        while(p != elems + elem_count)
+        {
+          allocator_type().destroy(p);
+
+          ++p;
+        }
+
         // Destroy the elements and deallocate the range.
         allocator_type().deallocate(elems, elem_count);
       }
@@ -108,7 +123,16 @@
       // Move assignment operator.
       dynamic_array& operator=(dynamic_array&& other)
       {
-        // Deallocate the elements and deallocate the range.
+        // Destroy the elements and deallocate the range.
+        pointer p = elems;
+
+        while(p != elems + elem_count)
+        {
+          allocator_type().destroy(p);
+
+          ++p;
+        }
+
         allocator_type().deallocate(elems, elem_count);
 
         elem_count = other.elem_count;
@@ -163,6 +187,18 @@
       }
 
       void swap(dynamic_array& other)
+      {
+        const size_type tmp_elem_count = elem_count;
+        const pointer   tmp_elems      = elems;
+
+        elem_count = other.elem_count;
+        elems      = other.elems;
+
+        other.elem_count = tmp_elem_count;
+        other.elems      = tmp_elems;
+      }
+
+      void swap(dynamic_array&& other)
       {
         const size_type tmp_elem_count = elem_count;
         const pointer   tmp_elems      = elems;
