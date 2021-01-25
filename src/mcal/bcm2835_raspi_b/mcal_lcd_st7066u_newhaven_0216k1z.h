@@ -72,24 +72,16 @@
       return true;
     }
 
-    virtual bool write_n(const char* pstr,
-                         const std::uint_fast8_t length,
-                         const std::uint_fast8_t line_index,
-                         const bool do_clear_line)
+    virtual bool write(const char* pstr,
+                       const std::uint_fast8_t length,
+                       const std::uint_fast8_t line_index)
     {
       bool write_is_ok;
 
       if((pstr != nullptr) && (length > 0U))
       {
         // Clear the line and reset the address to the line.
-        if(do_clear_line)
-        {
-          clear_line(line_index);
-        }
-        else
-        {
-          set_line_index(line_index);
-        }
+        clear_line(line_index);
 
         // Write the line at line_index.
         for(std::uint_fast8_t i = 0U; i < (std::min)(std::uint_fast8_t(16U), length); ++i)

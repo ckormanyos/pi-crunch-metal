@@ -1,9 +1,9 @@
-///////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2012 - 2020.                 //
-//  Distributed under the Boost Software License,                //
-//  Version 1.0. (See accompanying file LICENSE_1_0.txt          //
-//  or copy at http://www.boost.org/LICENSE_1_0.txt)             //
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+//  Copyright Christopher Kormanyos 2012 - 2021.
+//  Distributed under the Boost Software License,
+//  Version 1.0. (See accompanying file LICENSE_1_0.txt
+//  or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
 
 #ifndef UTIL_DYNAMIC_ARRAY_2012_05_16_H_
   #define UTIL_DYNAMIC_ARRAY_2012_05_16_H_
@@ -39,23 +39,22 @@
       constexpr dynamic_array() : elem_count(0U),
                                   elems     (nullptr) { }
 
-      dynamic_array(size_type count)
-        : elem_count(count),
-          elems     (elem_count > 0U ? allocator_type().allocate(elem_count) : nullptr)
-      {
-        for(size_type i = 0U; i < elem_count; i++)
-        {
-          allocator_type().construct(&elems[i], value_type());
-        }
-      }
-
       dynamic_array(size_type count,
-                    const value_type& v,
+                    const_reference v = value_type(),
                     const allocator_type& a = allocator_type())
         : elem_count(count),
           elems     (elem_count > 0U ? allocator_type(a).allocate(elem_count) : nullptr)
       {
-        fill(v);
+        iterator it = begin();
+
+        while(it != end())
+        {
+          allocator_type my_a(a);
+
+          std::allocator_traits<AllocatorType>::construct(my_a, it, v);
+
+          ++it;
+        }
       }
 
       dynamic_array(const dynamic_array& other)
@@ -98,7 +97,9 @@
 
         while(p != elems + elem_count)
         {
-          allocator_type().destroy(p);
+          allocator_type a;
+
+          std::allocator_traits<allocator_type>::destroy(a, p);
 
           ++p;
         }
@@ -128,7 +129,9 @@
 
         while(p != elems + elem_count)
         {
-          allocator_type().destroy(p);
+          allocator_type a;
+
+          std::allocator_traits<allocator_type>::destroy(a, p);
 
           ++p;
         }

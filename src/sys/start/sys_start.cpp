@@ -39,12 +39,17 @@ namespace
       math::wide_decimal::pi<wide_decimal_digits10, local_limb_type, local_allocator_type, double>(sys_start_callback_for_pi_digits10);
 
     const bool head_is_ok = std::equal(my_pi.crepresentation().cbegin(),
-                                       my_pi.crepresentation().cbegin() + math::constants::const_pi_control_head<local_limb_type>().size(),
-                                       math::constants::const_pi_control_head<local_limb_type>().begin());
+                                       my_pi.crepresentation().cbegin() + math::constants::const_pi_control_head_32.size(),
+                                       math::constants::const_pi_control_head_32.begin());
 
-    const bool tail_is_ok = std::equal(my_pi.crepresentation().cbegin() + ((std::uint32_t) (1UL + ((wide_decimal_digits10 - 1UL) / local_elem_digits10)) - math::constants::const_pi_control_tail<wide_decimal_digits10, local_limb_type>().size()),
-                                       my_pi.crepresentation().cbegin() +  (std::uint32_t) (1UL + ((wide_decimal_digits10 - 1UL) / local_elem_digits10)),
-                                       math::constants::const_pi_control_tail<wide_decimal_digits10, local_limb_type>().begin());
+    using const_iterator_type = typename math::wide_decimal::decwide_t<wide_decimal_digits10, local_limb_type, local_allocator_type, double>::array_type::const_iterator;
+
+    const_iterator_type fi(my_pi.crepresentation().cbegin() + (std::uint32_t) (  (std::uint32_t) (1UL + ((wide_decimal_digits10 - 1UL) / local_elem_digits10))
+                                                                               - (std::uint32_t) math::constants::const_pi_control_tail_32_1000001.size()));
+
+    const bool tail_is_ok = std::equal(fi,
+                                       fi + math::constants::const_pi_control_tail_32_1000001.size(),
+                                            math::constants::const_pi_control_tail_32_1000001.begin());
 
     const bool result_is_ok = (head_is_ok && tail_is_ok);
 
@@ -61,13 +66,13 @@ void sys_start_callback_for_pi_digits10(const std::uint32_t d10)
 
   const char* pend = util::baselexical_cast(d10, pstr);
 
-  mcal::lcd::lcd0().write_n(pstr, (std::uint_fast8_t) (pend - pstr), 0U, true);
+  mcal::lcd::lcd0().write(pstr, (std::uint_fast8_t) (pend - pstr), 0U);
 
   std::fill(pstr, pstr + sizeof(pstr), (char) 0);
 
   pend = util::baselexical_cast(sys_start_pi_count, pstr);
 
-  mcal::lcd::lcd0().write_n(pstr, (std::uint_fast8_t) (pend - pstr), 1U, true);
+  mcal::lcd::lcd0().write(pstr, (std::uint_fast8_t) (pend - pstr), 1U);
 }
 
 int main() __attribute__((noreturn));

@@ -1984,7 +1984,7 @@
                 </option>
                 <option>
                     <name>IlinkOptExceptionsAllow</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>IlinkOptExceptionsForce</name>
@@ -2274,6 +2274,120 @@
                 <name>memory</name>
                 <file>
                     <name>$PROJ_DIR$\src\util\memory\util_n_slot_array_allocator.h</name>
+                </file>
+            </group>
+            <group>
+                <name>STL</name>
+                <group>
+                    <name>impl</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\util\STL\impl\allocator_impl.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\util\STL\impl\stl_local_constexpr.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\util\STL\impl\stl_local_noexcept.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\util\STL\impl\xcmath_impl.h</name>
+                    </file>
+                </group>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\algorithm</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\any</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\array</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\atomic</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\basic_string</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\bitset</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\cfloat</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\chrono</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\climits</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\cmath</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\complex</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\cstdbool</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\cstddef</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\cstdint</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\cstdlib</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\cstring</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\ctime</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\functional</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\initializer_list</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\iterator</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\limits</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\memory</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\numeric</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\random</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\ratio</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\span</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\string</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\time.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\tuple</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\type_traits</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\utility</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\util\STL\vector</name>
                 </file>
             </group>
             <group>
