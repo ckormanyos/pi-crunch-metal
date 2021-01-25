@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 1999 - 2020.                 //
+//  Copyright Christopher Kormanyos 1999 - 2021.                 //
 //  Distributed under the Boost Software License,                //
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt          //
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)             //
@@ -78,25 +78,12 @@
     constexpr fixed_dynamic_array(const fixed_dynamic_array& other_array)
       : base_class_type((const base_class_type&) other_array) { }
 
-    fixed_dynamic_array(std::initializer_list<typename base_class_type::value_type> lst)
+    explicit fixed_dynamic_array(std::initializer_list<typename base_class_type::value_type> lst)
       : base_class_type(MySize)
     {
-      if((std::uint_fast32_t) lst.size() < MySize)
-      {
-        std::copy(lst.begin(),
-                  lst.begin() + lst.size(),
-                  base_class_type::begin());
-
-        std::fill(base_class_type::begin() + lst.size(),
-                  base_class_type::end(),
-                  typename base_class_type::value_type());
-      }
-      else
-      {
-        std::copy(lst.begin(),
-                  lst.begin() + MySize,
-                  base_class_type::begin());
-      }
+      std::copy(lst.begin(),
+                lst.begin() + (std::min)((std::uint_fast32_t) lst.size(), MySize),
+                base_class_type::begin());
     }
 
     constexpr fixed_dynamic_array(fixed_dynamic_array&& other_array)
@@ -186,9 +173,9 @@
   template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> constexpr long_double_min       ();
   template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> constexpr long_double_max       ();
 
-  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool isnan   (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x);
-  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool isfinite(decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x);
-  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool isinf   (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x);
+  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool (isnan)   (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x);
+  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool (isfinite)(decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x);
+  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool (isinf)   (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x);
 
   template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> fabs (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x);
   template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>  abs (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x);
@@ -389,13 +376,15 @@
     static constexpr std::int32_t decwide_t_elem_mask         = detail::decwide_t_helper<MyDigits10, LimbType>::elem_mask;
     static constexpr std::int32_t decwide_t_elem_mask_half    = detail::decwide_t_helper<MyDigits10, LimbType>::elem_mask_half;
 
-    static constexpr std::int64_t decwide_t_max_exp10         =  static_cast<std::int64_t>(INT64_C(0x7FFFFFFFFFFFFFFF) / decwide_t_elem_digits10) * decwide_t_elem_digits10;
+    static constexpr std::int64_t decwide_t_max_exp10         =  static_cast<std::int64_t>((std::numeric_limits<std::int64_t>::max)() / decwide_t_elem_digits10) * decwide_t_elem_digits10;
     static constexpr std::int64_t decwide_t_min_exp10         = -static_cast<std::int64_t>(decwide_t_max_exp10);
     static constexpr std::int64_t decwide_t_max_exp           = decwide_t_max_exp10;
     static constexpr std::int64_t decwide_t_min_exp           = decwide_t_min_exp10;
 
     // Rebind the decwide_t allocator to the granularity of the LimbType.
-    using allocator_type = typename AllocatorType::template rebind<LimbType>::other;
+    using allocator_type = typename std::allocator_traits<AllocatorType>::template rebind_alloc<LimbType>;
+
+    //using allocator_type = typename AllocatorType::template rebind<LimbType>::other;
 
     // Define the array type, which is the internal
     // representation of the data field of a decwide_t.
@@ -640,22 +629,23 @@
     // Constructor from initializer list of limbs,
     // exponent value (normed to limb granularity) 
     // and optional sign flag.
-    constexpr decwide_t(std::initializer_list<limb_type> limb_values,
-                        const std::int64_t e = 0,
-                        const bool is_neg = false) : my_data     (limb_values),
-                                                     my_exp      (e),
-                                                     my_neg      (is_neg),
-                                                     my_fpclass  (decwide_t_finite),
-                                                     my_prec_elem(decwide_t_elem_number) { }
+    explicit constexpr decwide_t(std::initializer_list<limb_type> limb_values,
+                                 const std::int64_t e = 0,
+                                 const bool is_neg = false)
+      : my_data     (limb_values),
+        my_exp      (e),
+        my_neg      (is_neg),
+        my_fpclass  (decwide_t_finite),
+        my_prec_elem(decwide_t_elem_number) { }
 
   private:
     // Constructor from mantissa and exponent.
-    decwide_t(const InternalFloatType mantissa,
-              const std::int64_t exponent) : my_data     (),
-                                             my_exp      (static_cast<std::int64_t>(0)),
-                                             my_neg      (false),
-                                             my_fpclass  (decwide_t_finite),
-                                             my_prec_elem(decwide_t_elem_number)
+    explicit decwide_t(const InternalFloatType mantissa,
+                       const std::int64_t exponent) : my_data     (),
+                                                      my_exp      (static_cast<std::int64_t>(0)),
+                                                      my_neg      (false),
+                                                      my_fpclass  (decwide_t_finite),
+                                                      my_prec_elem(decwide_t_elem_number)
     {
       // Create a decwide_t from mantissa and exponent.
 
@@ -752,14 +742,14 @@
       // TBD: Limit the length of add/sub to only those ranges needed,
       // whereby propagate borrow/carry may be necessary as well.
 
-      if(isnan())
+      if((isnan)())
       {
         return *this;
       }
 
-      if(isinf())
+      if((isinf)())
       {
-        if(v.isinf() && (isneg() != v.isneg()))
+        if((v.isinf)() && (isneg() != v.isneg()))
         {
           *this = my_value_nan();
         }
@@ -996,7 +986,7 @@
     decwide_t& operator/=(const decwide_t& v)
     {
       const bool u_and_v_are_finite_and_identical =
-        (    isfinite()
+        (    (isfinite)()
          && (my_fpclass == v.my_fpclass)
          && (my_exp     == v.my_exp)
          && (cmp_data(v.my_data) == static_cast<std::int32_t>(0)));
@@ -1042,10 +1032,10 @@
       my_neg = false;
 
       // Handle special cases like zero, inf and NaN.
-      const bool b_u_is_inf  = isinf();
+      const bool b_u_is_inf  = (isinf)();
       const bool b_n_is_zero = (n == static_cast<std::int32_t>(0));
 
-      if(isnan() || (b_u_is_inf && b_n_is_zero))
+      if((isnan)() || (b_u_is_inf && b_n_is_zero))
       {
         return (*this = my_value_nan());
       }
@@ -1111,12 +1101,12 @@
       my_neg = false;
 
       // Handle special cases like zero, inf and NaN.
-      if(isnan())
+      if((isnan)())
       {
         return *this;
       }
 
-      if(isinf())
+      if((isinf)())
       {
         *this = ((!b_neg) ?  my_value_inf() : -my_value_inf());
 
@@ -1251,17 +1241,17 @@
       //                -1 for *this < v
 
       // Handle all non-finite cases.
-      if((!isfinite()) || (!v.isfinite()))
+      if(((isfinite)() == false) || ((v.isfinite)() == false))
       {
         // NaN can never equal NaN. Return an implementation-dependent
         // signed result. Also note that comparison of NaN with NaN
         // using operators greater-than or less-than is undefined.
-        if(isnan() || v.isnan())
+        if((isnan)() || (v.isnan)())
         {
-          return (isnan() ? static_cast<std::int32_t>(1) : static_cast<std::int32_t>(-1));
+          return ((isnan)() ? static_cast<std::int32_t>(1) : static_cast<std::int32_t>(-1));
         }
 
-        if(isinf() && v.isinf())
+        if((isinf)() && (v.isinf)())
         {
           // Both *this and v are infinite. They are equal if they have the same sign.
           // Otherwise, *this is less than v if and only if *this is negative.
@@ -1270,7 +1260,7 @@
                    : (my_neg ? static_cast<std::int32_t>(-1) : static_cast<std::int32_t>(1)));
         }
 
-        if(isinf())
+        if((isinf)())
         {
           // *this is infinite, but v is finite.
           // So negative infinite *this is less than any finite v.
@@ -1401,12 +1391,12 @@
         return *this;
       }
 
-      if(isnan())
+      if((isnan)())
       {
         return *this;
       }
 
-      if(isinf())
+      if((isinf)())
       {
         return (*this = zero<MyDigits10, LimbType, AllocatorType, InternalFloatType>());
       }
@@ -1465,7 +1455,7 @@
     {
       // Compute the square root of *this.
 
-      if(isneg() || (!isfinite()))
+      if(isneg() || ((isfinite)() == false))
       {
         return (*this = my_value_nan());
       }
@@ -1543,7 +1533,7 @@
 
     decwide_t& negate()
     {
-      if(!iszero())
+      if(((iszero)() == false) && ((isnan)() == false))
       {
         my_neg = (!my_neg);
       }
@@ -1555,7 +1545,7 @@
     {
       decwide_t result;
 
-      if(x.isfinite() == false)
+      if((x.isfinite)() == false)
       {
         result = std::numeric_limits<decwide_t>::quiet_NaN();
       }
@@ -1563,7 +1553,7 @@
       {
         result = pow(x, -p);
       }
-      else if((p == 0) || (x.isneg() == true))
+      else if((p == 0) || ((x.isneg)() == true))
       {
         return std::numeric_limits<decwide_t>::quiet_NaN();
       }
@@ -1632,9 +1622,9 @@
     }
 
     // Comparison functions.
-    bool isnan   () const { return (my_fpclass == decwide_t_NaN); }
-    bool isinf   () const { return (my_fpclass == decwide_t_inf); }
-    bool isfinite() const { return (my_fpclass == decwide_t_finite); }
+    bool (isnan)   () const { return (my_fpclass == decwide_t_NaN); }
+    bool (isinf)   () const { return (my_fpclass == decwide_t_inf); }
+    bool (isfinite)() const { return (my_fpclass == decwide_t_finite); }
 
     bool iszero() const
     {
@@ -1645,7 +1635,7 @@
     {
       // Check if the value of *this is identically 1 or very close to 1.
 
-      const bool not_negative_and_is_finite = ((!my_neg) && isfinite());
+      const bool not_negative_and_is_finite = ((!my_neg) && (isfinite)());
 
       if(not_negative_and_is_finite)
       {
@@ -1780,7 +1770,7 @@
     {
       // Compute the signed integer part of x.
 
-      if(isfinite() == false)
+      if((isfinite)() == false)
       {
         return *this;
       }
@@ -1819,11 +1809,11 @@
       long double ld;
 
       // Check for non-normal decwide_t.
-      if(isfinite() == false)
+      if((isfinite)() == false)
       {
-        ld = (isnan() ? std::numeric_limits<long double>::quiet_NaN()
-                      : ((my_neg == false) ?  std::numeric_limits<long double>::infinity()
-                                           : -std::numeric_limits<long double>::infinity()));
+        ld = ((isnan)() ? std::numeric_limits<long double>::quiet_NaN()
+                        : ((my_neg == false) ?  std::numeric_limits<long double>::infinity()
+                                             : -std::numeric_limits<long double>::infinity()));
       }
       else
       {
@@ -2014,9 +2004,9 @@
       using std::isfinite;
       using std::isnan;
 
-      if(!isfinite(static_cast<double>(l)))
+      if((isfinite)(static_cast<double>(l)) == false)
       {
-        operator=(isnan(static_cast<double>(l)) ? my_value_nan() : ((!b_neg) ? my_value_inf() : -my_value_inf()));
+        operator=((isnan)(static_cast<double>(l)) ? my_value_nan() : ((!b_neg) ? my_value_inf() : -my_value_inf()));
 
         return;
       }
@@ -2712,7 +2702,12 @@
       const bool my_uppercase = ((my_flags & std::ios::uppercase) != static_cast<std::ios::fmtflags>(0U));
 
       // Use special handling for non-finite numbers (inf and nan).
-      if(!isfinite()) { special_handle_string_not_finite(str, static_cast<const decwide_t&>(*this), my_showpos, my_uppercase); return; }
+      if((isfinite)() == false)
+      {
+        special_handle_string_not_finite(str, static_cast<const decwide_t&>(*this), my_showpos, my_uppercase);
+
+        return;
+      }
 
       // Get the base-10 exponent.
       std::int64_t the_exp = (std::int64_t) ilogb(*this);
@@ -3005,7 +3000,7 @@
                                                   const bool my_uppercase)
     {
       // Handle INF and NaN.
-      if(f.isinf())
+      if((f.isinf)())
       {
         if(my_uppercase)
         {
@@ -3106,7 +3101,7 @@
 
     friend inline decwide_t floor(decwide_t x)
     {
-      return (((x.isfinite() == false) || x.isint())
+      return ((((x.isfinite)() == false) || x.isint())
                ?  x
                : (x.isneg() ? (x - one<MyDigits10, LimbType, AllocatorType, InternalFloatType>()).extract_integer_part()
                             :  x.extract_integer_part()));
@@ -3114,7 +3109,7 @@
 
     friend inline decwide_t ceil(decwide_t x)
     {
-      return (((x.isfinite() == false) || x.isint())
+      return ((((x.isfinite)() == false) || x.isint())
                ?  x
                : (x.isneg() ?  x.extract_integer_part()
                             : (x + one<MyDigits10, LimbType, AllocatorType, InternalFloatType>()).extract_integer_part()));
@@ -3124,7 +3119,7 @@
     {
       std::int64_t e10;
 
-      if(x.isfinite() == false)
+      if((x.isfinite)() == false)
       {
         e10 = static_cast<std::int64_t>(0);
       }
@@ -3235,7 +3230,6 @@
       },
       0
     );
-    //floating_point_type a((typename floating_point_type::limb_type) 1U);
 
     // Initialize bB to 0.5.
     floating_point_type bB
@@ -3293,7 +3287,7 @@
       // Test the number of precise digits from this iteration.
       // If it is there are enough precise digits, then the calculation
       // is finished.
-      const std::int32_t ib = (std::max)(0, -ilogb(iterate_term));
+      const std::int32_t ib = (std::max)(std::int32_t(0), -ilogb(iterate_term));
 
       const std::uint32_t digits10_of_iteration =
         (std::uint32_t) ((std::uint64_t) ((std::uint64_t) ib * digits10_scale) / 1000U);
@@ -3371,7 +3365,7 @@
       // half of the requested digits have been achieved,
       // then break after the upcoming iteration.
 
-      const std::int32_t ib = (std::max)(0, -ilogb(ak - bk));
+      const std::int32_t ib = (std::max)(std::int32_t(0), -ilogb(ak - bk));
 
       const std::uint32_t digits10_of_iteration =
         (std::uint32_t) ((std::uint64_t) ((std::uint64_t) ib * digits10_scale) / 1000U);
@@ -3727,9 +3721,9 @@
   template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> constexpr long_double_min       () { return decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>((std::numeric_limits<long double>::min)());}
   template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> const decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> constexpr long_double_max       () { return decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>((std::numeric_limits<long double>::max)());}
 
-  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool isnan   (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x) { return x.isnan(); }
-  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool isfinite(decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x) { return x.isfinite(); }
-  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool isinf   (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x) { return x.isinf(); }
+  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool (isnan)   (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x) { return (x.isnan)(); }
+  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool (isfinite)(decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x) { return (x.isfinite)(); }
+  template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType> bool (isinf)   (decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x) { return (x.isinf)(); }
 
   template<const std::int32_t MyDigits10, typename LimbType, typename AllocatorType, typename InternalFloatType>
   decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> pow(decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> x,
@@ -3792,7 +3786,7 @@
   {
     decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType> rtn;
 
-    if(!isfinite(x))
+    if((isfinite)(x) == false)
     {
       rtn = std::numeric_limits<decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType>>::quiet_NaN();
     }
@@ -3893,10 +3887,10 @@
       // half of the requested digits have been achieved,
       // then break after the upcoming iteration.
 
-      const std::int32_t ib = (std::max)(0, -ilogb(ak - bk));
+      const std::int32_t ilogb_of_ak_minus_bk = (std::max)(std::int32_t(0), -ilogb(ak - bk));
 
       const std::uint32_t digits10_of_iteration =
-        (std::uint32_t) ((std::uint64_t) ((std::uint64_t) ib * digits10_scale) / 1000U);
+        (std::uint32_t) ((std::uint64_t) ((std::uint64_t) ilogb_of_ak_minus_bk * digits10_scale) / 1000U);
 
       const floating_point_type ak_tmp(ak);
 
@@ -3931,8 +3925,9 @@
     floating_point_type exp_result;
 
     using std::isfinite;
+    using math::wide_decimal::isfinite;
 
-    if(isfinite(x) == false)
+    if((isfinite)(x) == false)
     {
       exp_result = x;
     }
@@ -3991,6 +3986,7 @@
         h0f0 += x_pow_n_div_n_fact;
       }
 
+      using std::ldexp;
       using std::pow;
 
       const floating_point_type exp_series = pow(h0f0, p2) * ldexp(floating_point_type(1U), nf);
@@ -4035,19 +4031,23 @@
     return result;
   }
 
-  bool example001_roots_sqrt           ();
-  bool example001a_roots_seventh       ();
-  bool example002_pi                   ();
-  bool example002a_pi_small_limb       ();
-  bool example002b_pi_100k             ();
-  bool example002c_pi_quintic          ();
-  bool example003_zeta                 ();
-  bool example004_bessel_recur         ();
-  bool example005_polylog_series       ();
-  bool example006_logarithm            ();
-  bool example007_catalan_series       ();
-  bool example008_bernoulli_tgamma     ();
-  bool example009_boost_math_standalone();
+  bool example001_roots_sqrt             ();
+  bool example001a_roots_seventh         ();
+  bool example001b_roots_almost_integer  ();
+  bool example002_pi                     ();
+  bool example002a_pi_small_limb         ();
+  bool example002b_pi_100k               ();
+  bool example002c_pi_quintic            ();
+  bool example003_zeta                   ();
+  bool example004_bessel_recur           ();
+  bool example005_polylog_series         ();
+  bool example006_logarithm              ();
+  bool example007_catalan_series         ();
+  bool example008_bernoulli_tgamma       ();
+  bool example009_boost_math_standalone  ();
+  bool example010_hypergeometric_2f1     ();
+  bool example010a_hypergeometric_1f1    ();
+  bool example011_trig_trapezoid_integral();
 
   } } // namespace math::wide_decimal
 

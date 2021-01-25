@@ -5,7 +5,7 @@
 define symbol __ICFEDIT_intvec_start__ = 0x8000;
 /*-Memory Regions-*/
 define symbol __ICFEDIT_region_IROM1_start__ = 0x08000;
-define symbol __ICFEDIT_region_IROM1_end__   = 0x47FFF;
+define symbol __ICFEDIT_region_IROM1_end__   = 0x17FFF;
 define symbol __ICFEDIT_region_IROM2_start__ = 0x0;
 define symbol __ICFEDIT_region_IROM2_end__   = 0x0;
 define symbol __ICFEDIT_region_EROM1_start__ = 0x0;
@@ -14,8 +14,8 @@ define symbol __ICFEDIT_region_EROM2_start__ = 0x0;
 define symbol __ICFEDIT_region_EROM2_end__   = 0x0;
 define symbol __ICFEDIT_region_EROM3_start__ = 0x0;
 define symbol __ICFEDIT_region_EROM3_end__   = 0x0;
-define symbol __ICFEDIT_region_IRAM1_start__ = 0x48000;
-define symbol __ICFEDIT_region_IRAM1_end__   = 0x2047FFF;
+define symbol __ICFEDIT_region_IRAM1_start__ = 0x18000;
+define symbol __ICFEDIT_region_IRAM1_end__   = 0x2017FFF;
 define symbol __ICFEDIT_region_IRAM2_start__ = 0x0;
 define symbol __ICFEDIT_region_IRAM2_end__   = 0x0;
 define symbol __ICFEDIT_region_ERAM1_start__ = 0x0;
@@ -32,7 +32,7 @@ define symbol __ICFEDIT_size_fiqstack__ = 0x4000;
 define symbol __ICFEDIT_size_undstack__ = 0x4000;
 define symbol __ICFEDIT_size_abtstack__ = 0x4000;
 define symbol __ICFEDIT_size_monstack__ = 0x0;
-define symbol __ICFEDIT_size_heap__     = 0x8000;
+define symbol __ICFEDIT_size_heap__     = 0x0;
 /**** End of ICF editor section. ###ICF###*/
 
 define memory mem with size = 4G;
