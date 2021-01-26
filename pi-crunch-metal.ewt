@@ -3007,7 +3007,13 @@
                 <group>
                     <name>impl</name>
                     <file>
+                        <name>$PROJ_DIR$\src\util\STL\impl\alloc_traits.h</name>
+                    </file>
+                    <file>
                         <name>$PROJ_DIR$\src\util\STL\impl\allocator_impl.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\util\STL\impl\ptr_traits.h</name>
                     </file>
                     <file>
                         <name>$PROJ_DIR$\src\util\STL\impl\stl_local_constexpr.h</name>
