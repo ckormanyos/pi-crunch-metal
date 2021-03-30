@@ -2855,13 +2855,10 @@
                     <name>$PROJ_DIR$\src\math\wide_decimal\decwide_t.h</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\src\math\wide_decimal\decwide_t_detail.h</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\src\math\wide_decimal\decwide_t_detail_fft.h</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\src\math\wide_decimal\decwide_t_detail_helper.h</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\src\math\wide_decimal\decwide_t_detail_karatsuba.h</name>
                 </file>
             </group>
         </group>
@@ -3020,9 +3017,6 @@
                     </file>
                     <file>
                         <name>$PROJ_DIR$\src\util\STL\impl\stl_local_noexcept.h</name>
-                    </file>
-                    <file>
-                        <name>$PROJ_DIR$\src\util\STL\impl\xcmath_impl.h</name>
                     </file>
                 </group>
                 <file>

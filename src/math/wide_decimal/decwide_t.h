@@ -845,9 +845,10 @@
       }
 
       // Get the offset for the add/sub operation.
-      static const exponent_type max_delta_exp = static_cast<exponent_type>((decwide_t_elem_number - 1) * decwide_t_elem_digits10);
+      constexpr std::int_fast64_t max_delta_exp =
+        static_cast<std::int_fast64_t>(std::int_fast64_t(decwide_t_elem_number - 1) * decwide_t_elem_digits10);
 
-      const exponent_type ofs_exp = static_cast<exponent_type>(my_exp - v.my_exp);
+      const std::int_fast64_t ofs_exp = static_cast<std::int_fast64_t>(my_exp - v.my_exp);
 
       // Check if the operation is out of range, requiring special handling.
       if(v.iszero() || (ofs_exp > max_delta_exp))
@@ -866,7 +867,7 @@
       typename array_type::pointer        p_u    =   my_data.data();
       typename array_type::const_pointer  p_v    = v.my_data.data();
       bool                                b_copy = false;
-      const std::int32_t                  ofs    = static_cast<std::int32_t>(static_cast<std::int32_t>(ofs_exp) / decwide_t_elem_digits10);
+      const std::int32_t                  ofs    = static_cast<std::int32_t>(ofs_exp / decwide_t_elem_digits10);
 
       #if !defined(WIDE_DECIMAL_DISABLE_DYNAMIC_MEMORY_ALLOCATION)
       array_type my_n_data_for_add_sub;
@@ -893,7 +894,7 @@
         else
         {
           std::copy(my_data.cbegin(),
-                    my_data.cend()     - static_cast<std::ptrdiff_t>(-ofs),
+                    my_data.cend() - static_cast<std::ptrdiff_t>(-ofs),
                     my_n_data_for_add_sub.begin() + static_cast<std::ptrdiff_t>(-ofs));
 
           std::fill(my_n_data_for_add_sub.begin(),
@@ -1022,7 +1023,10 @@
       }
 
       // Check for underflow.
-      if(iszero()) { return (*this = zero<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>()); }
+      if(iszero())
+      {
+        return (*this = zero<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>());
+      }
 
       return *this;
     }
@@ -1064,13 +1068,12 @@
 
     decwide_t& operator/=(const decwide_t& v)
     {
-      const bool u_and_v_are_finite_and_identical =
-        (    (isfinite)()
-         && (my_fpclass == v.my_fpclass)
+      const bool u_and_v_are_identical =
+        (   (my_fpclass == v.my_fpclass)
          && (my_exp     == v.my_exp)
          && (cmp_data(v.my_data) == static_cast<std::int32_t>(0)));
 
-      if(u_and_v_are_finite_and_identical)
+      if(u_and_v_are_identical)
       {
         *this = one<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>();
 
@@ -1285,43 +1288,7 @@
       //                 0 for *this = v
       //                -1 for *this < v
 
-      // Handle all non-finite cases.
-      if(((isfinite)() == false) || ((v.isfinite)() == false))
-      {
-        // NaN can never equal NaN. Return an implementation-dependent
-        // signed result. Also note that comparison of NaN with NaN
-        // using operators greater-than or less-than is undefined.
-        if((isnan)() || (v.isnan)())
-        {
-          return ((isnan)() ? static_cast<std::int32_t>(1) : static_cast<std::int32_t>(-1));
-        }
-
-        if((isinf)() && (v.isinf)())
-        {
-          // Both *this and v are infinite. They are equal if they have the same sign.
-          // Otherwise, *this is less than v if and only if *this is negative.
-          return ((my_neg == v.my_neg)
-                   ? static_cast<std::int32_t>(0)
-                   : (my_neg ? static_cast<std::int32_t>(-1) : static_cast<std::int32_t>(1)));
-        }
-
-        if((isinf)())
-        {
-          // *this is infinite, but v is finite.
-          // So negative infinite *this is less than any finite v.
-          // Whereas positive infinite *this is greater than any finite v.
-          return (isneg() ? static_cast<std::int32_t>(-1) : static_cast<std::int32_t>(1));
-        }
-        else
-        {
-          // *this is finite, and v is infinite.
-          // So any finite *this is greater than negative infinite v.
-          // Whereas any finite *this is less than positive infinite v.
-          return (v.my_neg ? static_cast<std::int32_t>(1) : static_cast<std::int32_t>(-1));
-        }
-      }
-
-      // And now handle all *finite* cases.
+      // Handle all *finite* cases only.
       if(iszero())
       {
         // The value of *this is zero and v is either zero or non-zero.
@@ -1439,7 +1406,7 @@
       // Extract the mantissa and exponent for a "manual"
       // computation of the estimate.
       InternalFloatType dd;
-      exponent_type      ne;
+      exponent_type     ne;
 
       x.extract_parts(dd, ne);
 
@@ -1557,7 +1524,7 @@
 
     decwide_t& negate()
     {
-      if(((iszero)() == false) && ((isnan)() == false))
+      if((iszero)() == false)
       {
         my_neg = (!my_neg);
       }
@@ -1569,11 +1536,7 @@
     {
       decwide_t result;
 
-      if((x.isfinite)() == false)
-      {
-        result = std::numeric_limits<decwide_t>::quiet_NaN();
-      }
-      else if(p < static_cast<std::int32_t>(0))
+      if(p < static_cast<std::int32_t>(0))
       {
         result = pow(x, -p);
       }
@@ -1659,9 +1622,9 @@
     {
       // Check if the value of *this is identically 1 or very close to 1.
 
-      const bool not_negative_and_is_finite = ((!my_neg) && (isfinite)());
+      const bool not_negative = (my_neg == false);
 
-      if(not_negative_and_is_finite)
+      if(not_negative)
       {
         if((my_data[0U] == static_cast<limb_type>(1U)) && (my_exp == static_cast<exponent_type>(0)))
         {
@@ -1728,8 +1691,8 @@
       return (it_non_zero == my_data.cend());
     }
 
-    bool isneg   () const { return my_neg; }
-    bool ispos   () const { return (!isneg()); }
+    bool isneg() const { return my_neg; }
+    bool ispos() const { return (!isneg()); }
 
     // Operators pre-increment and pre-decrement.
     decwide_t& operator++() { return *this += one<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>(); }
@@ -1794,11 +1757,6 @@
     {
       // Compute the signed integer part of x.
 
-      if((isfinite)() == false)
-      {
-        return *this;
-      }
-
       if(my_exp < static_cast<exponent_type>(0))
       {
         // The absolute value of the number is smaller than 1.
@@ -1833,45 +1791,36 @@
       long double ld;
 
       // Check for non-normal decwide_t.
-      if((isfinite)() == false)
+      const decwide_t xx(fabs(*this));
+
+      // Check for zero decwide_t.
+      if(iszero() || (xx < long_double_min<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>()))
       {
-        ld = ((isnan)() ? std::numeric_limits<long double>::quiet_NaN()
-                        : ((my_neg == false) ?  std::numeric_limits<long double>::infinity()
-                                             : -std::numeric_limits<long double>::infinity()));
+        ld = 0.0L;
+      }
+      else
+      if(xx > long_double_max<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>())
+      {
+        // Check if decwide_t exceeds the maximum of double.
+        ld = ((my_neg == false) ?  std::numeric_limits<long double>::infinity()
+                                : -std::numeric_limits<long double>::infinity());
       }
       else
       {
-        const decwide_t xx(fabs(*this));
+        ld = (long double) my_data[0U];
 
-        // Check for zero decwide_t.
-        if(iszero() || (xx < long_double_min<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>()))
+        long double scale = 1.0L;
+
+        for(typename array_type::size_type i  = (typename array_type::size_type) decwide_t_elem_digits10;
+                                            i  < (typename array_type::size_type) (std::numeric_limits<long double>::digits10 + 3);
+                                            i += (typename array_type::size_type) decwide_t_elem_digits10)
         {
-          ld = 0.0L;
+          scale /= (long double) decwide_t_elem_mask;
+
+          ld += (long double) my_data[i / decwide_t_elem_digits10] * scale;
         }
-        else
-        if(xx > long_double_max<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>())
-        {
-          // Check if decwide_t exceeds the maximum of double.
-          ld = ((my_neg == false) ?  std::numeric_limits<long double>::infinity()
-                                  : -std::numeric_limits<long double>::infinity());
-        }
-        else
-        {
-          ld = (long double) my_data[0U];
 
-          long double scale = 1.0L;
-
-          for(typename array_type::size_type i  = (typename array_type::size_type) decwide_t_elem_digits10;
-                                             i  < (typename array_type::size_type) (std::numeric_limits<long double>::digits10 + 3);
-                                             i += (typename array_type::size_type) decwide_t_elem_digits10)
-          {
-            scale /= (long double) decwide_t_elem_mask;
-
-            ld += (long double) my_data[i / decwide_t_elem_digits10] * scale;
-          }
-
-          if(my_neg) { ld = -ld; }
-        }
+        if(my_neg) { ld = -ld; }
       }
 
       return ld;
@@ -2090,54 +2039,59 @@
     static limb_type add_loop_uv(limb_type* const u, const limb_type* const v, const std::int32_t p)
     {
       // Addition algorithm
-      limb_type carry = 0U;
+      std::uint_fast8_t carry = static_cast<std::uint_fast8_t>(0U);
 
-      for(std::int32_t j = static_cast<std::int32_t>(p - static_cast<std::int32_t>(1)); j >= static_cast<std::int32_t>(0); j--)
+      for(std::int32_t j = static_cast<std::int32_t>(p - static_cast<std::int32_t>(1)); j >= static_cast<std::int32_t>(0); --j)
       {
         const limb_type t = static_cast<limb_type>(static_cast<limb_type>(u[j] + v[j]) + carry);
-        carry             = ((t > static_cast<limb_type>(decwide_t_elem_mask)) ? 1U : 0U);
-        u[j]              = static_cast<limb_type>(t - ((carry != 0U) ? static_cast<limb_type>(decwide_t_elem_mask) : static_cast<limb_type>(0U)));
+
+        carry = ((t >= static_cast<limb_type>(decwide_t_elem_mask)) ? static_cast<std::uint_fast8_t>(1U)
+                                                                    : static_cast<std::uint_fast8_t>(0U));
+
+        u[j]  = static_cast<limb_type>(t - ((carry != 0U) ? static_cast<limb_type>(decwide_t_elem_mask)
+                                                          : static_cast<limb_type>(0U)));
       }
 
-      return carry;
+      return static_cast<limb_type>(carry);
     }
 
     static signed_limb_type sub_loop_uv(limb_type* const u, const limb_type* const v, const std::int32_t p)
     {
       // Subtraction algorithm
-      signed_limb_type borrow = static_cast<std::int32_t>(0);
+      std::int_fast8_t borrow = static_cast<std::int_fast8_t>(0);
 
       for(std::uint32_t j = static_cast<std::uint32_t>(p - static_cast<std::int32_t>(1)); static_cast<std::int32_t>(j) >= static_cast<std::int32_t>(0); --j)
       {
-        signed_limb_type t = static_cast<signed_limb_type>(static_cast<signed_limb_type>(u[j] - v[j]) - borrow);
+        signed_limb_type t = static_cast<signed_limb_type>(  static_cast<signed_limb_type>(u[j])
+                                                           - static_cast<signed_limb_type>(v[j])) - borrow;
 
         // Underflow? Borrow?
         if(t < 0)
         {
           // Yes, underflow and borrow
           t     += static_cast<signed_limb_type>(decwide_t_elem_mask);
-          borrow = static_cast<signed_limb_type>(1);
+          borrow = static_cast<int_fast8_t>(1);
         }
         else
         {
-          borrow = static_cast<signed_limb_type>(0);
+          borrow = static_cast<int_fast8_t>(0);
         }
 
         u[j] = static_cast<limb_type>(t);
       }
 
-      return borrow;
+      return static_cast<signed_limb_type>(borrow);
     }
 
     static limb_type mul_loop_uv(limb_type* const u, const limb_type* const v, const std::int32_t p)
     {
       double_limb_type carry = static_cast<double_limb_type>(0U);
 
-      for(std::int32_t j = static_cast<std::int32_t>(p - 1); j >= static_cast<std::int32_t>(0); j--)
+      for(std::int32_t j = static_cast<std::int32_t>(p - 1); j >= static_cast<std::int32_t>(0); --j)
       {
         double_limb_type sum = carry;
 
-        for(std::int32_t i = j; i >= static_cast<std::int32_t>(0); i--)
+        for(std::int32_t i = j; i >= static_cast<std::int32_t>(0); --i)
         {
           sum += static_cast<double_limb_type>(u[j - i] * static_cast<double_limb_type>(v[i]));
         }
@@ -2154,7 +2108,7 @@
       double_limb_type carry = static_cast<double_limb_type>(0U);
 
       // Multiplication loop.
-      for(std::int32_t j = static_cast<std::int32_t>(p - 1); j >= static_cast<std::int32_t>(0); j--)
+      for(std::int32_t j = static_cast<std::int32_t>(p - 1); j >= static_cast<std::int32_t>(0); --j)
       {
         const double_limb_type t = static_cast<double_limb_type>(carry + static_cast<double_limb_type>(u[j] * static_cast<double_limb_type>(n)));
         carry                    = static_cast<double_limb_type>(t / static_cast<limb_type>(decwide_t_elem_mask));
@@ -2168,7 +2122,7 @@
     {
       double_limb_type prev = static_cast<double_limb_type>(0U);
 
-      for(std::int32_t j = static_cast<std::int32_t>(0); j < p; j++)
+      for(std::int32_t j = static_cast<std::int32_t>(0); j < p; ++j)
       {
         const double_limb_type t = static_cast<double_limb_type>(u[j] + static_cast<double_limb_type>(prev * static_cast<limb_type>(decwide_t_elem_mask)));
         u[j]                     = static_cast<limb_type>(t / n);
@@ -2303,19 +2257,21 @@
       // Release the carries and re-combine the low and high parts.
       // This sets the integral data elements in the big number
       // to the result of multiplication.
-      double_limb_type carry = static_cast<double_limb_type>(0U);
+      using fft_carry_type = std::uint_fast64_t;
+
+      fft_carry_type carry = static_cast<fft_carry_type>(0U);
 
       for(std::uint32_t j = static_cast<std::uint32_t>((prec_elems_for_multiply * 2L) - 2L); static_cast<std::int32_t>(j) >= 0; j -= 2U)
       {
         fft_float_type         xaj = af[j] / (n_fft / 2U);
-        const double_limb_type xlo = static_cast<double_limb_type>(xaj + detail::fft::template_half<fft_float_type>()) + carry;
-        carry                      = static_cast<double_limb_type>(xlo / static_cast<limb_type>(decwide_t_elem_mask_half));
-        const limb_type        nlo = static_cast<limb_type>       (xlo - static_cast<double_limb_type>(carry * static_cast<limb_type>(decwide_t_elem_mask_half)));
+        const fft_carry_type xlo = static_cast<fft_carry_type>(xaj + detail::fft::template_half<fft_float_type>()) + carry;
+        carry                    = static_cast<fft_carry_type>(xlo / static_cast<limb_type>(decwide_t_elem_mask_half));
+        const limb_type      nlo = static_cast<limb_type>     (xlo - static_cast<fft_carry_type>(carry * static_cast<limb_type>(decwide_t_elem_mask_half)));
 
-                               xaj = ((j != 0) ? (af[j - 1U] / (n_fft / 2U)) : fft_float_type(0));
-        const double_limb_type xhi = static_cast<double_limb_type>(xaj + detail::fft::template_half<fft_float_type>()) + carry;
-        carry                      = static_cast<double_limb_type>(xhi / static_cast<limb_type>(decwide_t_elem_mask_half));
-        const limb_type        nhi = static_cast<limb_type>       (xhi - static_cast<double_limb_type>(carry * static_cast<limb_type>(decwide_t_elem_mask_half)));
+                             xaj = ((j != 0) ? (af[j - 1U] / (n_fft / 2U)) : fft_float_type(0));
+        const fft_carry_type xhi = static_cast<fft_carry_type>(xaj + detail::fft::template_half<fft_float_type>()) + carry;
+        carry                    = static_cast<fft_carry_type>(xhi / static_cast<limb_type>(decwide_t_elem_mask_half));
+        const limb_type      nhi = static_cast<limb_type>     (xhi - static_cast<fft_carry_type>(carry * static_cast<limb_type>(decwide_t_elem_mask_half)));
 
         u[(j / 2U)] = static_cast<limb_type>(static_cast<limb_type>(nhi * static_cast<limb_type>(decwide_t_elem_mask_half)) + nlo);
       }
@@ -2718,14 +2674,6 @@
       const bool my_showpos   = ((my_flags & std::ios::showpos)   != static_cast<std::ios::fmtflags>(0U));
       const bool my_uppercase = ((my_flags & std::ios::uppercase) != static_cast<std::ios::fmtflags>(0U));
 
-      // Use special handling for non-finite numbers (inf and nan).
-      if((isfinite)() == false)
-      {
-        special_handle_string_not_finite(str, static_cast<const decwide_t&>(*this), my_showpos, my_uppercase);
-
-        return;
-      }
-
       // Get the base-10 exponent.
       exponent_type the_exp = (exponent_type) ilogb(*this);
 
@@ -3011,29 +2959,6 @@
       }
     }
 
-    static void special_handle_string_not_finite(std::string& str,
-                                                  const decwide_t& f,
-                                                  const bool my_showpos,
-                                                  const bool my_uppercase)
-    {
-      // Handle INF and NaN.
-      if((f.isinf)())
-      {
-        if(my_uppercase)
-        {
-          str = ((!f.isneg()) ? (my_showpos ? std::string("+INF") : std::string("INF")) : std::string("-INF"));
-        }
-        else
-        {
-          str = ((!f.isneg()) ? (my_showpos ? std::string("+inf") : std::string("inf")) : std::string("-inf"));
-        }
-      }
-      else
-      {
-        str = (my_uppercase ? std::string("NAN") : std::string("nan"));
-      }
-    }
-
     static void special_extend_string_to_precision(std::string& str, const std::uint_fast32_t os_precision)
     {
       // This is the special case of showpoint in combination with
@@ -3138,25 +3063,18 @@
     {
       exponent_type e10;
 
-      if((x.isfinite)() == false)
+      limb_type xx = x.my_data[0U];
+
+      std::int_fast16_t n10 = 0;
+
+      while(limb_type(xx + 5U) > 10U)
       {
-        e10 = static_cast<exponent_type>(0);
+        xx /= 10U;
+
+        ++n10;
       }
-      else
-      {
-        limb_type xx = x.my_data[0U];
 
-        std::uint_fast16_t n10 = 0;
-
-        while(limb_type(xx + 5U) > 10U)
-        {
-          xx /= 10U;
-
-          ++n10;
-        }
-
-        e10 = static_cast<exponent_type>(x.my_exp + n10);
-      }
+      e10 = static_cast<exponent_type>(x.my_exp + n10);
 
       return (std::max)(           (std::numeric_limits<std::int32_t>::min)(),
                         (std::min)((std::numeric_limits<std::int32_t>::max)(), (std::int32_t) e10));
@@ -3796,11 +3714,7 @@
   {
     decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType> rtn;
 
-    if((isfinite)(x) == false)
-    {
-      rtn = std::numeric_limits<decwide_t<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>>::quiet_NaN();
-    }
-    else if(p < static_cast<std::int32_t>(0))
+    if(p < static_cast<std::int32_t>(0))
     {
       rtn = rootn(one<MyDigits10, LimbType, AllocatorType, InternalFloatType, ExponentType>() / x, static_cast<std::int32_t>(-p));
     }
@@ -3934,11 +3848,7 @@
     using std::isfinite;
     using math::wide_decimal::isfinite;
 
-    if((isfinite)(x) == false)
-    {
-      exp_result = x;
-    }
-    else if(x == 0)
+    if(x == 0)
     {
       exp_result = floating_point_type(1U);
     }
@@ -4046,6 +3956,7 @@
   bool example002a_pi_small_limb         ();
   bool example002b_pi_100k               ();
   bool example002c_pi_quintic            ();
+  bool example002d_pi_limb08             ();
   bool example003_zeta                   ();
   bool example004_bessel_recur           ();
   bool example005_polylog_series         ();
