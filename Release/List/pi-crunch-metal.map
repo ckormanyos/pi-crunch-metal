@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.50.6.265/W32 for ARM                  30/Mar/2021  14:04:11
+# IAR ELF Linker V8.50.6.265/W32 for ARM                  10/Jun/2021  08:43:47
 # Copyright 2007-2020 IAR Systems AB.
 #
 #    Output file  =
@@ -8,7 +8,7 @@
 #    Map file     =
 #        C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\Release\List\pi-crunch-metal.map
 #    Command line =
-#        -f C:\Users\User\AppData\Local\Temp\EWF5B5.tmp
+#        -f C:\Users\User\AppData\Local\Temp\EW51FE.tmp
 #        (C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\Release\Obj\mcal_cpu.o
 #        C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\Release\Obj\mcal_cpu_detail_secure.o
 #        C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\Release\Obj\mcal_cxx_completion.o
@@ -79,124 +79,133 @@ initialize by copy { rw };
   .intvec                ro code     0x8000       0x3c  cstartup.o [5]
                                    - 0x803c       0x3c
 
-"P1":                                           0x6154
-  .text                  ro code     0x803c      0x628  sys_start.o [1]
-  .text                  ro code     0x8664      0x104  sys_start.o [1]
-  .text                  ro code     0x8768       0xcc  sys_start.o [1]
-  .text                  ro code     0x8834       0x90  sys_start.o [1]
-  .text                  ro code     0x88c4      0x144  sys_start.o [1]
-  .text                  ro code     0x8a08       0x40  sys_start.o [1]
-  .text                  ro code     0x8a48      0x184  I64DivMod.o [5]
-  .text                  ro code     0x8bcc       0x24  sqrt.o [4]
-  .text                  ro code     0x8bf0      0x3bc  sys_start.o [1]
-  .text                  ro code     0x8fac      0x108  sys_start.o [1]
-  .text                  ro code     0x90b4      0x178  sys_start.o [1]
-  .text                  ro code     0x922c      0x574  sys_start.o [1]
-  .text                  ro code     0x97a0       0x9c  sys_start.o [1]
-  .text                  ro code     0x983c       0x30  sys_start.o [1]
-  .text                  ro code     0x986c       0xe8  sys_start.o [1]
-  .text                  ro code     0x9954      0x17c  I32DivMod.o [5]
-  .text                  ro code     0x9ad0        0x4  I64DivZer.o [5]
-  .text                  ro code     0x9ad4        0x8  ABImemclr4.o [5]
-  .text                  ro code     0x9adc      0x240  sys_start.o [1]
-  .text                  ro code     0x9d1c       0xf8  sys_start.o [1]
-  .text                  ro code     0x9e14       0x30  sys_start.o [1]
-  .text                  ro code     0x9e44       0x70  sys_start.o [1]
-  .text                  ro code     0x9eb4       0x70  sys_start.o [1]
-  .text                  ro code     0x9f24       0x64  sys_start.o [1]
-  .text                  ro code     0x9f88       0xd4  ABImemmove.o [5]
-  .text                  ro code     0xa05c        0x4  IntDivZer.o [5]
-  .text                  ro code     0xa060       0x38  ABImemset48.o [5]
-  .text                  ro code     0xa098      0x13c  sys_start.o [1]
-  .text                  ro code     0xa1d4      0x240  sys_start.o [1]
-  .text                  ro code     0xa414      0x220  sys_start.o [1]
-  .text                  ro code     0xa634       0x30  sys_start.o [1]
-  .text                  ro code     0xa664      0x4c8  sys_start.o [1]
-  .text                  ro code     0xab2c      0x274  sys_start.o [1]
-  .text                  ro code     0xada0       0xd4  ABImemcpy.o [5]
-  .text                  ro code     0xae74       0x74  sys_start.o [1]
-  .text                  ro code     0xaee8       0xb8  sys_start.o [1]
-  .text                  ro code     0xafa0      0x1b0  sys_start.o [1]
-  .text                  ro code     0xb150      0x1c0  sys_start.o [1]
-  .text                  ro code     0xb310       0x6c  DblToU64.o [4]
-  .text                  ro code     0xb37c       0xe8  sys_start.o [1]
-  .text                  ro code     0xb464      0x2f0  sys_start.o [1]
-  .text                  ro code     0xb754       0xe8  sys_start.o [1]
-  .text                  ro code     0xb83c      0x148  sys_start.o [1]
-  .text                  ro code     0xb984      0x14c  sys_start.o [1]
-  .text                  ro code     0xbad0      0x104  sys_start.o [1]
-  .text                  ro code     0xbbd4      0x118  sys_start.o [1]
-  .text                  ro code     0xbcec      0x5e8  sys_start.o [1]
-  .text                  ro code     0xc2d4      0x2f4  sys_start.o [1]
-  .text                  ro code     0xc5c8       0xd0  logf.o [4]
-  .text                  ro code     0xc698       0x20  I64Shl.o [5]
-  .text                  ro code     0xc6b8      0x178  sys_start.o [1]
-  .text                  ro code     0xc830      0x520  sys_start.o [1]
-  .text                  ro code     0xcd50      0x2c0  sys_start.o [1]
-  .text                  ro code     0xd010       0x74  sys_start.o [1]
-  .text                  ro code     0xd084       0x88  sys_start.o [1]
-  .text                  ro code     0xd10c       0x20  mcal_lcd.o [1]
-  .text                  ro code     0xd12c       0xc0  mcal_gpt.o [1]
-  .text                  ro code     0xd1ec       0x90  mcal_cpu.o [1]
-  .text                  ro code     0xd27c       0x88  mcal_led.o [1]
-  .text                  ro code     0xd304        0xc  mcal_cpu.o [1]
-  .text                  ro code     0xd310       0x34  mcal_cpu_detail_secure.o [1]
-  .text                  ro code     0xd344       0x14  mcal_cpu.o [1]
-  .text                  ro code     0xd358       0x18  mcal_cpu.o [1]
-  .text                  ro code     0xd370       0x20  mcal_reg.o [1]
-  .text                  ro code     0xd390      0x284  mcal_lcd.o [1]
-  .text                  ro code     0xd614      0x11c  mcal_port.o [1]
-  .text                  ro code     0xd730       0x5c  mcal_lcd.o [1]
-  .text                  ro code     0xd78c       0x44  mcal_lcd.o [1]
-  .text                  ro code     0xd7d0       0xc8  mcal_lcd.o [1]
-  .text                  ro code     0xd898       0x30  mcal_spi.o [1]
-  .text                  ro code     0xd8c8       0x90  mcal_port.o [1]
-  .text                  ro code     0xd958       0x84  mcal_port.o [1]
-  .text                  ro code     0xd9dc       0xe0  mcal_spi.o [1]
-  .text                  ro code     0xdabc       0xe0  mcal_spi.o [1]
-  .text                  ro code     0xdb9c       0x30  mcal_spi.o [1]
-  .text                  ro code     0xdbcc        0x8  mcal_spi.o [1]
-  .text                  ro code     0xdbd4       0xb8  mcal_lcd.o [1]
-  .text                  ro code     0xdc8c       0x78  mcal_lcd.o [1]
-  .text                  ro code     0xdd04       0x44  mcal_lcd.o [1]
-  .text                  ro code     0xdd48       0x88  mcal_led.o [1]
-  .text                  ro code     0xddd0       0x58  cstartup.o [5]
-  .text                  ro code     0xde28       0x10  coreinit.o [5]
-  .text                  ro code     0xde38       0x28  fpinit.o [4]
-  .text                  ro code     0xde60       0x30  cmain.o [5]
-  .text                  ro code     0xde90       0x28  data_init.o [5]
-  .text                  ro code     0xdeb8       0x14  XXexit.o [5]
-  .rodata                const       0xdecc       0x44  logf.o [4]
-  .text                  ro code     0xdf10       0x3c  zero_init3.o [5]
-  .text                  ro code     0xdf4c       0x34  mcal_spi.o [1]
-  .text                  ro code     0xdf80       0x34  mcal_spi.o [1]
-  .text                  ro code     0xdfb4       0x34  cmain_call_ctors.o [5]
-  .text                  ro code     0xdfe8       0x30  cppinit.o [2]
-  .text                  ro code     0xe018       0x30  copy_init3.o [5]
-  .rodata                const       0xe048       0x24  mcal_spi.o [1]
-  .rodata                const       0xe06c       0x24  mcal_spi.o [1]
-  .iar.init_table        const       0xe090       0x28  - Linker created -
-  .rodata                const       0xe0b8       0x1c  mcal_lcd.o [1]
-  .rodata                const       0xe0d4       0x18  mcal_led.o [1]
-  .rodata                const       0xe0ec       0x18  mcal_led.o [1]
-  .text                  ro code     0xe104       0x18  mcal_led.o [1]
-  .text                  ro code     0xe11c       0x14  sys_start.o [1]
-  .rodata                const       0xe130       0x10  mcal_port.o [1]
-  .rodata                const       0xe140       0x10  sys_start.o [1]
-  .rodata                const       0xe150       0x10  sys_start.o [1]
-  Initializer bytes      const       0xe160       0x10  <for P2-1>
-  .rodata                const       0xe170        0xc  sys_start.o [1]
-  .rodata                const       0xe17c        0x4  sys_start.o [1]
-  .text                  ro code     0xe180        0x4  mcal_cxx_completion.o [1]
-  .text                  ro code     0xe184        0x4  xpurevirtual.o [2]
-  .text                  ro code     0xe188        0x4  vectortrap.o [5]
-  SHT$$PREINIT_ARRAY                 0xe18c        0x0  <Block>
-  SHT$$INIT_ARRAY                    0xe18c        0x4  <Block>
-    .init_array          const       0xe18c        0x4  sys_start.o [1]
-  __iar_tls$$INIT_ARRAY              0xe190        0x0  <Block>
-  .rodata                const       0xe190        0x0  zero_init3.o [5]
-  .rodata                const       0xe190        0x0  copy_init3.o [5]
-                                   - 0xe190     0x6154
+"P1":                                           0x7380
+  .text                  ro code     0x803c      0x890  sys_start.o [1]
+  .text                  ro code     0x88cc      0x144  sys_start.o [1]
+  .text                  ro code     0x8a10       0x40  sys_start.o [1]
+  .text                  ro code     0x8a50       0x9c  sys_start.o [1]
+  .text                  ro code     0x8aec      0x10c  sys_start.o [1]
+  .text                  ro code     0x8bf8       0xac  sys_start.o [1]
+  .text                  ro code     0x8ca4       0x90  sys_start.o [1]
+  .text                  ro code     0x8d34       0x40  sys_start.o [1]
+  .text                  ro code     0x8d74      0x3c8  sys_start.o [1]
+  .text                  ro code     0x913c      0x4dc  sys_start.o [1]
+  .text                  ro code     0x9618      0x780  sys_start.o [1]
+  .text                  ro code     0x9d98       0xe8  sys_start.o [1]
+  .text                  ro code     0x9e80       0xd4  ABImemmove.o [5]
+  .text                  ro code     0x9f54        0x8  ABImemclr4.o [5]
+  .text                  ro code     0x9f5c      0x184  I64DivMod.o [5]
+  .text                  ro code     0xa0e0      0x310  sys_start.o [1]
+  .text                  ro code     0xa3f0       0x70  sys_start.o [1]
+  .text                  ro code     0xa460       0x70  sys_start.o [1]
+  .text                  ro code     0xa4d0       0x30  sys_start.o [1]
+  .text                  ro code     0xa500       0x9c  sys_start.o [1]
+  .text                  ro code     0xa59c       0x70  sys_start.o [1]
+  .text                  ro code     0xa60c       0xd4  ABImemcpy.o [5]
+  .text                  ro code     0xa6e0       0x38  ABImemset48.o [5]
+  .text                  ro code     0xa718      0x17c  I32DivMod.o [5]
+  .text                  ro code     0xa894        0x4  I64DivZer.o [5]
+  .text                  ro code     0xa898      0x148  sys_start.o [1]
+  .text                  ro code     0xa9e0       0x64  sys_start.o [1]
+  .text                  ro code     0xaa44      0x1f4  sys_start.o [1]
+  .text                  ro code     0xac38       0x30  sys_start.o [1]
+  .text                  ro code     0xac68      0x1c0  sys_start.o [1]
+  .text                  ro code     0xae28      0x4bc  sys_start.o [1]
+  .text                  ro code     0xb2e4        0x4  IntDivZer.o [5]
+  .text                  ro code     0xb2e8       0x60  sys_start.o [1]
+  .text                  ro code     0xb348       0x9c  sys_start.o [1]
+  .text                  ro code     0xb3e4       0x4c  sys_start.o [1]
+  .text                  ro code     0xb430      0x1b0  sys_start.o [1]
+  .text                  ro code     0xb5e0      0x1c0  sys_start.o [1]
+  .text                  ro code     0xb7a0       0x6c  DblToU64.o [4]
+  .text                  ro code     0xb80c       0xe8  sys_start.o [1]
+  .text                  ro code     0xb8f4      0x2f0  sys_start.o [1]
+  .text                  ro code     0xbbe4       0xe8  sys_start.o [1]
+  .text                  ro code     0xbccc      0x148  sys_start.o [1]
+  .text                  ro code     0xbe14      0x14c  sys_start.o [1]
+  .text                  ro code     0xbf60      0x104  sys_start.o [1]
+  .text                  ro code     0xc064      0x118  sys_start.o [1]
+  .text                  ro code     0xc17c      0x6f8  sys_start.o [1]
+  .text                  ro code     0xc874       0x24  sqrt.o [4]
+  .text                  ro code     0xc898      0x208  sys_start.o [1]
+  .text                  ro code     0xcaa0      0x12c  sys_start.o [1]
+  .text                  ro code     0xcbcc      0x104  sys_start.o [1]
+  .text                  ro code     0xccd0       0x6c  sys_start.o [1]
+  .text                  ro code     0xcd3c      0x2a0  sys_start.o [1]
+  .text                  ro code     0xcfdc      0x6e8  sys_start.o [1]
+  .text                  ro code     0xd6c4      0x34c  sys_start.o [1]
+  .text                  ro code     0xda10       0xd0  logf.o [4]
+  .text                  ro code     0xdae0       0x20  I64Shl.o [5]
+  .text                  ro code     0xdb00      0x238  sys_start.o [1]
+  .text                  ro code     0xdd38      0x130  sys_start.o [1]
+  .text                  ro code     0xde68      0x2c0  sys_start.o [1]
+  .text                  ro code     0xe128       0x74  sys_start.o [1]
+  .text                  ro code     0xe19c       0x88  sys_start.o [1]
+  .text                  ro code     0xe224       0x20  mcal_lcd.o [1]
+  .text                  ro code     0xe244       0xc0  mcal_gpt.o [1]
+  .text                  ro code     0xe304       0x90  mcal_cpu.o [1]
+  .text                  ro code     0xe394       0x88  mcal_led.o [1]
+  .text                  ro code     0xe41c        0xc  mcal_cpu.o [1]
+  .text                  ro code     0xe428       0x34  mcal_cpu_detail_secure.o [1]
+  .text                  ro code     0xe45c       0x14  mcal_cpu.o [1]
+  .text                  ro code     0xe470       0x18  mcal_cpu.o [1]
+  .text                  ro code     0xe488       0x20  mcal_reg.o [1]
+  .text                  ro code     0xe4a8      0x284  mcal_lcd.o [1]
+  .text                  ro code     0xe72c      0x11c  mcal_port.o [1]
+  .text                  ro code     0xe848       0x5c  mcal_lcd.o [1]
+  .text                  ro code     0xe8a4       0x44  mcal_lcd.o [1]
+  .text                  ro code     0xe8e8       0xc8  mcal_lcd.o [1]
+  .text                  ro code     0xe9b0       0x30  mcal_spi.o [1]
+  .text                  ro code     0xe9e0       0x90  mcal_port.o [1]
+  .text                  ro code     0xea70       0x84  mcal_port.o [1]
+  .text                  ro code     0xeaf4       0xe0  mcal_spi.o [1]
+  .rodata                const       0xebd4      0x104  sys_start.o [1]
+  .text                  ro code     0xecd8       0xe0  mcal_spi.o [1]
+  .text                  ro code     0xedb8       0x30  mcal_spi.o [1]
+  .text                  ro code     0xede8        0x8  mcal_spi.o [1]
+  .text                  ro code     0xedf0       0xb8  mcal_lcd.o [1]
+  .text                  ro code     0xeea8       0x78  mcal_lcd.o [1]
+  .text                  ro code     0xef20       0x44  mcal_lcd.o [1]
+  .text                  ro code     0xef64       0x88  mcal_led.o [1]
+  .text                  ro code     0xefec       0x58  cstartup.o [5]
+  .text                  ro code     0xf044       0x10  coreinit.o [5]
+  .text                  ro code     0xf054       0x28  fpinit.o [4]
+  .text                  ro code     0xf07c       0x30  cmain.o [5]
+  .text                  ro code     0xf0ac       0x28  data_init.o [5]
+  .text                  ro code     0xf0d4       0x14  XXexit.o [5]
+  .rodata                const       0xf0e8       0x44  logf.o [4]
+  .text                  ro code     0xf12c       0x3c  zero_init3.o [5]
+  .text                  ro code     0xf168       0x34  mcal_spi.o [1]
+  .text                  ro code     0xf19c       0x34  mcal_spi.o [1]
+  .text                  ro code     0xf1d0       0x34  cmain_call_ctors.o [5]
+  .text                  ro code     0xf204       0x30  cppinit.o [2]
+  .text                  ro code     0xf234       0x30  copy_init3.o [5]
+  .rodata                const       0xf264       0x24  mcal_spi.o [1]
+  .rodata                const       0xf288       0x24  mcal_spi.o [1]
+  .iar.init_table        const       0xf2ac       0x28  - Linker created -
+  .rodata                const       0xf2d4       0x1c  mcal_lcd.o [1]
+  .rodata                const       0xf2f0       0x18  mcal_led.o [1]
+  .rodata                const       0xf308       0x18  mcal_led.o [1]
+  .text                  ro code     0xf320       0x18  mcal_led.o [1]
+  .rodata                const       0xf338       0x14  sys_start.o [1]
+  .text                  ro code     0xf34c       0x14  sys_start.o [1]
+  .rodata                const       0xf360       0x10  mcal_port.o [1]
+  .rodata                const       0xf370       0x10  sys_start.o [1]
+  .rodata                const       0xf380       0x10  sys_start.o [1]
+  Initializer bytes      const       0xf390       0x10  <for P2-1>
+  .rodata                const       0xf3a0        0x4  sys_start.o [1]
+  .rodata                const       0xf3a4        0x4  sys_start.o [1]
+  .rodata                const       0xf3a8        0x4  sys_start.o [1]
+  .text                  ro code     0xf3ac        0x4  mcal_cxx_completion.o [1]
+  .text                  ro code     0xf3b0        0x4  xpurevirtual.o [2]
+  .text                  ro code     0xf3b4        0x4  vectortrap.o [5]
+  SHT$$PREINIT_ARRAY                 0xf3b8        0x0  <Block>
+  SHT$$INIT_ARRAY                    0xf3b8        0x4  <Block>
+    .init_array          const       0xf3b8        0x4  sys_start.o [1]
+  __iar_tls$$INIT_ARRAY              0xf3bc        0x0  <Block>
+  .rodata                const       0xf3bc        0x0  zero_init3.o [5]
+  .rodata                const       0xf3bc        0x0  copy_init3.o [5]
+                                   - 0xf3bc     0x7380
 
 "P2", part 1 of 3:                                0x10
   P2-1                             0x1'8000        0xd  <Init block>
@@ -204,42 +213,43 @@ initialize by copy { rw };
     .data                inited    0x1'8008        0x5  sys_start.o [1]
                                  - 0x1'800d        0xd
 
-"P2", part 2 of 3:                           0xfa'94d8
-  .bss                   zero      0x1'8010  0x80'0000  sys_start.o [1]
-  .bss                   zero     0x81'8010  0x7a'1300  sys_start.o [1]
-  .bss                   zero     0xfb'9310     0x8000  sys_start.o [1]
-  .bss                   zero     0xfc'1310      0x180  sys_start.o [1]
-  .bss                   zero     0xfc'1490       0x10  sys_start.o [1]
-  .bss                   zero     0xfc'14a0        0xd  mcal_port.o [1]
-  .bss                   zero     0xfc'14ad        0x1  mcal_gpt.o [1]
-  .bss                   zero     0xfc'14ae        0x1  mcal_led.o [1]
-  .bss                   zero     0xfc'14af        0x1  mcal_spi.o [1]
-  .bss                   zero     0xfc'14b0        0xc  mcal_spi.o [1]
-  .bss                   zero     0xfc'14bc        0xc  sys_start.o [1]
-  .bss                   zero     0xfc'14c8        0x9  mcal_led.o [1]
-  .bss                   zero     0xfc'14d4        0x4  sys_start.o [1]
-  .bss                   zero     0xfc'14d8        0x8  mcal_gpt.o [1]
-  .bss                   zero     0xfc'14e0        0x4  cppinit.o [2]
-  .bss                   zero     0xfc'14e4        0x1  mcal_spi.o [1]
-  .bss                   zero     0xfc'14e5        0x1  mcal_spi.o [1]
-  .bss                   zero     0xfc'14e6        0x1  sys_start.o [1]
-                                - 0xfc'14e7  0xfa'94d7
+"P2", part 2 of 3:                           0xfa'b6d8
+  .bss                   zero      0x1'8010  0x7a'1300  sys_start.o [1]
+  .bss                   zero     0x7b'9310  0x40'0000  sys_start.o [1]
+  .bss                   zero     0xbb'9310  0x40'0000  sys_start.o [1]
+  .bss                   zero     0xfb'9310     0xa000  sys_start.o [1]
+  .bss                   zero     0xfc'3310      0x380  sys_start.o [1]
+  .bss                   zero     0xfc'3690       0x10  sys_start.o [1]
+  .bss                   zero     0xfc'36a0        0xd  mcal_port.o [1]
+  .bss                   zero     0xfc'36ad        0x1  mcal_gpt.o [1]
+  .bss                   zero     0xfc'36ae        0x1  mcal_led.o [1]
+  .bss                   zero     0xfc'36af        0x1  mcal_spi.o [1]
+  .bss                   zero     0xfc'36b0        0xc  mcal_spi.o [1]
+  .bss                   zero     0xfc'36bc        0xc  sys_start.o [1]
+  .bss                   zero     0xfc'36c8        0x9  mcal_led.o [1]
+  .bss                   zero     0xfc'36d4        0x4  sys_start.o [1]
+  .bss                   zero     0xfc'36d8        0x8  mcal_gpt.o [1]
+  .bss                   zero     0xfc'36e0        0x4  cppinit.o [2]
+  .bss                   zero     0xfc'36e4        0x1  mcal_spi.o [1]
+  .bss                   zero     0xfc'36e5        0x1  mcal_spi.o [1]
+  .bss                   zero     0xfc'36e6        0x1  sys_start.o [1]
+                                - 0xfc'36e7  0xfa'b6d7
 
 "P2", part 3 of 3:                              0xc000
-  CSTACK                          0xfc'14e8     0x4000  <Block>
-    CSTACK               uninit   0xfc'14e8     0x4000  <Block tail>
-  IRQ_STACK                       0xfc'54e8     0x4000  <Block>
-    IRQ_STACK            uninit   0xfc'54e8     0x4000  <Block tail>
-  FIQ_STACK                       0xfc'94e8     0x4000  <Block>
-    FIQ_STACK            uninit   0xfc'94e8     0x4000  <Block tail>
-                                - 0xfc'd4e8     0xc000
+  CSTACK                          0xfc'36e8     0x4000  <Block>
+    CSTACK               uninit   0xfc'36e8     0x4000  <Block tail>
+  IRQ_STACK                       0xfc'76e8     0x4000  <Block>
+    IRQ_STACK            uninit   0xfc'76e8     0x4000  <Block tail>
+  FIQ_STACK                       0xfc'b6e8     0x4000  <Block>
+    FIQ_STACK            uninit   0xfc'b6e8     0x4000  <Block tail>
+                                - 0xfc'f6e8     0xc000
 
 Unused ranges:
 
        From          To        Size
        ----          --        ----
-     0xe190    0x1'7fff      0x9e70
-  0xfc'd4e8  0x201'7fff  0x104'ab18
+     0xf3bc    0x1'7fff      0x8c44
+  0xfc'f6e8  0x201'7fff  0x104'8918
 
 
 *******************************************************************************
@@ -249,12 +259,12 @@ Unused ranges:
           Address   Size
           -------   ----
 Zero (__iar_zero_init3)
-    1 destination range, total size 0xfa'94d7:
-          0x1'8010  0xfa'94d7
+    1 destination range, total size 0xfa'b6d7:
+          0x1'8010  0xfa'b6d7
 
 Copy (__iar_copy_init3)
     1 source range, total size 0x10 (123% of destination):
-            0xe160       0x10
+            0xf390       0x10
     1 destination range, total size 0xd:
           0x1'8000        0xd
 
@@ -282,9 +292,9 @@ C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\Release\Obj: [1]
     mcal_port.o                   560       16          13
     mcal_reg.o                     32
     mcal_spi.o                    656       72          15
-    sys_start.o                19'060       57  16'422'054
+    sys_start.o                23'436      333  16'430'758
     ------------------------------------------------------
-    Total:                     22'460      229  16'422'109
+    Total:                     26'836      505  16'430'813
 
 dl5E_aln.a: [2]
     cppinit.o                      48                    4
@@ -329,7 +339,7 @@ rt5E_al.a: [5]
     Gaps                                                 3
     Linker created                          43      49'152
 ----------------------------------------------------------
-    Grand Total:               24'636      340  16'471'268
+    Grand Total:               29'012      616  16'479'972
 
 
 *******************************************************************************
@@ -338,301 +348,321 @@ rt5E_al.a: [5]
 
 Entry                     Address       Size  Type      Object
 -----                     -------       ----  ----      ------
-.iar.init_table$$Base      0xe090              --   Gb  - Linker created -
-.iar.init_table$$Limit     0xe0b8              --   Gb  - Linker created -
+.iar.init_table$$Base      0xf2ac              --   Gb  - Linker created -
+.iar.init_table$$Limit     0xf2d4              --   Gb  - Linker created -
 <unnamed>::example002_pi()
-                           0xce28       0x70  Code  Gb  sys_start.o [1]
+                           0xdf40       0x70  Code  Gb  sys_start.o [1]
 <unnamed>::gpt_is_initialized()
-                           0xd12c        0x8  Code  Gb  mcal_gpt.o [1]
+                           0xe244        0x8  Code  Gb  mcal_gpt.o [1]
 <unnamed>::gpt_is_initialized()::is_init
-                        0xfc'14ad        0x1  Data  Lc  mcal_gpt.o [1]
+                        0xfc'36ad        0x1  Data  Lc  mcal_gpt.o [1]
 <unnamed>::mcal_gpt_system_tick::initial_count
-                        0xfc'14d8        0x8  Data  Gb  mcal_gpt.o [1]
+                        0xfc'36d8        0x8  Data  Gb  mcal_gpt.o [1]
 <unnamed>::mcal_port_pin_expander_device()::device
-                        0xfc'14a0        0xc  Data  Lc  mcal_port.o [1]
+                        0xfc'36a0        0xc  Data  Lc  mcal_port.o [1]
 <unnamed>::mcal_port_pin_expander_device()::static guard for device
-                        0xfc'14ac        0x1  Data  Lc  mcal_port.o [1]
+                        0xfc'36ac        0x1  Data  Lc  mcal_port.o [1]
 <unnamed>::sys_start_pi_count
                          0x1'8008        0x4  Data  Gb  sys_start.o [1]
 <unnamed>::sys_start_pi_result
                          0x1'800c        0x1  Data  Gb  sys_start.o [1]
-?main                      0xde60             Code  Gb  cmain.o [5]
-Abort_Handler              0xe188             Code  Wk  vectortrap.o [5]
-CSTACK$$Base            0xfc'14e8              --   Gb  - Linker created -
-CSTACK$$Limit           0xfc'54e8              --   Gb  - Linker created -
-FIQ_Handler                0xe188             Code  Wk  vectortrap.o [5]
-FIQ_STACK$$Base         0xfc'94e8              --   Gb  - Linker created -
-FIQ_STACK$$Limit        0xfc'd4e8              --   Gb  - Linker created -
-IRQ_Handler                0xe188             Code  Wk  vectortrap.o [5]
-IRQ_STACK$$Base         0xfc'54e8              --   Gb  - Linker created -
-IRQ_STACK$$Limit        0xfc'94e8              --   Gb  - Linker created -
-Initialization guard variable for math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::my_n_data_for_add_sub
-                        0xfc'14e6        0x1  Data  Gb  sys_start.o [1]
-Prefetch_Handler           0xe188             Code  Wk  vectortrap.o [5]
-Region$$Table$$Base        0xe090              --   Gb  - Linker created -
-Region$$Table$$Limit       0xe0b8              --   Gb  - Linker created -
-SHT$$INIT_ARRAY$$Base      0xe18c              --   Gb  - Linker created -
-SHT$$INIT_ARRAY$$Limit     0xe190              --   Gb  - Linker created -
+?main                      0xf07c             Code  Gb  cmain.o [5]
+Abort_Handler              0xf3b4             Code  Wk  vectortrap.o [5]
+CSTACK$$Base            0xfc'36e8              --   Gb  - Linker created -
+CSTACK$$Limit           0xfc'76e8              --   Gb  - Linker created -
+FIQ_Handler                0xf3b4             Code  Wk  vectortrap.o [5]
+FIQ_STACK$$Base         0xfc'b6e8              --   Gb  - Linker created -
+FIQ_STACK$$Limit        0xfc'f6e8              --   Gb  - Linker created -
+IRQ_Handler                0xf3b4             Code  Wk  vectortrap.o [5]
+IRQ_STACK$$Base         0xfc'76e8              --   Gb  - Linker created -
+IRQ_STACK$$Limit        0xfc'b6e8              --   Gb  - Linker created -
+Initialization guard variable for math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::my_n_data_for_add_sub
+                        0xfc'36e6        0x1  Data  Gb  sys_start.o [1]
+Prefetch_Handler           0xf3b4             Code  Wk  vectortrap.o [5]
+Region$$Table$$Base        0xf2ac              --   Gb  - Linker created -
+Region$$Table$$Limit       0xf2d4              --   Gb  - Linker created -
+SHT$$INIT_ARRAY$$Base      0xf3b8              --   Gb  - Linker created -
+SHT$$INIT_ARRAY$$Limit     0xf3bc              --   Gb  - Linker created -
 SHT$$PREINIT_ARRAY$$Base
-                           0xe18c              --   Gb  - Linker created -
+                           0xf3b8              --   Gb  - Linker created -
 SHT$$PREINIT_ARRAY$$Limit
-                           0xe18c              --   Gb  - Linker created -
-SWI_Handler                0xe188             Code  Wk  vectortrap.o [5]
-Undefined_Handler          0xe188             Code  Wk  vectortrap.o [5]
+                           0xf3b8              --   Gb  - Linker created -
+SWI_Handler                0xf3b4             Code  Wk  vectortrap.o [5]
+Undefined_Handler          0xf3b4             Code  Wk  vectortrap.o [5]
 Virtual function table for math::wide_decimal::detail::fixed_dynamic_array<unsigned int, (unsigned int)125004, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>
-                           0xe150       0x10  Data  Gb  sys_start.o [1]
+                           0xf380       0x10  Data  Gb  sys_start.o [1]
 Virtual function table for mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal::port::port_pin_expander<(unsigned char)5>, mcal::port::port_pin_expander<(unsigned char)6>, mcal::port::port_pin_expander<(unsigned char)7>, mcal::port::port_pin_expander<(unsigned char)8>, mcal::port::port_pin_expander<(unsigned char)9>, mcal::port::port_pin_expander<(unsigned char)10>, mcal::port::port_pin_expander<(unsigned char)11>, mcal::port::port_pin_expander<(unsigned char)12>, mcal::port::port_pin_expander<(unsigned char)13>, mcal::port::port_pin_expander<(unsigned char)14>, mcal::port::port_pin_expander<(unsigned char)15>>
-                           0xe0b8       0x1c  Data  Gb  mcal_lcd.o [1]
+                           0xf2d4       0x1c  Data  Gb  mcal_lcd.o [1]
 Virtual function table for mcal::led::led_boolean_state_base
-                           0xe0d4       0x18  Data  Gb  mcal_led.o [1]
+                           0xf2f0       0x18  Data  Gb  mcal_led.o [1]
 Virtual function table for mcal::led::led_port_inverted<mcal::port::port_pin<(unsigned char)71>>
-                           0xe0ec       0x18  Data  Gb  mcal_led.o [1]
+                           0xf308       0x18  Data  Gb  mcal_led.o [1]
 Virtual function table for mcal::port::port_pin_expander_microchip_mcp23s17<(unsigned char)2>
-                           0xe130       0x10  Data  Gb  mcal_port.o [1]
+                           0xf360       0x10  Data  Gb  mcal_port.o [1]
 Virtual function table for mcal::spi::spi_software_port_driver<mcal::port::port_pin<(unsigned char)24>, mcal::port::port_pin<(unsigned char)25>, mcal::port::port_pin<(unsigned char)22>, mcal::port::port_pin_dummy, (unsigned int)32, (bool)0>
-                           0xe06c       0x24  Data  Gb  mcal_spi.o [1]
+                           0xf288       0x24  Data  Gb  mcal_spi.o [1]
 Virtual function table for util::communication_buffer_depth_one_byte
-                           0xe048       0x24  Data  Gb  mcal_spi.o [1]
-Virtual function table for util::dynamic_array<unsigned int, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>
-                           0xe140       0x10  Data  Gb  sys_start.o [1]
+                           0xf264       0x24  Data  Gb  mcal_spi.o [1]
+Virtual function table for util::dynamic_array<unsigned int, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>, unsigned int, int>
+                           0xf370       0x10  Data  Gb  sys_start.o [1]
 [local to sys_start_cpp]::math::constants::const_pi_control_head_32
-                           0xcfd0       0x20  Data  Lc  sys_start.o [1]
+                           0xe0e8       0x20  Data  Lc  sys_start.o [1]
 [local to sys_start_cpp]::math::constants::const_pi_control_tail_32_1000001
-                           0xcff0       0x20  Data  Lc  sys_start.o [1]
-__aeabi_d2ulz              0xb310             Code  Gb  DblToU64.o [4]
-__aeabi_idiv0              0xa05c             Code  Gb  IntDivZer.o [5]
-__aeabi_ldiv0              0x9ad0             Code  Gb  I64DivZer.o [5]
-__aeabi_ldivmod            0x8a48             Code  Gb  I64DivMod.o [5]
-__aeabi_llsl               0xc698             Code  Gb  I64Shl.o [5]
-__aeabi_memclr4            0x9ad4             Code  Gb  ABImemclr4.o [5]
-__aeabi_memcpy             0xada0             Code  Gb  ABImemcpy.o [5]
-__aeabi_memcpy4            0xadc4             Code  Gb  ABImemcpy.o [5]
-__aeabi_memcpy8            0xadc4             Code  Gb  ABImemcpy.o [5]
-__aeabi_memmove            0x9f88             Code  Gb  ABImemmove.o [5]
-__aeabi_memmove4           0x9f88             Code  Gb  ABImemmove.o [5]
-__aeabi_memmove8           0x9f88             Code  Gb  ABImemmove.o [5]
-__aeabi_uidiv              0x9954             Code  Gb  I32DivMod.o [5]
-__aeabi_uidivmod           0x9954             Code  Gb  I32DivMod.o [5]
-__aeabi_uldivmod           0x8a9c             Code  Gb  I64DivMod.o [5]
-__call_ctors               0xdfe8       0x30  Code  Gb  cppinit.o [2]
-__cmain                    0xde60             Code  Gb  cmain.o [5]
-__cxa_pure_virtual         0xe184        0x4  Code  Gb  xpurevirtual.o [2]
-__dso_handle            0xfc'14e0        0x4  Data  Gb  cppinit.o [2]
-__exit                     0xdeb8             Code  Gb  XXexit.o [5]
-__iar_Memset4_word         0xa060             Code  Gb  ABImemset48.o [5]
-__iar_Memset8_word         0xa060             Code  Gb  ABImemset48.o [5]
-__iar_copy_init3           0xe019       0x30  Code  Gb  copy_init3.o [5]
+                           0xe108       0x20  Data  Lc  sys_start.o [1]
+__aeabi_d2ulz              0xb7a0             Code  Gb  DblToU64.o [4]
+__aeabi_idiv0              0xb2e4             Code  Gb  IntDivZer.o [5]
+__aeabi_ldiv0              0xa894             Code  Gb  I64DivZer.o [5]
+__aeabi_ldivmod            0x9f5c             Code  Gb  I64DivMod.o [5]
+__aeabi_llsl               0xdae0             Code  Gb  I64Shl.o [5]
+__aeabi_memclr4            0x9f54             Code  Gb  ABImemclr4.o [5]
+__aeabi_memcpy             0xa60c             Code  Gb  ABImemcpy.o [5]
+__aeabi_memcpy4            0xa630             Code  Gb  ABImemcpy.o [5]
+__aeabi_memcpy8            0xa630             Code  Gb  ABImemcpy.o [5]
+__aeabi_memmove            0x9e80             Code  Gb  ABImemmove.o [5]
+__aeabi_memmove4           0x9e80             Code  Gb  ABImemmove.o [5]
+__aeabi_memmove8           0x9e80             Code  Gb  ABImemmove.o [5]
+__aeabi_uidiv              0xa718             Code  Gb  I32DivMod.o [5]
+__aeabi_uidivmod           0xa718             Code  Gb  I32DivMod.o [5]
+__aeabi_uldivmod           0x9fb0             Code  Gb  I64DivMod.o [5]
+__call_ctors               0xf204       0x30  Code  Gb  cppinit.o [2]
+__cmain                    0xf07c             Code  Gb  cmain.o [5]
+__cxa_pure_virtual         0xf3b0        0x4  Code  Gb  xpurevirtual.o [2]
+__dso_handle            0xfc'36e0        0x4  Data  Gb  cppinit.o [2]
+__exit                     0xf0d4             Code  Gb  XXexit.o [5]
+__iar_Memset4_word         0xa6e0             Code  Gb  ABImemset48.o [5]
+__iar_Memset8_word         0xa6e0             Code  Gb  ABImemset48.o [5]
+__iar_copy_init3           0xf235       0x30  Code  Gb  copy_init3.o [5]
 __iar_cstart_call_ctors
-                           0xdfb4       0x34  Code  Gb  cmain_call_ctors.o [5]
-__iar_data_init3           0xde91       0x28  Code  Gb  data_init.o [5]
-__iar_init_core_v6         0xde28             Code  Gb  coreinit.o [5]
-__iar_init_vfp             0xde4c             Code  Gb  fpinit.o [4]
-__iar_init_vfp_v6          0xde38             Code  Gb  fpinit.o [4]
-__iar_log32                0xc5c8             Code  Gb  logf.o [4]
-__iar_log_medium32         0xc5c8             Code  Gb  logf.o [4]
-__iar_log_mediumf          0xc5c8             Code  Gb  logf.o [4]
-__iar_logf_NoFini          0xc668             Code  Gb  logf.o [4]
-__iar_logf_ZerNeg          0xc680             Code  Gb  logf.o [4]
-__iar_logf_cTab            0xdecc             Data  Gb  logf.o [4]
-__iar_program_start        0xddd0             Code  Gb  cstartup.o [5]
-__iar_safe_logf            0xc5ec             Code  Gb  logf.o [4]
-__iar_sqrt64               0x8bcc             Code  Gb  sqrt.o [4]
+                           0xf1d0       0x34  Code  Gb  cmain_call_ctors.o [5]
+__iar_data_init3           0xf0ad       0x28  Code  Gb  data_init.o [5]
+__iar_init_core_v6         0xf044             Code  Gb  coreinit.o [5]
+__iar_init_vfp             0xf068             Code  Gb  fpinit.o [4]
+__iar_init_vfp_v6          0xf054             Code  Gb  fpinit.o [4]
+__iar_log32                0xda10             Code  Gb  logf.o [4]
+__iar_log_medium32         0xda10             Code  Gb  logf.o [4]
+__iar_log_mediumf          0xda10             Code  Gb  logf.o [4]
+__iar_logf_NoFini          0xdab0             Code  Gb  logf.o [4]
+__iar_logf_ZerNeg          0xdac8             Code  Gb  logf.o [4]
+__iar_logf_cTab            0xf0e8             Data  Gb  logf.o [4]
+__iar_program_start        0xefec             Code  Gb  cstartup.o [5]
+__iar_safe_logf            0xda34             Code  Gb  logf.o [4]
+__iar_sqrt64               0xc874             Code  Gb  sqrt.o [4]
 __iar_tls$$INIT_ARRAY$$Base
-                           0xe190              --   Gb  - Linker created -
+                           0xf3bc              --   Gb  - Linker created -
 __iar_tls$$INIT_ARRAY$$Limit
-                           0xe190              --   Gb  - Linker created -
-__iar_zero_init3           0xdf11       0x3c  Code  Gb  zero_init3.o [5]
-__sti__routine             0xcd50       0xd8  Code  Lc  sys_start.o [1]
+                           0xf3bc              --   Gb  - Linker created -
+__iar_zero_init3           0xf12d       0x3c  Code  Gb  zero_init3.o [5]
+__sti__routine             0xde68       0xd8  Code  Lc  sys_start.o [1]
 __vector                   0x8000             Data  Gb  cstartup.o [5]
-_call_main                 0xde78             Code  Gb  cmain.o [5]
-_main                      0xde80             Code  Gb  cmain.o [5]
-abort                      0xe180        0x4  Code  Gb  mcal_cxx_completion.o [1]
+_call_main                 0xf094             Code  Gb  cmain.o [5]
+_main                      0xf09c             Code  Gb  cmain.o [5]
+abort                      0xf3ac        0x4  Code  Gb  mcal_cxx_completion.o [1]
+bool math::wide_decimal::detail::eval_subtract_n<unsigned int *, unsigned int *>(unsigned int *, unsigned int *, unsigned int *, int)
+                           0xa59c       0x70  Code  Gb  sys_start.o [1]
 bool std::equal<unsigned int const *, std::_Array_const_iterator<unsigned int, (unsigned int)8>>(unsigned int const *, unsigned int const *, std::_Array_const_iterator<unsigned int, (unsigned int)8>)
-                           0xd010       0x74  Code  Gb  sys_start.o [1]
+                           0xe128       0x74  Code  Gb  sys_start.o [1]
 char * util::baselexical_cast<unsigned int, char *, (unsigned int)10, (bool)1>(unsigned int const &, char *)
-                           0xd084       0x88  Code  Gb  sys_start.o [1]
+                           0xe19c       0x88  Code  Gb  sys_start.o [1]
 double math::wide_decimal::detail::fft::template_sin_order_1<double>(unsigned int)
-                           0xb464      0x2f0  Code  Gb  sys_start.o [1]
-logf                       0xc5c8             Code  Gb  logf.o [4]
-main                       0xcf20       0x94  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long> math::wide_decimal::calc_pi<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>(void (*)(unsigned int))
-                           0xbcec      0x5e8  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::calculate_inv()
-                           0xc830      0x520  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::calculate_sqrt()
-                           0x803c      0x628  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::compare_ranges(unsigned int const *, unsigned int const *, unsigned int)
-                           0xaee8       0xb8  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::decwide_t(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>&)
-                           0x8a08       0x40  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::decwide_t(double, long long)
-                           0x8bf0      0x3bc  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::decwide_t<unsigned long long, (void const *)0>(unsigned long long)
-                           0x9d1c       0xf8  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::decwide_t_elem_number
-                           0xe17c        0x4  Data  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::div_unsigned_long_long(unsigned long long)
-                           0xc2d4      0x2f4  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::eval_add_n(unsigned int *, unsigned int const *, unsigned int const *, int)
-                           0x9eb4       0x70  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::eval_multiply_kara_n_by_n_to_2n(unsigned int *, unsigned int const *, unsigned int const *, unsigned int, unsigned int *)
-                           0xa414      0x220  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::eval_multiply_kara_propagate_carry(unsigned int *, unsigned int, unsigned int)
-                           0xae74       0x74  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::eval_subtract_n(unsigned int *, unsigned int const *, unsigned int const *, int)
-                           0x9f24       0x64  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::from_unsigned_long_long(unsigned long long)
-                           0xab2c      0x274  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::isone() const
-                           0x88c4      0x144  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::mul_loop_fft(unsigned int *, unsigned int const *, int)
-                           0xa664      0x4c8  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::mul_unsigned_long_long(unsigned long long)
-                           0x90b4      0x178  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::my_af_bf_fft_mul_pool
-                         0x1'8010  0x80'0000  Data  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::my_kara_mul_pool
-                        0xfb'9310     0x8000  Data  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::my_n_data_for_add_sub
-                        0xfc'14bc        0xc  Data  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::my_school_mul_pool
-                        0xfc'1310      0x180  Data  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::operator *=(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>&)
-                           0x8fac      0x108  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::operator +=(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>&)
-                           0x922c      0x574  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::operator /=(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>&)
-                           0xc6b8      0x178  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::operator =(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>&)
-                           0x9e44       0x70  Code  Gb  sys_start.o [1]
-math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::operator =(math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>&&)
-                           0x8768       0xcc  Code  Gb  sys_start.o [1]
-math::wide_decimal::detail::a029747_maker_of_upper_limit(unsigned int)
-                           0xa1d4      0x240  Code  Gb  sys_start.o [1]
+                           0xb8f4      0x2f0  Code  Gb  sys_start.o [1]
+int math::wide_decimal::detail::compare_ranges<unsigned int *, unsigned int *>(unsigned int *, unsigned int *, unsigned int)
+                           0xb348       0x9c  Code  Gb  sys_start.o [1]
+int math::wide_decimal::detail::compare_ranges<unsigned int *, unsigned int const *>(unsigned int *, unsigned int const *, unsigned int)
+                           0xa500       0x9c  Code  Gb  sys_start.o [1]
+logf                       0xda10             Code  Gb  logf.o [4]
+main                       0xe038       0x94  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double> math::wide_decimal::calc_pi<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>(void (*)(unsigned int))
+                           0xcfdc      0x6e8  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::calculate_inv()
+                           0x803c      0x890  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::calculate_sqrt()
+                           0xc17c      0x6f8  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::decwide_t(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>&)
+                           0x8a10       0x40  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::decwide_t(double, long long)
+                           0x8d74      0x3c8  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::decwide_t<unsigned long long, (void const *)0>(unsigned long long)
+                           0xcbcc      0x104  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::decwide_t_elem_number
+                           0xf3a0        0x4  Data  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::decwide_t_elems_for_fft
+                           0xf3a8        0x4  Data  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::decwide_t_elems_for_kara
+                           0xf3a4        0x4  Data  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::div_unsigned_long_long(unsigned long long)
+                           0xd6c4      0x34c  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::from_lst(std::initializer_list<unsigned int>, long long, bool)
+                           0xcaa0      0x12c  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::from_unsigned_long_long(unsigned long long)
+                           0xcd3c      0x2a0  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::isone() const
+                           0x88cc      0x144  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::mul_unsigned_long_long(unsigned long long)
+                           0xc898      0x208  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::my_af_fft_mul_pool
+                        0x7b'9310  0x40'0000  Data  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::my_bf_fft_mul_pool
+                        0xbb'9310  0x40'0000  Data  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::my_kara_mul_pool
+                        0xfb'9310     0xa000  Data  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::my_n_data_for_add_sub
+                        0xfc'36bc        0xc  Data  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::my_school_mul_pool
+                        0xfc'3310      0x380  Data  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::operator *=(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>&)
+                           0x913c      0x4dc  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::operator +=(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>&)
+                           0x9618      0x780  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::operator /=(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>&)
+                           0xdb00      0x238  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::operator =(const math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>&)
+                           0xa3f0       0x70  Code  Gb  sys_start.o [1]
+math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::operator =(math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>&&)
+                           0x8d34       0x40  Code  Gb  sys_start.o [1]
+math::wide_decimal::detail::a000079::a000079_as_constexpr(unsigned int)
+                           0xac68      0x1c0  Code  Gb  sys_start.o [1]
+math::wide_decimal::detail::a029750::a029750_as_runtime_value(uint32_t)::a029750_data
+                           0xebd4      0x104  Data  Lc  sys_start.o [1]
+math::wide_decimal::detail::a029750::a029750_as_runtime_value(unsigned int)
+                           0xa9e0       0x64  Code  Gb  sys_start.o [1]
 math::wide_decimal::detail::fixed_dynamic_array<unsigned int, (unsigned int)125004, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>::fixed_dynamic_array(const math::wide_decimal::detail::fixed_dynamic_array<unsigned int, (unsigned int)125004, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>&)
-                           0x986c       0xe8  Code  Gb  sys_start.o [1]
+                           0x9d98       0xe8  Code  Gb  sys_start.o [1]
 math::wide_decimal::detail::fixed_dynamic_array<unsigned int, (unsigned int)125004, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>::fixed_dynamic_array(std::initializer_list<unsigned int>)
-                           0x8664      0x104  Code  Gb  sys_start.o [1]
+                           0x8aec      0x10c  Code  Gb  sys_start.o [1]
+math::wide_decimal::detail::fixed_dynamic_array<unsigned int, (unsigned int)125004, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>::operator =(math::wide_decimal::detail::fixed_dynamic_array<unsigned int, (unsigned int)125004, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>&&)
+                           0x8bf8       0xac  Code  Gb  sys_start.o [1]
 math::wide_decimal::detail::fixed_dynamic_array<unsigned int, (unsigned int)125004, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>::~fixed_dynamic_array()
-                           0xe11c       0x14  Code  Gb  sys_start.o [1]
+                           0xf34c       0x14  Code  Gb  sys_start.o [1]
 mcal::cpu::detail::init()
-                           0xd1f0       0x8c  Code  Gb  mcal_cpu.o [1]
+                           0xe308       0x8c  Code  Gb  mcal_cpu.o [1]
 mcal::cpu::detail::secure::clear_branch_prediction_array()
-                           0xd304        0xc  Code  Gb  mcal_cpu.o [1]
+                           0xe41c        0xc  Code  Gb  mcal_cpu.o [1]
 mcal::cpu::detail::secure::enable_branch_prediction()
-                           0xd344       0x14  Code  Gb  mcal_cpu.o [1]
+                           0xe45c       0x14  Code  Gb  mcal_cpu.o [1]
 mcal::cpu::detail::secure::enable_caches()
-                           0xd358       0x18  Code  Gb  mcal_cpu.o [1]
-mcal::cpu::init()          0xd1ec        0x4  Code  Gb  mcal_cpu.o [1]
-mcal::cpu::nop()           0xdbcc        0x8  Code  Gb  mcal_spi.o [1]
+                           0xe470       0x18  Code  Gb  mcal_cpu.o [1]
+mcal::cpu::init()          0xe304        0x4  Code  Gb  mcal_cpu.o [1]
+mcal::cpu::nop()           0xede8        0x8  Code  Gb  mcal_spi.o [1]
 mcal::gpt::init(void const *)
-                           0xd134       0x54  Code  Gb  mcal_gpt.o [1]
+                           0xe24c       0x54  Code  Gb  mcal_gpt.o [1]
 mcal::gpt::secure::get_time_elapsed()
-                           0xd188       0x5c  Code  Gb  mcal_gpt.o [1]
-mcal::lcd::lcd0()          0xd10c       0x20  Code  Gb  mcal_lcd.o [1]
+                           0xe2a0       0x5c  Code  Gb  mcal_gpt.o [1]
+mcal::lcd::lcd0()          0xe224       0x20  Code  Gb  mcal_lcd.o [1]
 mcal::lcd::lcd0()::lc0   0x1'8004        0x4  Data  Lc  mcal_lcd.o [1]
 mcal::lcd::lcd0()::static guard for lc0
                          0x1'8000        0x1  Data  Lc  mcal_lcd.o [1]
 mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal::port::port_pin_expander<(unsigned char)5>, mcal::port::port_pin_expander<(unsigned char)6>, mcal::port::port_pin_expander<(unsigned char)7>, mcal::port::port_pin_expander<(unsigned char)8>, mcal::port::port_pin_expander<(unsigned char)9>, mcal::port::port_pin_expander<(unsigned char)10>, mcal::port::port_pin_expander<(unsigned char)11>, mcal::port::port_pin_expander<(unsigned char)12>, mcal::port::port_pin_expander<(unsigned char)13>, mcal::port::port_pin_expander<(unsigned char)14>, mcal::port::port_pin_expander<(unsigned char)15>>::P1_set(unsigned char)
-                           0xd7d0       0xc8  Code  Gb  mcal_lcd.o [1]
+                           0xe8e8       0xc8  Code  Gb  mcal_lcd.o [1]
 mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal::port::port_pin_expander<(unsigned char)5>, mcal::port::port_pin_expander<(unsigned char)6>, mcal::port::port_pin_expander<(unsigned char)7>, mcal::port::port_pin_expander<(unsigned char)8>, mcal::port::port_pin_expander<(unsigned char)9>, mcal::port::port_pin_expander<(unsigned char)10>, mcal::port::port_pin_expander<(unsigned char)11>, mcal::port::port_pin_expander<(unsigned char)12>, mcal::port::port_pin_expander<(unsigned char)13>, mcal::port::port_pin_expander<(unsigned char)14>, mcal::port::port_pin_expander<(unsigned char)15>>::clear_line(unsigned char)
-                           0xdc8c       0x78  Code  Gb  mcal_lcd.o [1]
+                           0xeea8       0x78  Code  Gb  mcal_lcd.o [1]
 mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal::port::port_pin_expander<(unsigned char)5>, mcal::port::port_pin_expander<(unsigned char)6>, mcal::port::port_pin_expander<(unsigned char)7>, mcal::port::port_pin_expander<(unsigned char)8>, mcal::port::port_pin_expander<(unsigned char)9>, mcal::port::port_pin_expander<(unsigned char)10>, mcal::port::port_pin_expander<(unsigned char)11>, mcal::port::port_pin_expander<(unsigned char)12>, mcal::port::port_pin_expander<(unsigned char)13>, mcal::port::port_pin_expander<(unsigned char)14>, mcal::port::port_pin_expander<(unsigned char)15>>::command(unsigned char)
-                           0xd730       0x5c  Code  Gb  mcal_lcd.o [1]
+                           0xe848       0x5c  Code  Gb  mcal_lcd.o [1]
 mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal::port::port_pin_expander<(unsigned char)5>, mcal::port::port_pin_expander<(unsigned char)6>, mcal::port::port_pin_expander<(unsigned char)7>, mcal::port::port_pin_expander<(unsigned char)8>, mcal::port::port_pin_expander<(unsigned char)9>, mcal::port::port_pin_expander<(unsigned char)10>, mcal::port::port_pin_expander<(unsigned char)11>, mcal::port::port_pin_expander<(unsigned char)12>, mcal::port::port_pin_expander<(unsigned char)13>, mcal::port::port_pin_expander<(unsigned char)14>, mcal::port::port_pin_expander<(unsigned char)15>>::init()
-                           0xd390      0x284  Code  Gb  mcal_lcd.o [1]
+                           0xe4a8      0x284  Code  Gb  mcal_lcd.o [1]
 mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal::port::port_pin_expander<(unsigned char)5>, mcal::port::port_pin_expander<(unsigned char)6>, mcal::port::port_pin_expander<(unsigned char)7>, mcal::port::port_pin_expander<(unsigned char)8>, mcal::port::port_pin_expander<(unsigned char)9>, mcal::port::port_pin_expander<(unsigned char)10>, mcal::port::port_pin_expander<(unsigned char)11>, mcal::port::port_pin_expander<(unsigned char)12>, mcal::port::port_pin_expander<(unsigned char)13>, mcal::port::port_pin_expander<(unsigned char)14>, mcal::port::port_pin_expander<(unsigned char)15>>::set_line_index(unsigned char)
-                           0xdd04       0x44  Code  Gb  mcal_lcd.o [1]
+                           0xef20       0x44  Code  Gb  mcal_lcd.o [1]
 mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal::port::port_pin_expander<(unsigned char)5>, mcal::port::port_pin_expander<(unsigned char)6>, mcal::port::port_pin_expander<(unsigned char)7>, mcal::port::port_pin_expander<(unsigned char)8>, mcal::port::port_pin_expander<(unsigned char)9>, mcal::port::port_pin_expander<(unsigned char)10>, mcal::port::port_pin_expander<(unsigned char)11>, mcal::port::port_pin_expander<(unsigned char)12>, mcal::port::port_pin_expander<(unsigned char)13>, mcal::port::port_pin_expander<(unsigned char)14>, mcal::port::port_pin_expander<(unsigned char)15>>::write(char const *, unsigned int, unsigned int)
-                           0xdbd4       0xb8  Code  Gb  mcal_lcd.o [1]
+                           0xedf0       0xb8  Code  Gb  mcal_lcd.o [1]
 mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal::port::port_pin_expander<(unsigned char)5>, mcal::port::port_pin_expander<(unsigned char)6>, mcal::port::port_pin_expander<(unsigned char)7>, mcal::port::port_pin_expander<(unsigned char)8>, mcal::port::port_pin_expander<(unsigned char)9>, mcal::port::port_pin_expander<(unsigned char)10>, mcal::port::port_pin_expander<(unsigned char)11>, mcal::port::port_pin_expander<(unsigned char)12>, mcal::port::port_pin_expander<(unsigned char)13>, mcal::port::port_pin_expander<(unsigned char)14>, mcal::port::port_pin_expander<(unsigned char)15>>::write(unsigned char)
-                           0xd78c       0x44  Code  Gb  mcal_lcd.o [1]
-mcal::led::led0()          0xd27c       0x88  Code  Gb  mcal_led.o [1]
-mcal::led::led0()::l0   0xfc'14c8        0x8  Data  Lc  mcal_led.o [1]
+                           0xe8a4       0x44  Code  Gb  mcal_lcd.o [1]
+mcal::led::led0()          0xe394       0x88  Code  Gb  mcal_led.o [1]
+mcal::led::led0()::l0   0xfc'36c8        0x8  Data  Lc  mcal_led.o [1]
 mcal::led::led0()::static guard for l0
-                        0xfc'14d0        0x1  Data  Lc  mcal_led.o [1]
+                        0xfc'36d0        0x1  Data  Lc  mcal_led.o [1]
 mcal::led::led_boolean_state_base::toggle()
-                           0xe104       0x18  Code  Gb  mcal_led.o [1]
+                           0xf320       0x18  Code  Gb  mcal_led.o [1]
 mcal::led::led_port_inverted<mcal::port::port_pin<(unsigned char)71>>::toggle()
-                           0xdd48       0x88  Code  Gb  mcal_led.o [1]
+                           0xef64       0x88  Code  Gb  mcal_led.o [1]
 mcal::port::port_pin<(unsigned char)22>::my_pin_is_high
-                        0xfc'14af        0x1  Data  Gb  mcal_spi.o [1]
+                        0xfc'36af        0x1  Data  Gb  mcal_spi.o [1]
 mcal::port::port_pin<(unsigned char)24>::my_pin_is_high
-                        0xfc'14e4        0x1  Data  Gb  mcal_spi.o [1]
+                        0xfc'36e4        0x1  Data  Gb  mcal_spi.o [1]
 mcal::port::port_pin<(unsigned char)25>::my_pin_is_high
-                        0xfc'14e5        0x1  Data  Gb  mcal_spi.o [1]
+                        0xfc'36e5        0x1  Data  Gb  mcal_spi.o [1]
 mcal::port::port_pin<(unsigned char)71>::my_pin_is_high
-                        0xfc'14ae        0x1  Data  Gb  mcal_led.o [1]
+                        0xfc'36ae        0x1  Data  Gb  mcal_led.o [1]
 mcal::port::port_pin_expander_microchip_mcp23s17<(unsigned char)2>::port_pin_expander_microchip_mcp23s17(util::communication_base &)
-                           0xd8c8       0x90  Code  Gb  mcal_port.o [1]
+                           0xe9e0       0x90  Code  Gb  mcal_port.o [1]
 mcal::port::port_regs_expander_microchip_mcp23s17<(unsigned char)2>::write_word(unsigned char, unsigned short)
-                           0xd958       0x84  Code  Gb  mcal_port.o [1]
-mcal::spi::spi1()          0xd898       0x2c  Code  Gb  mcal_spi.o [1]
+                           0xea70       0x84  Code  Gb  mcal_port.o [1]
+mcal::spi::spi1()          0xe9b0       0x2c  Code  Gb  mcal_spi.o [1]
 mcal::spi::spi1()::com1
-                        0xfc'14b4        0x8  Data  Lc  mcal_spi.o [1]
+                        0xfc'36b4        0x8  Data  Lc  mcal_spi.o [1]
 mcal::spi::spi1()::static guard for com1
-                        0xfc'14b0        0x1  Data  Lc  mcal_spi.o [1]
+                        0xfc'36b0        0x1  Data  Lc  mcal_spi.o [1]
 mcal::spi::spi_software_port_driver<mcal::port::port_pin<(unsigned char)24>, mcal::port::port_pin<(unsigned char)25>, mcal::port::port_pin<(unsigned char)22>, mcal::port::port_pin_dummy, (unsigned int)32, (bool)0>::deselect()
-                           0xdf80       0x34  Code  Gb  mcal_spi.o [1]
+                           0xf19c       0x34  Code  Gb  mcal_spi.o [1]
 mcal::spi::spi_software_port_driver<mcal::port::port_pin<(unsigned char)24>, mcal::port::port_pin<(unsigned char)25>, mcal::port::port_pin<(unsigned char)22>, mcal::port::port_pin_dummy, (unsigned int)32, (bool)0>::select()
-                           0xdf4c       0x34  Code  Gb  mcal_spi.o [1]
+                           0xf168       0x34  Code  Gb  mcal_spi.o [1]
 mcal::spi::spi_software_port_driver<mcal::port::port_pin<(unsigned char)24>, mcal::port::port_pin<(unsigned char)25>, mcal::port::port_pin<(unsigned char)22>, mcal::port::port_pin_dummy, (unsigned int)32, (bool)0>::send(unsigned char)
-                           0xdabc       0xe0  Code  Gb  mcal_spi.o [1]
+                           0xecd8       0xe0  Code  Gb  mcal_spi.o [1]
 mcal::spi::spi_software_port_driver<mcal::port::port_pin<(unsigned char)24>, mcal::port::port_pin<(unsigned char)25>, mcal::port::port_pin<(unsigned char)22>, mcal::port::port_pin_dummy, (unsigned int)32, (bool)0>::spi_software_port_driver()
-                           0xd9dc       0xe0  Code  Gb  mcal_spi.o [1]
+                           0xeaf4       0xe0  Code  Gb  mcal_spi.o [1]
 mcal_cpu_detail_secure_start_mmu
-                           0xd310       0x34  Code  Gb  mcal_cpu_detail_secure.o [1]
+                           0xe428       0x34  Code  Gb  mcal_cpu_detail_secure.o [1]
 mcal_port_pin_expander_set_direction_output(unsigned char)
-                           0xd614       0x5c  Code  Gb  mcal_port.o [1]
+                           0xe72c       0x5c  Code  Gb  mcal_port.o [1]
 mcal_port_pin_expander_set_pin_high(unsigned char)
-                           0xd670       0x60  Code  Gb  mcal_port.o [1]
+                           0xe788       0x60  Code  Gb  mcal_port.o [1]
 mcal_port_pin_expander_set_pin_low(unsigned char)
-                           0xd6d0       0x5c  Code  Gb  mcal_port.o [1]
-mcal_reg_access32_read     0xd380             Code  Gb  mcal_reg.o [1]
+                           0xe7e8       0x5c  Code  Gb  mcal_port.o [1]
+mcal_reg_access32_read     0xe498             Code  Gb  mcal_reg.o [1]
 mcal_reg_access32_write
-                           0xd370             Code  Gb  mcal_reg.o [1]
-sqrt                       0x8bcc             Code  Gb  sqrt.o [4]
-sqrtl                      0x8bcc             Code  Gb  sqrt.o [4]
+                           0xe488             Code  Gb  mcal_reg.o [1]
+sqrt                       0xc874             Code  Gb  sqrt.o [4]
+sqrtl                      0xc874             Code  Gb  sqrt.o [4]
 std::allocator_traits<util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>::allocate(util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16> &, unsigned int)
-                           0x97a0       0x9c  Code  Gb  sys_start.o [1]
+                           0x8a50       0x9c  Code  Gb  sys_start.o [1]
 std::enable_if<((unsigned int)8==(unsigned int)8), void>::type mcal::helper::nop_maker<(unsigned int)8>()
-                           0xdb9c       0x30  Code  Gb  mcal_spi.o [1]
+                           0xedb8       0x30  Code  Gb  mcal_spi.o [1]
+std::iterator_traits<unsigned int *>::value_type math::wide_decimal::detail::div_loop_n<unsigned int *>(unsigned int *, std::iterator_traits<unsigned int *>::value_type, int)
+                           0xdd38      0x130  Code  Gb  sys_start.o [1]
+std::iterator_traits<unsigned int *>::value_type math::wide_decimal::detail::eval_add_n<unsigned int *, unsigned int *>(unsigned int *, unsigned int *, unsigned int *, int)
+                           0xa460       0x70  Code  Gb  sys_start.o [1]
+std::iterator_traits<unsigned int *>::value_type math::wide_decimal::detail::mul_loop_n<unsigned int *>(unsigned int *, std::iterator_traits<unsigned int *>::value_type, int)
+                           0xccd0       0x6c  Code  Gb  sys_start.o [1]
 sys_start_callback_for_pi_digits10(unsigned int)
-                           0xce98       0x88  Code  Gb  sys_start.o [1]
+                           0xdfb0       0x88  Code  Gb  sys_start.o [1]
 unsigned int * std::copy<unsigned int *, unsigned int *>(unsigned int *, unsigned int *, unsigned int *)
-                           0xa634       0x30  Code  Gb  sys_start.o [1]
-unsigned int * std::copy<unsigned int const *, unsigned int *>(unsigned int const *, unsigned int const *, unsigned int *)
-                           0x983c       0x30  Code  Gb  sys_start.o [1]
+                           0xac38       0x30  Code  Gb  sys_start.o [1]
 unsigned int * std::copy_backward<unsigned int const *, unsigned int *>(unsigned int const *, unsigned int const *, unsigned int *)
-                           0x9e14       0x30  Code  Gb  sys_start.o [1]
-util::dynamic_array<unsigned int, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>>::~dynamic_array()
-                           0x8834       0x90  Code  Gb  sys_start.o [1]
+                           0xa4d0       0x30  Code  Gb  sys_start.o [1]
+util::dynamic_array<unsigned int, util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>, unsigned int, int>::~dynamic_array()
+                           0x8ca4       0x90  Code  Gb  sys_start.o [1]
 util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>::slot_array_memory
-                        0x81'8010  0x7a'1300  Data  Gb  sys_start.o [1]
+                         0x1'8010  0x7a'1300  Data  Gb  sys_start.o [1]
 util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>::slot_flags
-                        0xfc'1490       0x10  Data  Gb  sys_start.o [1]
+                        0xfc'3690       0x10  Data  Gb  sys_start.o [1]
 util::n_slot_array_allocator<unsigned int, (unsigned int)125004, (unsigned int)16>::slot_max_index
-                        0xfc'14d4        0x4  Data  Gb  sys_start.o [1]
-void math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::eval_mul_dispatch_multiplication_method<(int)1000001>(math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long> const &, int, std::enable_if<(math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::decwide_t_elem_number>=(int)1025), void>::type const *)
-                           0x9adc      0x240  Code  Gb  sys_start.o [1]
-void math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long>::eval_multiply_n_by_n_to_2n<unsigned int>(unsigned int *, unsigned int const *, unsigned int const *, int, std::enable_if<((std::is_same<unsigned int, unsigned short>::value==(bool)1)||(std::is_same<unsigned int, unsigned int>::value==(bool)1)), void>::type const *)
-                           0xa098      0x13c  Code  Gb  sys_start.o [1]
+                        0xfc'36d4        0x4  Data  Gb  sys_start.o [1]
+void math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::eval_mul_dispatch_multiplication_method<(int)1000001>(math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double> const &, int, std::enable_if<(((int)1000001==(int)1000001)&&(math::wide_decimal::decwide_t<(int)1000001, unsigned int, util::n_slot_array_allocator<void, (unsigned int)125004, (unsigned int)16>, double, long long, double>::decwide_t_elem_number>=(int)1281)), void>::type const *)
+                           0xa0e0      0x310  Code  Gb  sys_start.o [1]
+void math::wide_decimal::detail::eval_multiply_kara_n_by_n_to_2n<unsigned int *, unsigned int *, unsigned int *>(unsigned int *, unsigned int *, unsigned int *, unsigned int, unsigned int *)
+                           0xaa44      0x1f4  Code  Gb  sys_start.o [1]
+void math::wide_decimal::detail::eval_multiply_kara_propagate_borrow<unsigned int *>(unsigned int *, unsigned int, bool)
+                           0xb3e4       0x4c  Code  Gb  sys_start.o [1]
+void math::wide_decimal::detail::eval_multiply_kara_propagate_carry<unsigned int *>(unsigned int *, unsigned int, std::iterator_traits<unsigned int *>::value_type)
+                           0xb2e8       0x60  Code  Gb  sys_start.o [1]
+void math::wide_decimal::detail::eval_multiply_n_by_n_to_2n<unsigned int *, unsigned int *>(unsigned int *, unsigned int *, unsigned int *, int, std::enable_if<((std::is_same<std::iterator_traits<unsigned int *>::value_type, unsigned short>::value==(bool)1)||(std::is_same<std::iterator_traits<unsigned int *>::value_type, unsigned int>::value==(bool)1)), void>::type const *)
+                           0xa898      0x148  Code  Gb  sys_start.o [1]
 void math::wide_decimal::detail::fft::danielson_lanczos_apply<double, (bool)0>(unsigned int, double *)
-                           0xb984      0x14c  Code  Gb  sys_start.o [1]
+                           0xbe14      0x14c  Code  Gb  sys_start.o [1]
 void math::wide_decimal::detail::fft::danielson_lanczos_apply<double, (bool)1>(unsigned int, double *)
-                           0xb83c      0x148  Code  Gb  sys_start.o [1]
+                           0xbccc      0x148  Code  Gb  sys_start.o [1]
 void math::wide_decimal::detail::fft::danielson_lanczos_apply_4_basecase<double, (bool)0>(double *)
-                           0xbbd4      0x118  Code  Gb  sys_start.o [1]
+                           0xc064      0x118  Code  Gb  sys_start.o [1]
 void math::wide_decimal::detail::fft::danielson_lanczos_apply_4_basecase<double, (bool)1>(double *)
-                           0xbad0      0x104  Code  Gb  sys_start.o [1]
+                           0xbf60      0x104  Code  Gb  sys_start.o [1]
 void math::wide_decimal::detail::fft::fft_lanczos_fft<double, (bool)0>(unsigned int, double *)
-                           0xb754       0xe8  Code  Gb  sys_start.o [1]
+                           0xbbe4       0xe8  Code  Gb  sys_start.o [1]
 void math::wide_decimal::detail::fft::fft_lanczos_fft<double, (bool)1>(unsigned int, double *)
-                           0xb37c       0xe8  Code  Gb  sys_start.o [1]
+                           0xb80c       0xe8  Code  Gb  sys_start.o [1]
 void math::wide_decimal::detail::fft::rfft_lanczos_rfft<double, (bool)0>(unsigned int, double *, bool, std::enable_if<((bool)0==(bool)0), void>::type const *)
-                           0xb150      0x1c0  Code  Gb  sys_start.o [1]
+                           0xb5e0      0x1c0  Code  Gb  sys_start.o [1]
 void math::wide_decimal::detail::fft::rfft_lanczos_rfft<double, (bool)1>(unsigned int, double *, bool, std::enable_if<((bool)1==(bool)1), void>::type const *)
-                           0xafa0      0x1b0  Code  Gb  sys_start.o [1]
+                           0xb430      0x1b0  Code  Gb  sys_start.o [1]
+void math::wide_decimal::detail::mul_loop_fft<unsigned int *, unsigned int *, double *>(unsigned int *, unsigned int *, unsigned int *, double *, double *, int, unsigned int)
+                           0xae28      0x4bc  Code  Gb  sys_start.o [1]
 
 
 [1] = C:\Users\User\Documents\Ks\uC_Software\Boards\pi-crunch-metal\Release\Obj
@@ -641,9 +671,9 @@ void math::wide_decimal::detail::fft::rfft_lanczos_rfft<double, (bool)1>(unsigne
 [4] = m5E_alv.a
 [5] = rt5E_al.a
 
-      24'636 bytes of readonly  code memory
-         340 bytes of readonly  data memory
-  16'471'268 bytes of readwrite data memory
+      29'012 bytes of readonly  code memory
+         616 bytes of readonly  data memory
+  16'479'972 bytes of readwrite data memory
 
 Errors: none
 Warnings: none
