@@ -33,9 +33,6 @@
     }
 
   public:
-    lcd_st7066u_newhaven_0216k1z() = default;
-    virtual ~lcd_st7066u_newhaven_0216k1z() = default;
-
     virtual bool init(void)
     {
       port_pin_rs__type::set_pin_low();
@@ -81,7 +78,8 @@
       if((pstr != nullptr) && (length > 0U))
       {
         // Clear the line and reset the address to the line.
-        clear_line(line_index);
+        clear_line    (static_cast<std::uint8_t>(line_index));
+        set_line_index(static_cast<std::uint8_t>(line_index));
 
         // Write the line at line_index.
         for(std::uint_fast8_t i = 0U; i < (std::min)(std::uint_fast8_t(16U), length); ++i)
@@ -106,7 +104,10 @@
 
       if(line_index < 4U)
       {
-        command(0x80U | ((line_index * 0x40U) + ((line_index > 1U) ? 20U : 0U)));
+        const std::uint8_t my_cmd =
+          static_cast<std::uint8_t>(0x80U | ((line_index * 0x40U) + ((line_index > 1U) ? 20U : 0U)));
+
+        command(my_cmd);
 
         set_line_index_is_ok = true;
       }

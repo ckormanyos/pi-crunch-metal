@@ -12,7 +12,7 @@
 
   #include <mcal_reg.h>
 
-  extern "C" void mcal_cpu_detail_secure_start_mmu(uint32_t tlb_base, uint32_t mmu_flags) __attribute__((naked));
+  extern "C" void mcal_cpu_detail_secure_start_mmu(uint32_t tlb_base, uint32_t mmu_flags);
 
   namespace mcal { namespace cpu { namespace detail {
 
@@ -24,7 +24,6 @@
   {
     static void initialize_vfp_unit()
     {
-      #if defined(__GNUC__)
       asm volatile("mrc p15, 0, r1, c1, c1, 2");
       asm volatile("ldr r0, =0x00000C00");
       asm volatile("orr r1, r0");
@@ -38,9 +37,8 @@
       asm volatile("mov r0, #0");
       asm volatile("mcr p15, 0, r0, c7, c10, 5");
 
-      asm volatile("ldr r0, =0x40000000");
+      asm volatile("ldr r0, =#0x40000000");
       asm volatile("vmsr fpexc,r0");
-      #endif
     }
 
     static void invalidate_caches()
@@ -86,10 +84,6 @@
       (void) set_mmu_section(mcal::reg::gpio_base, mcal::reg::gpio_base, UINT32_C(0x0000));
     }
 
-    static void set_tlb_base_address()
-    {
-    }
-
     static void enable_mmu()
     {
       mcal_cpu_detail_secure_start_mmu(tlb_base_address, std::uint32_t(0x00000001UL | 0x1000UL |0x0004UL));
@@ -98,7 +92,7 @@
     static void enable_branch_prediction()
     {
       asm volatile("mrc p15, 0, r1, c1, c0, 0");
-      asm volatile("ldr r0, =0x00000800");
+      asm volatile("ldr r0, =#0x00000800");
       asm volatile("orr r1, r0");
       asm volatile("mcr p15, 0, r1, c1, c0, 0");
     }
@@ -109,7 +103,7 @@
       //   (Bit  2 = data cache) and
       //   (Bit 12 = instruction cache).
       asm volatile("mrc p15, 0, r1, c1, c0, 0");
-      asm volatile("ldr r0, =0x00001004");
+      asm volatile("ldr r0, =#0x00001004");
       asm volatile("orr r1, r0");
       asm volatile("mcr p15, 0, r1, c1, c0, 0");
     }
