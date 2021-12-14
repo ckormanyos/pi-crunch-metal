@@ -1,19 +1,20 @@
+@///////////////////////////////////////////////////////////////////////////////
+@//  Copyright Christopher Kormanyos 2014 - 2021.
+@//  Distributed under the Boost Software License,
+@//  Version 1.0. (See accompanying file LICENSE_1_0.txt
+@//  or copy at http://www.boost.org/LICENSE_1_0.txt)
+@//
 
-  PUBLIC mcal_reg_access32_write
-  PUBLIC mcal_reg_access32_read
-
-  SECTION .text:CODE
-
-mcal_reg_access32_write
+.globl mcal_reg_access32_write
+mcal_reg_access32_write:
   mov r2, #0
   mcr p15, 0, r2, c7, c10, 5
   str r1, [r0]
   bx lr
 
-mcal_reg_access32_read
+.globl mcal_reg_access32_read
+mcal_reg_access32_read:
   mov r2, #0
   ldr r0, [r0]
   mcr p15, 0, r2, c7, c10, 5
   bx lr
-
-  END

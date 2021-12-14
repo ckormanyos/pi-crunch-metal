@@ -62,7 +62,7 @@
     {
       base_class_type::recv_buffer = 0U;
 
-      for(std::uint_fast8_t bit_mask = UINT8_C(0x80); bit_mask != UINT8_C(0); bit_mask >>= 1U)
+      for(std::uint_fast8_t bit_mask = UINT8_C(0x80); bit_mask != UINT8_C(0); bit_mask = std::uint_fast8_t(bit_mask >> 1U))
       {
         ((std::uint_fast8_t(byte_to_send & bit_mask) != UINT8_C(0)) ? port_pin_mosi_type::set_pin_high()
                                                                     : port_pin_mosi_type::set_pin_low());
@@ -77,7 +77,8 @@
 
         if(port_pin_miso_type::read_input_value())
         {
-          base_class_type::recv_buffer |= bit_mask;
+          base_class_type::recv_buffer =
+            base_class_type::buffer_type(base_class_type::recv_buffer | bit_mask);
         }
 
         mcal::helper::enable_all_interrupts<has_disable_enable_interrupts>();
@@ -116,7 +117,9 @@
 
     virtual bool send(const std::uint8_t byte_to_send)
     {
-      for(std::uint_fast8_t bit_mask = UINT8_C(0x80); bit_mask != UINT8_C(0); bit_mask >>= 1U)
+      for(std::uint_fast8_t bit_mask  = UINT8_C(0x80);
+                            bit_mask != UINT8_C(0);
+                            bit_mask  = std::uint_fast8_t(bit_mask >> 1U))
       {
         ((std::uint_fast8_t(byte_to_send & bit_mask) != UINT8_C(0)) ? port_pin_mosi_type::set_pin_high()
                                                                     : port_pin_mosi_type::set_pin_low());

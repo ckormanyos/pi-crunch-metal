@@ -65,7 +65,7 @@
     std::uint16_t my_reg_iodira_value;
     std::uint16_t my_reg_gpioa__value;
 
-    port_regs_expander_microchip_mcp23s17(util::communication_base& com)
+    port_regs_expander_microchip_mcp23s17(util::communication_base& com) noexcept
       : my_reg_iodira_value(UINT16_C(0xFFFF)),
         my_reg_gpioa__value(UINT16_C(0x0000)),
         my_com(com)
@@ -95,7 +95,7 @@
       return util::make_long(byte_to_read_lo, byte_to_read_hi);
     }
 
-    void write_word(const std::uint8_t reg, const std::uint16_t word_to_write)
+    void write_word(const std::uint8_t reg, const std::uint16_t word_to_write) noexcept
     {
       my_com.select();
       my_com.send(my_cmd_write);
@@ -117,12 +117,12 @@
     using base_class_type = port_regs_expander_microchip_mcp23s17<hardware_address>;
 
   public:
-    port_pin_expander_microchip_mcp23s17(util::communication_base& com)
+    port_pin_expander_microchip_mcp23s17(util::communication_base& com) noexcept
       : base_class_type(com) { }
 
     virtual ~port_pin_expander_microchip_mcp23s17() = default;
 
-    void set_direction_output(const std::uint8_t bpos)
+    void set_direction_output(const std::uint8_t bpos) noexcept
     {
       base_class_type::my_reg_iodira_value =
         std::uint16_t(base_class_type::my_reg_iodira_value & std::uint16_t(~std::uint16_t(1ULL << bpos)));
@@ -130,7 +130,7 @@
       base_class_type::write_word(base_class_type::reg_iodira, base_class_type::my_reg_iodira_value);
     }
 
-    void set_direction_input(const std::uint8_t bpos)
+    void set_direction_input(const std::uint8_t bpos) noexcept
     {
       base_class_type::my_reg_iodira_value =
         std::uint16_t(base_class_type::my_reg_iodira_value | std::uint16_t(1ULL << bpos));
@@ -138,7 +138,7 @@
       base_class_type::write_word(base_class_type::reg_iodira,  base_class_type::my_reg_iodira_value);
     }
 
-    void set_pin_high(const std::uint8_t bpos)
+    void set_pin_high(const std::uint8_t bpos) noexcept
     {
       base_class_type::my_reg_gpioa__value =
         std::uint16_t(base_class_type::my_reg_gpioa__value | std::uint16_t(1ULL << bpos));
@@ -146,7 +146,7 @@
       base_class_type::write_word(base_class_type::reg_gpioa, base_class_type::my_reg_gpioa__value);
     }
 
-    void set_pin_low(const std::uint8_t bpos)
+    void set_pin_low(const std::uint8_t bpos) noexcept
     {
       base_class_type::my_reg_gpioa__value =
         std::uint16_t(std::uint16_t(base_class_type::my_reg_gpioa__value & std::uint16_t(~std::uint16_t(1ULL << bpos))));
@@ -154,7 +154,7 @@
       base_class_type::write_word(base_class_type::reg_gpioa, base_class_type::my_reg_gpioa__value);
     }
 
-    void toggle_pin(const std::uint8_t bpos)
+    void toggle_pin(const std::uint8_t bpos) noexcept
     {
       base_class_type::my_reg_gpioa__value =
         std::uint16_t(base_class_type::my_reg_gpioa__value ^ std::uint16_t(1ULL << bpos));

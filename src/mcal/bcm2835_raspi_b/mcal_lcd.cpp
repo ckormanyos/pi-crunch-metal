@@ -9,6 +9,11 @@
 #include <mcal_lcd_st7066u_newhaven_0216k1z.h>
 #include <mcal_port.h>
 
+void mcal::lcd::init(const config_type*)
+{
+  static_cast<void>(lcd0().init());
+}
+
 mcal::lcd::lcd_base& mcal::lcd::lcd0()
 {
   // LCD port pin expander configuration.

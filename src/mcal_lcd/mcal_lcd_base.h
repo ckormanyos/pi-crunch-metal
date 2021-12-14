@@ -3,11 +3,9 @@
 
   #include <cstdint>
 
-  #include <util/utility/util_noncopyable.h>
-
   namespace mcal { namespace lcd {
 
-    class lcd_base : private util::noncopyable
+  class lcd_base
   {
   public:
     virtual ~lcd_base() = default;

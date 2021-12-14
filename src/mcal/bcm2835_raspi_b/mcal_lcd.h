@@ -12,6 +12,10 @@
 
   namespace mcal { namespace lcd {
 
+  typedef void config_type;
+
+  void init(const config_type*);
+
   lcd_base& lcd0();
 
   } } // namespace mcal::lcd
