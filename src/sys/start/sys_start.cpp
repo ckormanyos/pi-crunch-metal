@@ -13,14 +13,11 @@ bool run_pi_agm();
 
 } } // namespace app::benchmark
 
-namespace app
-{
-  namespace led
-  {
-    void task_init();
-    void task_func();
-  }
-}
+namespace app { namespace led {
+  void task_init();
+  void task_func();
+
+} } // namespace app::benchmark
 
 #if defined(__GNUC__)
 int main(void) __attribute__((used));
@@ -42,5 +39,10 @@ int main(void)
     result_is_ok &= result_pi_agm_is_ok;
 
     app::led::task_func();
+  }
+
+  if(result_is_ok == false)
+  {
+    for(;;) { ; }
   }
 }
