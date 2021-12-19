@@ -87,15 +87,6 @@
     <None Include="target\micros\bcm2835_raspi_b\startup\SD_CARD\PiZero\start.elf">
       <Filter>micros\bcm2835_raspi_b\startup\SD_CARD\PiZero</Filter>
     </None>
-    <None Include="target\build\test_app_benchmarks.sh">
-      <Filter>build</Filter>
-    </None>
-    <None Include="target\build\test_app_benchmarks_avr.sh">
-      <Filter>build</Filter>
-    </None>
-    <None Include="target\build\test_app_benchmarks_stm32f446.sh">
-      <Filter>build</Filter>
-    </None>
     <None Include="target\micros\bcm2835_raspi_b\make\bcm2835_raspi_b_with_stdlib.ld">
       <Filter>micros\bcm2835_raspi_b\make</Filter>
     </None>

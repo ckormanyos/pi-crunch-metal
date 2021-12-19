@@ -30,7 +30,6 @@ TGT_CXXFLAGS  = -std=c++11                                     \
                 -Wno-psabi                                     \
                 $(TGT_ALLFLAGS)
 
-#TGT_INCLUDES  = -I$(PATH_APP)/util/STL
 TGT_INCLUDES  =
 
 TGT_AFLAGS    =
@@ -43,9 +42,3 @@ TGT_LDFLAGS   = -nostartfiles                                                   
                 -T $(LINKER_DEFINITION_FILE)
 
 IMAGE_FILE   := $(PATH_BIN)/kernel.img
-
-ifeq ($(OBJCOPY),)
-OBJCOPY   = $(PATH_TOOLS_CC)\$(GCC_PREFIX)-objcopy.exe
-endif
-
-RULE_SPECIAL_MAKE_IMAGE_FILE := $(OBJCOPY) $(APP).$(TGT_SUFFIX) -O binary $(IMAGE_FILE)

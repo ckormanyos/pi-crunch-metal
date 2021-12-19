@@ -156,6 +156,7 @@ WARN_FLAGS =  -Wall                             \
               -Wcast-align                      \
               -Wmissing-include-dirs            \
               -Winit-self                       \
+              -Wfloat-equal                     \
               -Wdouble-promotion
 endif
 
@@ -176,10 +177,11 @@ CXXFLAGS    = $(GCCFLAGS)                       \
               -x c++                            \
               -fno-rtti                         \
               -fno-use-cxa-atexit               \
+              -fno-exceptions                   \
               -fno-nonansi-builtins             \
               -fno-threadsafe-statics           \
               -fno-enforce-eh-specs             \
-              -ftemplate-depth=128              \
+              -ftemplate-depth=32               \
               -Wzero-as-null-pointer-constant
 
 AFLAGS      = $(GCCFLAGS)                       \

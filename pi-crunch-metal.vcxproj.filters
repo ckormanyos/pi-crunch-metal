@@ -116,9 +116,6 @@
     <Filter Include="src\math\wide_decimal">
       <UniqueIdentifier>{600114e0-a873-4e3b-8b5b-06844c801c31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\app\benchmark\_doc">
-      <UniqueIdentifier>{906a028e-7aa3-4935-8a72-2f735b223885}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\math\softfloat">
       <UniqueIdentifier>{edc2180f-2a1e-4ee1-8b2f-e51592be2ebf}</UniqueIdentifier>
     </Filter>
@@ -757,9 +754,6 @@
     </None>
     <None Include="src\util\STL\span">
       <Filter>src\util\STL</Filter>
-    </None>
-    <None Include="src\app\benchmark\readme.md">
-      <Filter>src\app\benchmark\_doc</Filter>
     </None>
     <None Include="src\util\STL\charconv">
       <Filter>src\util\STL</Filter>
