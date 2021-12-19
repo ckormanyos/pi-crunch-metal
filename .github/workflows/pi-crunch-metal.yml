@@ -1,0 +1,33 @@
+##############################################################################
+#  Copyright Christopher Kormanyos 2021.
+#  Distributed under the Boost Software License,
+#  Version 1.0. (See accompanying file LICENSE_1_0.txt
+#  or copy at http://www.boost.org/LICENSE_1_0.txt)
+
+name: real-time-cpp
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+jobs:
+  target-arm:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [ bcm2835_raspi_b ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: update-tools
+        run: sudo apt install gcc-arm-none-eabi
+      - name: target-arm-${{ matrix.suite }}
+        run: |
+          ./target/build/build.sh ${{ matrix.suite }} rebuild
+          ls -la ./bin/pi-crunch-metal.hex ./bin/pi-crunch-metal.s19 ./bin/kernel.img
+        working-directory: ./

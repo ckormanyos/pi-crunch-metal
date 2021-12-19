@@ -53,6 +53,15 @@ running on a
 This powerful single-board computer is driven in OS-less, bare-metal mode
 directly out-of-the-box.
 
+The build system is set up to use GCC, making use of the `arm-none-eabi`
+compiler taken directly from the
+[real-time-cpp-toolchains](https://github.com/ckormanyos/real-time-cpp-toolchains)
+repository.
+
+The default optimization setting ìs `-O2` and the million-and-one
+decimal digit pi calculation takes slightly under 30 minutes
+on this target system with the above-mentioned compiler.
+
 The hardware setup is pictured in the image below.
 In this image, the system has successfully completed one full
 mega-digit pi calculation and is almost done with a second one.

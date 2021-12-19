@@ -7,6 +7,9 @@
 
 #include <mcal/mcal.h>
 
+// cd /mnt/c/Users/User/Documents/Ks/uC_Software/Boards/pi-crunch-metal
+// ./target/build/build.sh bcm2835_raspi_b rebuild
+
 namespace app { namespace benchmark {
 
 bool run_pi_agm();
