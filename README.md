@@ -2,8 +2,6 @@ pi-crunch-metal\
 [![Build Status](https://github.com/ckormanyos/pi-crunch-metal/actions/workflows/pi-crunch-metal.yml/badge.svg)](https://github.com/ckormanyos/pi-crunch-metal/actions)
 ==================
 
-# pi-crunch-metal
-
 pi-crunch-metal computes a million digits of pi
 on a bare-metal RaspberryPi(R)-Zero (and other systems).
 
@@ -46,7 +44,7 @@ GHU/GCC `arm-non-eabi` is used for he target system.
 Cros development witn `Win*` and/or `*nin` host is
 supported. Build tools and compilers are essentially the same
 as those used in the
-[�real-time-cpp`](https://github.com/ckormanyos/real-time-cpp)
+[`real-time-cpp`](https://github.com/ckormanyos/real-time-cpp)
 repository.
 
 # Prototype Project
@@ -62,7 +60,7 @@ compiler taken directly from the
 [real-time-cpp-toolchains](https://github.com/ckormanyos/real-time-cpp-toolchains)
 repository.
 
-The default optimization setting �s `-O2` and the million-and-one
+The default optimization setting is `-O2` and the million-and-one
 decimal digit pi calculation takes slightly under 30 minutes
 on this target system with the above-mentioned compiler.
 
