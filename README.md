@@ -1,3 +1,7 @@
+pi-crunch-metal\
+[![Build Status](https://github.com/ckormanyos/pi-crunch-metal/actions/workflows/pi-crunch-metal.yml/badge.svg)](https://github.com/ckormanyos/pi-crunch-metal/actions)
+==================
+
 # pi-crunch-metal
 
 pi-crunch-metal computes a million digits of pi
@@ -15,14 +19,6 @@ The [wide-decimal](https://github.com/ckormanyos/wide-decimal) multiprecision
 float back end provides the big-number engine for pi-crunch-metal.
 Computation progress can be displayed on either the console (for PC systems)
 or on a simple industry-standard LCD character display.
-
-### Build Status
-
-Here is the build status badge.
-
-[![Build Status](https://github.com/ckormanyos/pi-crunch-metal/actions/workflows/pi-crunch-metal.yml/badge.svg)](https://github.com/ckormanyos/pi-crunch-metal/actions)
-
-The build status badge represents the state of the nightly CI builds and tests.
 
 # Software Details
 
