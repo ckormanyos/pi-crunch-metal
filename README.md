@@ -40,10 +40,10 @@ Compact code size is in focus and the entire project fits within about 40k
 of program code, with slight variations depending on the target system selected.
 The calculation does, however, require ample RAM of about 16 Mbyte.
 
-GHU/GCC `arm-non-eabi` is used for he target system.
-Cros development witn `Win*` and/or `*nin` host is
-supported. Build tools and compilers are essentially the same
-as those used in the
+GNU/GCC `arm-non-eabi` is used for the target system.
+Cross development with `Win*` and/or `*nix` host is
+supported. Build tools, the build system and the compilers
+are essentially the same as those used in the
 [`real-time-cpp`](https://github.com/ckormanyos/real-time-cpp)
 repository.
 
