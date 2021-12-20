@@ -31,3 +31,23 @@ jobs:
           ./target/build/build.sh ${{ matrix.suite }} rebuild
           ls -la ./bin/pi-crunch-metal.hex ./bin/pi-crunch-metal.s19 ./bin/kernel.img
         working-directory: ./
+  msvc-msbuild:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [ Debug, Release ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: msvc-msbuild-${{ matrix.suite }}
+        env:
+          PATH: '${env:PATH};C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\amd64'
+        run: |
+          MSBuild -m pi-crunch-metal.sln -p:Configuration=${{ matrix.suite }} -p:Platform=x64 /t:Rebuild
+          dir .\tmp\${{ matrix.suite }}\pi-crunch-metal.exe
+        working-directory: ./
