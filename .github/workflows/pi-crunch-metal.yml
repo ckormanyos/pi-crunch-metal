@@ -49,5 +49,5 @@ jobs:
           PATH: '${env:PATH};C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\amd64'
         run: |
           MSBuild -m pi-crunch-metal.sln -p:Configuration=${{ matrix.suite }} -p:Platform=x64 /t:Rebuild
-          dir .\tmp\${{ matrix.suite }}\ref_app.exe
+          dir .\tmp\${{ matrix.suite }}\pi-crunch-metal.exe
         working-directory: ./
