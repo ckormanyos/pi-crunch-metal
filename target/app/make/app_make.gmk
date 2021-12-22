@@ -66,7 +66,6 @@ APP = $(PATH_BIN)/pi-crunch-metal
 
 IMAGE_FILE = $(APP).bin
 
-RULE_SPECIAL_MAKE_IMAGE_FILE  =
 RULE_SPECIAL_MAKE_FLASH_BATCH =
 
 WARN_FLAGS =
@@ -302,13 +301,8 @@ ifeq ($(TGT_SUFFIX),elf)
 else
 	@-$(ECHO) +++ creating hex module disabled for non-ELF absolute objet file.
 endif
-ifeq ($(RULE_SPECIAL_MAKE_IMAGE_FILE),)
 	@-$(ECHO) +++ creating special image file
-	@-$(ECHO) +++ disabled because there is no special image file
-else
-	@-$(ECHO) +++ creating special image file
-	@-$(RULE_SPECIAL_MAKE_IMAGE_FILE)
-endif
+	@-$(OBJCOPY) $(APP).$(TGT_SUFFIX) -O binary $(IMAGE_FILE)
 ifeq ($(RULE_SPECIAL_MAKE_FLASH_BATCH),)
 	@-$(ECHO) +++ creating special flash batch file
 	@-$(ECHO) +++ disabled because there is no special flash batch file
