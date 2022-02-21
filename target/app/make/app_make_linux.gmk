@@ -1,4 +1,4 @@
-#
+﻿#
 #  Copyright Christopher Kormanyos 2007 - 2021.
 #  Distributed under the Boost Software License,
 #  Version 1.0. (See accompanying file LICENSE_1_0.txt
@@ -60,7 +60,6 @@ APP = $(PATH_BIN)/pi-crunch-metal
 
 IMAGE_FILE = $(APP).bin
 
-RULE_SPECIAL_MAKE_IMAGE_FILE  =
 RULE_SPECIAL_MAKE_FLASH_BATCH =
 
 WARN_FLAGS =
@@ -258,7 +257,7 @@ version:
 # ------------------------------------------------------------------------------
 $(APP).$(TGT_SUFFIX) : $(LINKER_DEFINITION_FILE) $(FILES_O)
 	@-$(ECHO) +++ linking application to generate: $(APP).$(TGT_SUFFIX)
-	-$(CC) $(LDFLAGS) $(FILES_O) -o $(APP).$(TGT_SUFFIX)
+	@-$(CC) $(LDFLAGS) $(FILES_O) -o $(APP).$(TGT_SUFFIX)
 	@-$(ECHO) +++ generating assembly list file: $(APP).lss
 	@-$(OBJDUMP) -h -S $(APP).$(TGT_SUFFIX) > $(APP).lss
 
