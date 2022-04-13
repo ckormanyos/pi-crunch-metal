@@ -1,4 +1,4 @@
-##############################################################################
+﻿##############################################################################
 #  Copyright Christopher Kormanyos 2021.
 #  Distributed under the Boost Software License,
 #  Version 1.0. (See accompanying file LICENSE_1_0.txt
@@ -32,7 +32,7 @@ jobs:
           ls -la ./bin/pi-crunch-metal.hex ./bin/pi-crunch-metal.s19 ./bin/kernel.img
         working-directory: ./
   msvc-msbuild:
-    runs-on: windows-latest
+    runs-on: windows-2019
     defaults:
       run:
         shell: cmd
