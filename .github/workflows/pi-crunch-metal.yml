@@ -1,5 +1,5 @@
 ﻿##############################################################################
-#  Copyright Christopher Kormanyos 2021 - 2022.
+#  Copyright Christopher Kormanyos 2021 - 2023.
 #  Distributed under the Boost Software License,
 #  Version 1.0. (See accompanying file LICENSE_1_0.txt
 #  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -12,7 +12,7 @@ on:
   pull_request:
 jobs:
   target-arm:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
@@ -21,7 +21,7 @@ jobs:
       matrix:
         suite: [ bcm2835_raspi_b ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
       - name: update-tools
@@ -32,22 +32,23 @@ jobs:
           ls -la ./bin/pi-crunch-metal.hex ./bin/pi-crunch-metal.s19 ./bin/kernel.img
         working-directory: ./
   msvc-msbuild:
-    runs-on: windows-2019
-    defaults:
-      run:
-        shell: cmd
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
         suite: [ Debug, Release ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
+      - uses: actions/checkout@v3
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          toolset: 14.2
       - name: msvc-msbuild-${{ matrix.suite }}
-        env:
-          PATH: '${env:PATH};C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\amd64'
+        shell: cmd
         run: |
-          MSBuild -m pi-crunch-metal.sln -p:Configuration=${{ matrix.suite }} -p:Platform=x64 /t:Rebuild
+          set INCLUDE=%cd%\src\mcal\host;%cd%\src;%INCLUDE%
+          MSBuild -m pi-crunch-metal.sln -p:useenv=true -p:Configuration=${{ matrix.suite }} -p:Platform=x64 /t:Rebuild
           dir .\tmp\${{ matrix.suite }}\pi-crunch-metal.exe
         working-directory: ./
