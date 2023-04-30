@@ -10,6 +10,19 @@
 #include <mcal_cpu.h>
 #include <mcal_gpt.h>
 
+extern "C"
+{
+  // Patched labels.
+  void* __dso_handle;
+}
+
+namespace std
+{
+  void __throw_bad_function_call();
+
+  void __throw_bad_function_call() { while(1); }
+}
+
 // Implement std::chrono::high_resolution_clock::now()
 // for the standard library's high-resolution clock.
 namespace std

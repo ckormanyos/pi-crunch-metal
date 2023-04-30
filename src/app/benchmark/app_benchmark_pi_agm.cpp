@@ -53,7 +53,7 @@ constexpr std::array<std::uint32_t, 8U> const_pi_control_tail_32_1000001
 
 namespace app { namespace benchmark {
 
-bool run_pi_agm();
+bool run_pi_calc();
 
 namespace detail {
 
@@ -80,7 +80,7 @@ void app::benchmark::detail::app_benchmark_callback_for_pi_digits10(const std::u
   mcal::lcd::lcd0().write(pstr, (std::uint_fast8_t) (pend - pstr), 1U);
 }
 
-bool app::benchmark::run_pi_agm()
+bool app::benchmark::run_pi_calc()
 {
   using local_limb_type = std::uint32_t;
 
@@ -155,7 +155,7 @@ int main()
 
   for(unsigned i = 0U; i < 64U; ++i)
   {
-    result_is_ok &= app::benchmark::run_pi_agm();
+    result_is_ok &= app::benchmark::run_pi_calc();
   }
 
   return result_is_ok ? 0 : -1;

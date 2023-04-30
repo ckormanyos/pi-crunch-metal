@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2013 - 2021.
+//  Copyright Christopher Kormanyos 2013 - 2023.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -8,14 +8,22 @@
 #ifndef MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H_
   #define MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H_
 
+  #if defined(__GNUC__) && (__GNUC__ >= 12)
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Warray-bounds"
+  #endif
+
   namespace mcal
   {
     namespace reg
     {
-      template<typename register_address_type,
-               typename register_value_type>
+      template<typename RegisterAddressType,
+               typename RegisterValueType>
       struct reg_access_dynamic final
       {
+        using register_address_type = RegisterAddressType;
+        using register_value_type   = RegisterValueType;
+
         static register_value_type
                     reg_get(const register_address_type address) { return *reinterpret_cast<volatile register_value_type*>(address); }
 
@@ -39,5 +47,10 @@
       };
     }
   }
+
+  #if defined(__GNUC__) && (__GNUC__ >= 12)
+  // -Warray-bounds
+  #pragma GCC diagnostic pop
+  #endif
 
 #endif // MCAL_REG_ACCESS_DYNAMIC_2013_12_13_H_

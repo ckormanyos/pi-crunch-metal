@@ -189,6 +189,7 @@ AFLAGS      = $(GCCFLAGS)                       \
 
 LDFLAGS     = $(CXXFLAGS)                       \
               $(TGT_LDFLAGS)                    \
+              -Wl,--print-memory-usage          \
               -x none
 
 # ------------------------------------------------------------------------------

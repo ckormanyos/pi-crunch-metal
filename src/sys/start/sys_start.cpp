@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2007 - 2021.
+//  Copyright Christopher Kormanyos 2007 - 2023.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -8,11 +8,13 @@
 #include <mcal/mcal.h>
 
 // cd /mnt/c/Users/User/Documents/Ks/uC_Software/Boards/pi-crunch-metal
+
 // ./target/build/build.sh bcm2835_raspi_b rebuild
+// ./target/build/build.sh host rebuild
 
 namespace app { namespace benchmark {
 
-bool run_pi_agm();
+bool run_pi_calc();
 
 } } // namespace app::benchmark
 
@@ -37,9 +39,9 @@ int main(void)
 
   while(result_is_ok)
   {
-    const bool result_pi_agm_is_ok = app::benchmark::run_pi_agm();
+    const bool result_pi_spigot_is_ok = app::benchmark::run_pi_calc();
 
-    result_is_ok &= result_pi_agm_is_ok;
+    result_is_ok = (result_pi_spigot_is_ok && result_is_ok);
 
     app::led::task_func();
   }

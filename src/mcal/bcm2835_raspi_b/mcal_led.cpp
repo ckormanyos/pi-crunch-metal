@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2007 - 2020.
+//  Copyright Christopher Kormanyos 2007 - 2023.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -31,7 +31,7 @@ mcal::led::led_base& mcal::led::led1()
 {
   using led1_port_pin_type = mcal_led_port_pin_expander_port_pin_a4_type;
 
-  using led1_led_type  = mcal::led::led_port<led1_port_pin_type>;
+  using led1_led_type = mcal::led::led_port<led1_port_pin_type>;
 
   static led1_led_type l1;
 
