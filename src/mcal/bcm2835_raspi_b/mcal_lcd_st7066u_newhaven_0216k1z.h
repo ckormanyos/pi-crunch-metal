@@ -6,7 +6,6 @@
   #include <cstring>
 
   #include <mcal_lcd/mcal_lcd_base.h>
-  //#include <util/utility/util_countof.h>
   #include <util/utility/util_time.h>
 
   namespace mcal { namespace lcd {

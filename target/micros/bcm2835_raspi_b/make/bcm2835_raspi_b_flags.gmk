@@ -37,6 +37,9 @@ TGT_AFLAGS    =
 LINKER_DEFINITION_FILE := $(PATH_TGT_MAKE)/bcm2835_raspi_b_with_stdlib.ld
 
 TGT_LDFLAGS   = -nostartfiles                                                     \
+                -nostdlib                                                         \
+                --specs=nano.specs                                                \
+                --specs=nosys.specs                                               \
                 -Wl,--gc-sections                                                 \
                 -Wl,-Map,$(APP).map                                               \
                 -T $(LINKER_DEFINITION_FILE)

@@ -188,7 +188,11 @@
     </CustomBuildStep>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\app\benchmark\app_benchmark_pi_agm.cpp" />
+    <ClCompile Include="src\app\benchmark\app_benchmark_pi_agm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\app\benchmark\app_benchmark_pi_spigot.cpp" />
     <ClCompile Include="src\app\led\app_led.cpp" />
     <ClCompile Include="src\mcal\bcm2835_raspi_b\mcal_cpu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -290,31 +294,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\math\calculus\derivative.h" />
-    <ClInclude Include="src\math\calculus\integral.h" />
-    <ClInclude Include="src\math\checksums\crc\crc32.h" />
     <ClInclude Include="src\math\checksums\hash\hash_base.h" />
     <ClInclude Include="src\math\checksums\hash\hash_detail.h" />
     <ClInclude Include="src\math\checksums\hash\hash_sha1.h" />
-    <ClInclude Include="src\math\constants\constants.h" />
-    <ClInclude Include="src\math\constants\constant_functions.h" />
-    <ClInclude Include="src\math\constants\pi_spigot_base.h" />
-    <ClInclude Include="src\math\constants\pi_spigot_single.h" />
-    <ClInclude Include="src\math\constants\pi_spigot_state.h" />
-    <ClInclude Include="src\math\extended_complex\extended_complex.h" />
-    <ClInclude Include="src\math\fast_math\fast_math.h" />
-    <ClInclude Include="src\math\filters\fir_order_n.h" />
-    <ClInclude Include="src\math\fixed_point\fixed_point.h" />
-    <ClInclude Include="src\math\functions\math_functions_bessel.h" />
-    <ClInclude Include="src\math\functions\math_functions_hypergeometric.h" />
-    <ClInclude Include="src\math\functions\math_functions_legendre.h" />
-    <ClInclude Include="src\math\softfloat\soft_double.h" />
+    <ClInclude Include="src\math\checksums\hash\hash_stream_base.h" />
+    <ClInclude Include="src\math\pi_spigot\pi_spigot.h" />
     <ClInclude Include="src\math\wide_decimal\decwide_t.h" />
     <ClInclude Include="src\math\wide_decimal\decwide_t_detail.h" />
     <ClInclude Include="src\math\wide_decimal\decwide_t_detail_fft.h" />
     <ClInclude Include="src\math\wide_decimal\decwide_t_detail_namespace.h" />
     <ClInclude Include="src\math\wide_decimal\decwide_t_detail_ops.h" />
-    <ClInclude Include="src\math\wide_integer\uintwide_t.h" />
     <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_benchmark.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

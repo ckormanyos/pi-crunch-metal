@@ -29,18 +29,6 @@
     <Filter Include="src\sys">
       <UniqueIdentifier>{ede03732-bfee-4556-a8b7-14eaa5c8d374}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\math\calculus">
-      <UniqueIdentifier>{ffc48514-113f-41c9-804f-c48ed5a77eb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\math\fixed_point">
-      <UniqueIdentifier>{9e589103-0fd8-4fb0-b033-c9e37b055853}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\math\constants">
-      <UniqueIdentifier>{ac401e26-4242-43da-804a-937e5eb999a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\math\filters">
-      <UniqueIdentifier>{98cee71e-3f6f-4eca-9f12-6ab0aea7c992}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\sys\start">
       <UniqueIdentifier>{41a9ec66-7b1d-45ca-b5d9-4195aa12cc5f}</UniqueIdentifier>
     </Filter>
@@ -71,23 +59,8 @@
     <Filter Include="src\app\benchmark">
       <UniqueIdentifier>{8692e096-13a3-44ae-ab6a-cc5a7a96c3f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\math\checksums\crc">
-      <UniqueIdentifier>{8c458229-093f-4c84-be41-c44701230e48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\math\extended_complex">
-      <UniqueIdentifier>{0f8d2031-bb2c-4616-ba26-9e801fbd3e64}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\util\STL_C++XX_stdfloat">
       <UniqueIdentifier>{56776e10-f1a6-42e5-bfff-6d5b3a20b327}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\math\functions">
-      <UniqueIdentifier>{62976de0-9569-4a72-af6f-e6c489a1dfb0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\math\wide_integer">
-      <UniqueIdentifier>{ca989bd6-465c-4ffe-b218-f82c14ce6146}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\math\fast_math">
-      <UniqueIdentifier>{21eb30fc-adf8-47ab-b3e2-8bdc73ab3d9b}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\mcal\x86_64-w64-mingw32">
       <UniqueIdentifier>{2b7c4ec7-869e-40b2-a6de-a8e387212a34}</UniqueIdentifier>
@@ -116,9 +89,6 @@
     <Filter Include="src\math\wide_decimal">
       <UniqueIdentifier>{600114e0-a873-4e3b-8b5b-06844c801c31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\math\softfloat">
-      <UniqueIdentifier>{edc2180f-2a1e-4ee1-8b2f-e51592be2ebf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\util\boost_metal_bindings">
       <UniqueIdentifier>{46a2d805-8bc6-4d6e-a05f-ccc9153db65d}</UniqueIdentifier>
     </Filter>
@@ -133,6 +103,9 @@
     </Filter>
     <Filter Include="src\app\led">
       <UniqueIdentifier>{522e0801-ac9a-4e93-b224-84f642f06a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\math\pi_spigot">
+      <UniqueIdentifier>{26302f2b-b650-413a-bee9-9a7c10615706}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -238,23 +211,11 @@
     <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_cpu.cpp">
       <Filter>src\mcal\x86_64-w64-mingw32</Filter>
     </ClCompile>
+    <ClCompile Include="src\app\benchmark\app_benchmark_pi_spigot.cpp">
+      <Filter>src\app\benchmark</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\math\calculus\derivative.h">
-      <Filter>src\math\calculus</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\calculus\integral.h">
-      <Filter>src\math\calculus</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\constants\constants.h">
-      <Filter>src\math\constants</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\filters\fir_order_n.h">
-      <Filter>src\math\filters</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\fixed_point\fixed_point.h">
-      <Filter>src\math\fixed_point</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\utility\util_bit_mask.h">
       <Filter>src\util\utility</Filter>
     </ClInclude>
@@ -327,17 +288,11 @@
     <ClInclude Include="src\util\utility\util_stopwatch.h">
       <Filter>src\util\utility</Filter>
     </ClInclude>
-    <ClInclude Include="src\math\constants\constant_functions.h">
-      <Filter>src\math\constants</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\STL\time.h">
       <Filter>src\util\STL</Filter>
     </ClInclude>
     <ClInclude Include="src\util\utility\util_countof.h">
       <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\checksums\crc\crc32.h">
-      <Filter>src\math\checksums\crc</Filter>
     </ClInclude>
     <ClInclude Include="src\util\utility\util_alignas.h">
       <Filter>src\util\utility</Filter>
@@ -347,9 +302,6 @@
     </ClInclude>
     <ClInclude Include="src\util\utility\util_swdm.h">
       <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\extended_complex\extended_complex.h">
-      <Filter>src\math\extended_complex</Filter>
     </ClInclude>
     <ClInclude Include="src\util\STL\impl\stl_local_constexpr.h">
       <Filter>src\util\STL\impl</Filter>
@@ -366,23 +318,8 @@
     <ClInclude Include="src\util\STL_C++XX_stdfloat\stdfloat.h">
       <Filter>src\util\STL_C++XX_stdfloat</Filter>
     </ClInclude>
-    <ClInclude Include="src\math\functions\math_functions_hypergeometric.h">
-      <Filter>src\math\functions</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\functions\math_functions_legendre.h">
-      <Filter>src\math\functions</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\functions\math_functions_bessel.h">
-      <Filter>src\math\functions</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\utility\util_dynamic_bitset.h">
       <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\wide_integer\uintwide_t.h">
-      <Filter>src\math\wide_integer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\fast_math\fast_math.h">
-      <Filter>src\math\fast_math</Filter>
     </ClInclude>
     <ClInclude Include="src\mcal\mcal.h">
       <Filter>src\mcal</Filter>
@@ -392,15 +329,6 @@
     </ClInclude>
     <ClInclude Include="src\mcal\mcal_reg_access_static.h">
       <Filter>src\mcal</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\constants\pi_spigot_base.h">
-      <Filter>src\math\constants</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\constants\pi_spigot_single.h">
-      <Filter>src\math\constants</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\constants\pi_spigot_state.h">
-      <Filter>src\math\constants</Filter>
     </ClInclude>
     <ClInclude Include="src\mcal_spi\mcal_spi_software_port_driver.h">
       <Filter>src\mcal_spi</Filter>
@@ -513,15 +441,6 @@
     <ClInclude Include="src\mcal_led\mcal_led_boolean_state_base.h">
       <Filter>src\mcal_led</Filter>
     </ClInclude>
-    <ClInclude Include="src\math\checksums\hash\hash_base.h">
-      <Filter>src\math\checksums\hash</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\checksums\hash\hash_detail.h">
-      <Filter>src\math\checksums\hash</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\checksums\hash\hash_sha1.h">
-      <Filter>src\math\checksums\hash</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\utility\util_narrow_cast.h">
       <Filter>src\util\utility</Filter>
     </ClInclude>
@@ -551,9 +470,6 @@
     </ClInclude>
     <ClInclude Include="src\math\wide_decimal\decwide_t_detail_ops.h">
       <Filter>src\math\wide_decimal</Filter>
-    </ClInclude>
-    <ClInclude Include="src\math\softfloat\soft_double.h">
-      <Filter>src\math\softfloat</Filter>
     </ClInclude>
     <ClInclude Include="src\util\boost_metal_bindings\boost\math\policies\error_handling.hpp">
       <Filter>src\util\boost_metal_bindings\boost\math\policies</Filter>
@@ -641,6 +557,21 @@
     </ClInclude>
     <ClInclude Include="src\math\wide_decimal\decwide_t_detail_namespace.h">
       <Filter>src\math\wide_decimal</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\pi_spigot\pi_spigot.h">
+      <Filter>src\math\pi_spigot</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\checksums\hash\hash_detail.h">
+      <Filter>src\math\checksums\hash</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\checksums\hash\hash_sha1.h">
+      <Filter>src\math\checksums\hash</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\checksums\hash\hash_base.h">
+      <Filter>src\math\checksums\hash</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\checksums\hash\hash_stream_base.h">
+      <Filter>src\math\checksums\hash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
