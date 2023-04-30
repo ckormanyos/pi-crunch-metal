@@ -31,7 +31,7 @@ mcal::led::led_base& mcal::led::led1()
 {
   using led1_port_pin_type = mcal_led_port_pin_expander_port_pin_a4_type;
 
-  using led1_led_type  = mcal::led::led_port<led1_port_pin_type>;
+  using led1_led_type = mcal::led::led_port<led1_port_pin_type>;
 
   static led1_led_type l1;
 
