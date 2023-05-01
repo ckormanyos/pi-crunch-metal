@@ -20,6 +20,8 @@ or on a simple industry-standard LCD character display.
 
 # Software Details
 
+## AGM Algorithm
+
 In this project, $1,000,001$ decmal digits of $\pi$ (i.e., one million and 1)
 are computed with a quadratically converging Gauss arithmetic geometric mean
 iteration. Memory management uses a custom C++ allocator that manages
@@ -48,7 +50,7 @@ are essentially the same as those used in the
 [`real-time-cpp`](https://github.com/ckormanyos/real-time-cpp)
 repository.
 
-## Alternate Algorithm
+## Alternate Spigot Algorithm
 
 In addition to the AGM algorithm mentioned above, a slower
 quadratic pi-spigot algorithm of order $N^2$ is also supported
