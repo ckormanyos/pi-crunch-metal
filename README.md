@@ -2,14 +2,14 @@ pi-crunch-metal\
 [![Build Status](https://github.com/ckormanyos/pi-crunch-metal/actions/workflows/pi-crunch-metal.yml/badge.svg)](https://github.com/ckormanyos/pi-crunch-metal/actions)
 ==================
 
-pi-crunch-metal computes a million digits of pi
+pi-crunch-metal computes a million digits of $\pi$
 on a bare-metal RaspberryPi(R)-Zero (and other systems).
 
 This fascinating, educational and fun project combines the domain
 of high-performance numerical computing with the raw simplicity of
 bare-metal embedded microcontroller systems.
 
-Exihbiting the utmost in portability realized through modern header-only C++11
+Exihbiting the utmost in portability realized through modern header-only C++14
 template code, pi-crunch-metal is intended to run out of the box on both
 a PC system as well as selected bare-metal microcontroller systems.
 
@@ -20,7 +20,8 @@ or on a simple industry-standard LCD character display.
 
 # Software Details
 
-Pi is computed with a quadratically converging Gauss arithmetic geometric mean
+In this project, $1,000,001$ decmal digits of $\pi$ (i.e., one million and 1)
+are computed with a quadratically converging Gauss arithmetic geometric mean
 iteration. Memory management uses a custom C++ allocator that manages
 memory slots aligned to the size of the limb-storage of the individual
 multiprecision type.
@@ -36,7 +37,7 @@ startup code. Hardware setup including clock initialization,
 FPU enable, instruction caching, etc. is carried out with self-written
 hybrid assembly/C++ code shortly after reaching `main()`.
 
-Compact code size is in focus and the entire project fits within about 40k
+Compact code size is in focus and the entire project easily fits within 32k
 of program code, with slight variations depending on the target system selected.
 The calculation does, however, require ample RAM of about 16 Mbyte.
 
@@ -46,6 +47,22 @@ supported. Build tools, the build system and the compilers
 are essentially the same as those used in the
 [`real-time-cpp`](https://github.com/ckormanyos/real-time-cpp)
 repository.
+
+## Alternate Algorithm
+
+In addition to the AGM algorithm mentioned above, a slower
+quadratic pi-spigot algorithm of order $N^2$ is also supported
+in this project.
+Switching to use the (interchangeable) file
+[app_benchmark_pi_spigot.cpp](./src/app/benchmark/app_benchmark_pi_spigot.cpp)
+instead of
+[app_benchmark_pi_agm.cpp](./src/app/benchmark/app_benchmark_pi_agm.cpp)
+alternately uses the pi-spigot algorithm.
+
+The spigot calculation
+is slower than the AGM calculatoin and requires sightly
+more time to compute a count of $100,001$ decimal digits,
+a factor of ten fewer.
 
 # Prototype Project
 
