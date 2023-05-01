@@ -33,13 +33,13 @@
     using unsigned_small_type = UnsignedSmallType;
     using unsigned_large_type = UnsignedLargeType;
 
-    static constexpr auto result_digit = ResultDigit;
-    static constexpr auto loop_digit   = LoopDigit;
+    static constexpr auto result_digit() -> std::uint32_t { return ResultDigit; }
+    static constexpr auto loop_digit  () -> std::uint32_t { return LoopDigit; }
 
-    static_assert(loop_digit <= static_cast<std::uint32_t>(std::numeric_limits<unsigned_small_type>::digits10),
+    static_assert(loop_digit() <= static_cast<std::uint32_t>(std::numeric_limits<unsigned_small_type>::digits10),
                   "Error: loop_digit exceeds the number of base-10 digits in its constituent unsigned_small_type");
 
-    static_assert(result_digit <= UINT32_C(100001),
+    static_assert(result_digit() <= UINT32_C(100001),
                   "Error: result_digit exceeds its limit of 100,001");
 
     static_assert(std::numeric_limits<unsigned_small_type>::digits * 2 == std::numeric_limits<unsigned_large_type>::digits,
@@ -56,14 +56,14 @@
       return
         static_cast<std::uint32_t>
         (
-          static_cast<std::uint32_t>(x * static_cast<std::uint32_t>((static_cast<std::uint32_t>(UINT32_C(10) * loop_digit) / UINT32_C(3)) + UINT32_C(1))) / loop_digit
+          static_cast<std::uint32_t>(x * static_cast<std::uint32_t>((static_cast<std::uint32_t>(UINT32_C(10) * loop_digit()) / UINT32_C(3)) + UINT32_C(1))) / loop_digit()
         );
     }
 
   public:
     static constexpr auto get_input_static_size() -> std::uint32_t
     {
-      return input_scale(result_digit);
+      return input_scale(result_digit());
     }
 
     using input_container_type = std::array<std::uint32_t, get_input_static_size()>;
@@ -85,7 +85,7 @@
       return my_operation_count;
     }
 
-    auto calculate(const std::function<void(const std::uint32_t)>& pfn_callback_to_report_digits10,
+    auto calculate(std::function<void(const std::uint32_t)> pfn_callback_to_report_digits10 = nullptr,
                    ::math::checksums::hash::hash_stream_base* p_hash = nullptr) -> void
     {
       // Use pi_spigot::calculate() to calculate result_digit
@@ -116,18 +116,18 @@
       my_output_count    = static_cast<std::uint32_t>(UINT8_C(0));
       my_operation_count = static_cast<std::uintmax_t>(UINT8_C(0));
 
-      const auto p10 = static_cast<unsigned_large_type>(pow10(loop_digit));
+      const auto p10 = static_cast<unsigned_large_type>(pow10(loop_digit()));
 
       // Operation count Mathematica(R), example for loop_digit=9.
       // Sum[Floor[((d - j) (Floor[((10 9)/3)] + 1))/9], {j, 0, Floor[d/9] 9, 9}]
 
       for(auto j = static_cast<std::uint32_t>(UINT8_C(0));
-               j < result_digit;
-               j = static_cast<std::uint32_t>(j + loop_digit))
+               j < result_digit();
+               j = static_cast<std::uint32_t>(j + loop_digit()))
       {
         auto val_d = static_cast<unsigned_large_type>(UINT8_C(0));
 
-        const auto ilim = input_scale(result_digit - j);
+        const auto ilim = input_scale(result_digit() - j);
 
         for(auto   i = static_cast<std::uint32_t>(INT8_C(0));
                    i < ilim;
@@ -173,7 +173,7 @@
         // If loop_digit is 4, for instance, then successive groups
         // of digits have a form such as: 3141, 5926, ..., etc.
 
-        const auto p10_loop = static_cast<unsigned_large_type>(pow10(loop_digit));
+        const auto p10_loop = static_cast<unsigned_large_type>(pow10(loop_digit()));
 
         const auto next_digits =
           static_cast<unsigned_small_type>
@@ -186,14 +186,14 @@
         const auto n =
           (std::min)
           (
-            loop_digit,
-            static_cast<std::uint32_t>(result_digit - j)
+            loop_digit(),
+            static_cast<std::uint32_t>(result_digit() - j)
           );
 
-        unsigned_small_type scale10 = pow10(loop_digit - UINT32_C(1));
+        unsigned_small_type scale10 = pow10(loop_digit() - UINT32_C(1));
 
         auto output_chars_as_bytes_hash_array =
-          std::array<std::uint8_t, static_cast<std::size_t>(loop_digit)> { };
+          std::array<std::uint8_t, static_cast<std::size_t>(loop_digit())> { };
 
         for(auto i = static_cast<std::size_t>(UINT8_C(0)); i < static_cast<std::size_t>(n); ++i)
         {
@@ -226,7 +226,10 @@
 
         my_output_count += n;
 
-        pfn_callback_to_report_digits10(my_output_count);
+        if(pfn_callback_to_report_digits10 != nullptr)
+        {
+          pfn_callback_to_report_digits10(my_output_count);
+        }
       }
 
       if(p_hash != nullptr)
@@ -258,7 +261,7 @@
       return
         static_cast<unsigned_small_type>
         (
-          pow10(loop_digit) / static_cast<unsigned>(UINT8_C(5))
+          pow10(loop_digit()) / static_cast<unsigned>(UINT8_C(5))
         );
     }
   };
