@@ -5,79 +5,80 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef MCAL_PORT_2012_06_27_H_
-  #define MCAL_PORT_2012_06_27_H_
+#ifndef MCAL_PORT_2012_06_27_H
+  #define MCAL_PORT_2012_06_27_H
 
-  #if defined(__cplusplus)
-  #include <cstdint>
-  #else
+  #if !defined(__cplusplus)
   #include <stdint.h>
   #endif
 
-  #include <mcal_reg.h>
-
   #if defined(__cplusplus)
 
-  void mcal_port_pin_expander_set_direction_output(const uint8_t bpos);
-  void mcal_port_pin_expander_set_direction_input (const uint8_t bpos);
-  void mcal_port_pin_expander_set_pin_high        (const uint8_t bpos);
-  void mcal_port_pin_expander_set_pin_low         (const uint8_t bpos);
-  bool mcal_port_pin_expander_read_input_value    (const uint8_t bpos);
-  void mcal_port_pin_expander_toggle_pin          (const uint8_t bpos);
+  #include <mcal_port_expander_base.h>
+  #include <mcal_reg.h>
 
   namespace mcal
   {
     namespace port
     {
-      typedef void config_type;
+      using config_type = void;
 
       void init(const config_type*);
 
-      constexpr std::uint8_t gpio_pin02_h03 = UINT8_C(0x02U);
-      constexpr std::uint8_t gpio_pin03_h05 = UINT8_C(0x03U);
-      constexpr std::uint8_t gpio_pin04_h07 = UINT8_C(0x04U);
-      constexpr std::uint8_t gpio_pin17_h11 = UINT8_C(0x17U);
-      constexpr std::uint8_t gpio_pin27_h13 = UINT8_C(0x27U);
-      constexpr std::uint8_t gpio_pin22_h15 = UINT8_C(0x22U);
-      constexpr std::uint8_t gpio_pin10_h19 = UINT8_C(0x10U);
-      constexpr std::uint8_t gpio_pin09_h21 = UINT8_C(0x09U);
-      constexpr std::uint8_t gpio_pin11_h23 = UINT8_C(0x11U);
-      constexpr std::uint8_t gpio_pin05_h29 = UINT8_C(0x05U);
-      constexpr std::uint8_t gpio_pin06_h31 = UINT8_C(0x06U);
-      constexpr std::uint8_t gpio_pin13_h33 = UINT8_C(0x13U);
-      constexpr std::uint8_t gpio_pin19_h35 = UINT8_C(0x19U);
-      constexpr std::uint8_t gpio_pin26_h37 = UINT8_C(0x26U);
-      constexpr std::uint8_t gpio_pin14_h08 = UINT8_C(0x14U);
-      constexpr std::uint8_t gpio_pin15_h10 = UINT8_C(0x15U);
-      constexpr std::uint8_t gpio_pin18_h12 = UINT8_C(0x18U);
-      constexpr std::uint8_t gpio_pin23_h16 = UINT8_C(0x23U);
-      constexpr std::uint8_t gpio_pin24_h18 = UINT8_C(0x24U);
-      constexpr std::uint8_t gpio_pin25_h22 = UINT8_C(0x25U);
-      constexpr std::uint8_t gpio_pin08_h24 = UINT8_C(0x08U);
-      constexpr std::uint8_t gpio_pin07_h26 = UINT8_C(0x07U);
-      constexpr std::uint8_t gpio_pin12_h32 = UINT8_C(0x12U);
-      constexpr std::uint8_t gpio_pin16_h36 = UINT8_C(0x16U);
-      constexpr std::uint8_t gpio_pin20_h38 = UINT8_C(0x20U);
-      constexpr std::uint8_t gpio_pin21_h40 = UINT8_C(0x21U);
+      auto port_expander_device() -> port_expander_base&;
 
-      constexpr std::uint8_t gpio_status_led = UINT8_C(0x47U);
+      inline auto port_expander_set_direction_output(const uint8_t bpos) -> void { port_expander_device().set_direction_output(bpos); }
+      inline auto port_expander_set_direction_input (const uint8_t bpos) -> void { port_expander_device().set_direction_input(bpos); }
+      inline auto port_expander_set_pin_high        (const uint8_t bpos) -> void { port_expander_device().set_pin_high(bpos); }
+      inline auto port_expander_set_pin_low         (const uint8_t bpos) -> void { port_expander_device().set_pin_low(bpos); }
+      inline auto port_expander_read_input_value    (const uint8_t bpos) -> bool { static_cast<void>(bpos); return false; }
+      inline auto port_expander_toggle_pin          (const uint8_t bpos) -> void { port_expander_device().toggle_pin(bpos); }
+
+      constexpr auto gpio_pin02_h03 = static_cast<std::uint8_t>(UINT8_C(0x02));
+      constexpr auto gpio_pin03_h05 = static_cast<std::uint8_t>(UINT8_C(0x03));
+      constexpr auto gpio_pin04_h07 = static_cast<std::uint8_t>(UINT8_C(0x04));
+      constexpr auto gpio_pin17_h11 = static_cast<std::uint8_t>(UINT8_C(0x17));
+      constexpr auto gpio_pin27_h13 = static_cast<std::uint8_t>(UINT8_C(0x27));
+      constexpr auto gpio_pin22_h15 = static_cast<std::uint8_t>(UINT8_C(0x22));
+      constexpr auto gpio_pin10_h19 = static_cast<std::uint8_t>(UINT8_C(0x10));
+      constexpr auto gpio_pin09_h21 = static_cast<std::uint8_t>(UINT8_C(0x09));
+      constexpr auto gpio_pin11_h23 = static_cast<std::uint8_t>(UINT8_C(0x11));
+      constexpr auto gpio_pin05_h29 = static_cast<std::uint8_t>(UINT8_C(0x05));
+      constexpr auto gpio_pin06_h31 = static_cast<std::uint8_t>(UINT8_C(0x06));
+      constexpr auto gpio_pin13_h33 = static_cast<std::uint8_t>(UINT8_C(0x13));
+      constexpr auto gpio_pin19_h35 = static_cast<std::uint8_t>(UINT8_C(0x19));
+      constexpr auto gpio_pin26_h37 = static_cast<std::uint8_t>(UINT8_C(0x26));
+      constexpr auto gpio_pin14_h08 = static_cast<std::uint8_t>(UINT8_C(0x14));
+      constexpr auto gpio_pin15_h10 = static_cast<std::uint8_t>(UINT8_C(0x15));
+      constexpr auto gpio_pin18_h12 = static_cast<std::uint8_t>(UINT8_C(0x18));
+      constexpr auto gpio_pin23_h16 = static_cast<std::uint8_t>(UINT8_C(0x23));
+      constexpr auto gpio_pin24_h18 = static_cast<std::uint8_t>(UINT8_C(0x24));
+      constexpr auto gpio_pin25_h22 = static_cast<std::uint8_t>(UINT8_C(0x25));
+      constexpr auto gpio_pin08_h24 = static_cast<std::uint8_t>(UINT8_C(0x08));
+      constexpr auto gpio_pin07_h26 = static_cast<std::uint8_t>(UINT8_C(0x07));
+      constexpr auto gpio_pin12_h32 = static_cast<std::uint8_t>(UINT8_C(0x12));
+      constexpr auto gpio_pin16_h36 = static_cast<std::uint8_t>(UINT8_C(0x16));
+      constexpr auto gpio_pin20_h38 = static_cast<std::uint8_t>(UINT8_C(0x20));
+      constexpr auto gpio_pin21_h40 = static_cast<std::uint8_t>(UINT8_C(0x21));
+
+      constexpr auto gpio_status_led = static_cast<std::uint8_t>(UINT8_C(0x47));
 
       class port_pin_base
       {
       protected:
-        static constexpr std::uint32_t gpfsel0_addr         = UINT32_C(0x20200000);
+        static constexpr auto gpfsel0_addr         = static_cast<std::uint32_t>(UINT32_C(0x20200000));
 
-        static constexpr std::uint32_t gpio_pin_x_input     = UINT32_C(0);
-        static constexpr std::uint32_t gpio_pin_x_output    = UINT32_C(1);
+        static constexpr auto gpio_pin_x_input     = static_cast<std::uint32_t>(UINT8_C(0));
+        static constexpr auto gpio_pin_x_output    = static_cast<std::uint32_t>(UINT8_C(1));
 
-        static constexpr std::uint32_t gpclr0_addr          = UINT32_C(0x20200028);
-        static constexpr std::uint32_t gpclr1_addr          = UINT32_C(0x2020002C);
+        static constexpr auto gpclr0_addr          = static_cast<std::uint32_t>(UINT32_C(0x20200028));
+        static constexpr auto gpclr1_addr          = static_cast<std::uint32_t>(UINT32_C(0x2020002C));
 
-        static constexpr std::uint32_t gpset0_addr          = UINT32_C(0x2020001C);
-        static constexpr std::uint32_t gpset1_addr          = UINT32_C(0x20200020);
+        static constexpr auto gpset0_addr          = static_cast<std::uint32_t>(UINT32_C(0x2020001C));
+        static constexpr auto gpset1_addr          = static_cast<std::uint32_t>(UINT32_C(0x20200020));
 
-        static constexpr std::uint32_t gpio_no_effect       = UINT32_C(0);
-        static constexpr std::uint32_t gpio_set_gpio_pin_x  = UINT32_C(1);
+        static constexpr auto gpio_no_effect       = static_cast<std::uint32_t>(UINT8_C(0));
+        static constexpr auto gpio_set_gpio_pin_x  = static_cast<std::uint32_t>(UINT8_C(1));
       };
 
       template<const std::uint8_t GpioPin>
@@ -86,55 +87,72 @@
       private:
         static bool my_pin_is_high;
 
-        static constexpr std::uint8_t  gpio_pin = GpioPin;
+        static constexpr auto gpio_pin = static_cast<std::uint8_t>(GpioPin);
 
-        static constexpr std::uint32_t port     = (std::uint32_t) ((gpio_pin & 0xF0U) >> 4U);
-        static constexpr std::uint32_t pin      = (std::uint32_t)  (gpio_pin & 0x0FU);
-        static constexpr std::uint32_t pos      = (std::uint32_t) ((port * 10U) + pin);
-        static constexpr std::uint32_t addfsel  = (std::uint32_t)  (gpfsel0_addr + (std::uint32_t) (4U * port));
-        static constexpr std::uint32_t valfout  = (std::uint32_t)   gpio_pin_x_output << (pin * 3U);
+        static constexpr auto port =
+          static_cast<std::uint32_t>
+          (
+               static_cast<std::uint32_t>(gpio_pin & static_cast<std::uint32_t>(UINT8_C(0xF0)))
+            >> static_cast<unsigned>(UINT8_C(4))
+          );
 
-        static constexpr std::uint32_t addclr   = (std::uint32_t) ((gpio_pin < 0x32U) ? gpclr0_addr : gpclr1_addr);
-        static constexpr std::uint32_t valclr   = (std::uint32_t) ((std::uint32_t) gpio_set_gpio_pin_x << ((pos < 32U) ? (pos) : (pos - 32U)));
+        static constexpr auto pin =
+          static_cast<std::uint32_t>
+          (
+            gpio_pin & static_cast<std::uint32_t>(UINT8_C(0x0F))
+          );
 
-        static constexpr std::uint32_t addset   = (std::uint32_t) ((gpio_pin < 0x32U) ? gpset0_addr : gpset1_addr);
-        static constexpr std::uint32_t valset   = (std::uint32_t) ((std::uint32_t) gpio_set_gpio_pin_x << ((pos < 32U) ? (pos) : (pos - 32U)));
+        static constexpr auto pos =
+          static_cast<std::uint32_t>
+          (
+              static_cast<std::uint32_t>(port * static_cast<std::uint32_t>(UINT8_C(10)))
+            + pin
+          );
+
+        static constexpr auto addfsel =
+          static_cast<std::uint32_t>
+          (
+              gpfsel0_addr
+            + static_cast<std::uint32_t>(static_cast<std::uint32_t>(UINT8_C(4)) * port)
+          );
+
+        static constexpr auto valfout =
+          static_cast<std::uint32_t>
+          (
+            gpio_pin_x_output << static_cast<unsigned>(pin * static_cast<std::uint32_t>(UINT8_C(3)))
+          );
+
+        static constexpr auto addclr =
+          static_cast<std::uint32_t>
+          (
+            (gpio_pin < static_cast<std::uint8_t>(UINT8_C(32))) ? gpclr0_addr : gpclr1_addr
+          );
+
+        static constexpr auto pos_is_lt_32 = (pos < static_cast<std::uint32_t>(UINT8_C(32)));
+
+        static constexpr auto shl_amount =
+          static_cast<unsigned>
+          (
+            pos_is_lt_32 ? static_cast<unsigned>(pos)
+                         : static_cast<unsigned>(pos - static_cast<std::uint32_t>(UINT8_C(32)))
+          );
+
+        static constexpr auto addset =
+          static_cast<std::uint32_t>
+          (
+            pos_is_lt_32 ? gpset0_addr : gpset1_addr
+          );
+
+        static constexpr auto valclr = static_cast<std::uint32_t>(gpio_set_gpio_pin_x << shl_amount);
+        static constexpr auto valset = valclr;
 
       public:
-        static void set_direction_output()
-        {
-          mcal_reg_access32_reg_or(addfsel, valfout);
-        }
-
-        static void set_direction_input()
-        {
-          // TBD: Not yet implemented.
-        }
-
-        static void set_pin_high()
-        {
-          mcal_reg_access32_reg_or(addset, valset);
-
-          my_pin_is_high = true;
-        }
-
-        static void set_pin_low()
-        {
-          mcal_reg_access32_reg_or(addclr, valclr);
-
-          my_pin_is_high = false;
-        }
-
-        static bool read_input_value()
-        {
-          // TBD: Not yet implemented.
-          return false;
-        }
-
-        static void toggle_pin()
-        {
-          (my_pin_is_high ? set_pin_low() : set_pin_high());
-        }
+        static auto set_direction_output() -> void { mcal_reg_access32_reg_or(addfsel, valfout); }
+        static auto set_direction_input () -> void { } // TBD: Not yet implemented.
+        static auto set_pin_high        () -> void { mcal_reg_access32_reg_or(addset, valset); my_pin_is_high = true; }
+        static auto set_pin_low         () -> void { mcal_reg_access32_reg_or(addclr, valclr); my_pin_is_high = false; }
+        static auto read_input_value    () -> bool { return false; } // TBD: Not yet implemented.
+        static auto toggle_pin          () -> void { (my_pin_is_high ? set_pin_low() : set_pin_high()); }
       };
 
       template<const std::uint8_t PortPin>
@@ -144,21 +162,15 @@
       class port_pin_expander
       {
       public:
-        static void set_direction_output() {        mcal_port_pin_expander_set_direction_output(bpos); }
-        static void set_direction_input () {        mcal_port_pin_expander_set_direction_input (bpos); }
-        static void set_pin_high        () {        mcal_port_pin_expander_set_pin_high        (bpos); }
-        static void set_pin_low         () {        mcal_port_pin_expander_set_pin_low         (bpos); }
-        static bool read_input_value    () { return mcal_port_pin_expander_read_input_value    (bpos); }
-        static void toggle_pin          () {        mcal_port_pin_expander_toggle_pin          (bpos); }
+        static auto set_direction_output() -> void {        port_expander_set_direction_output(bpos); }
+        static auto set_direction_input () -> void {        port_expander_set_direction_input (bpos); }
+        static auto set_pin_high        () -> void {        port_expander_set_pin_high        (bpos); }
+        static auto set_pin_low         () -> void {        port_expander_set_pin_low         (bpos); }
+        static auto read_input_value    () -> bool { return port_expander_read_input_value    (bpos); }
+        static auto toggle_pin          () -> void {        port_expander_toggle_pin          (bpos); }
       };
     }
   }
-  #endif
-
-  #if defined(__cplusplus)
-  #include <cstdint>
-  #else
-  #include <stdint.h>
   #endif
 
   #if defined(__cplusplus)
@@ -173,4 +185,4 @@
   }
   #endif
 
-#endif // MCAL_PORT_2012_06_27_H_
+#endif // MCAL_PORT_2012_06_27_H

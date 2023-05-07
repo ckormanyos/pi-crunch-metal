@@ -9,7 +9,7 @@
 # File list of the RaspberryPi(R) ARM(R) A11 files in the project
 # ------------------------------------------------------------------------------
 
-FILES_TGT  = $(PATH_APP)/mcal/mcal_gcc_cxx_completion                  \
+FILES_TGT  = $(PATH_APP)/mcal/mcal_gcc_cxx_completion_with_stdlib      \
              $(PATH_APP)/mcal/$(TGT)/mcal_cpu_detail                   \
              $(PATH_APP)/mcal/$(TGT)/mcal_cpu_detail_secure            \
              $(PATH_APP)/mcal/$(TGT)/mcal_lcd                          \

@@ -48,13 +48,13 @@ void app::benchmark::detail::app_benchmark_callback_for_pi_digits10(const std::u
 
   const char* pend = util::baselexical_cast(d10, pstr);
 
-  mcal::lcd::lcd0().write(pstr, (std::uint_fast8_t) (pend - pstr), 0U);
+  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 0U);
 
   std::fill(pstr, pstr + sizeof(pstr), (char) 0);
 
   pend = util::baselexical_cast(app_benchmark_pi_count, pstr);
 
-  mcal::lcd::lcd0().write(pstr, (std::uint_fast8_t) (pend - pstr), 1U);
+  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 1U);
 }
 
 namespace local
@@ -64,6 +64,7 @@ namespace local
   #else
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(100001));
   #endif
+
   constexpr auto loop_digit = static_cast<std::uint32_t>(UINT8_C(9));
 
   using pi_spigot_type = math::constants::pi_spigot<result_digit, loop_digit>;

@@ -7,6 +7,14 @@
 
 #include <mcal/mcal.h>
 
+extern "C"
+auto mcal_init(void) -> void;
+
+auto mcal_init(void) -> void
+{
+  mcal::init();
+}
+
 void mcal::init()
 {
   // Initialize the microcontroller abstraction layer.
@@ -16,8 +24,6 @@ void mcal::init()
   //   mcal::wdg::init(nullptr);
   //   mcal::port::init(nullptr);
   //   mcal::osc::init(nullptr);
-
-  mcal::irq::init(nullptr);
 
   mcal::gpt::init(nullptr);
   mcal::spi::init(nullptr);

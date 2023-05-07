@@ -1,5 +1,5 @@
 /*
- Copyright Christopher Kormanyos 2013 - 2021.
+ Copyright Christopher Kormanyos 2013 - 2023.
  Distributed under the Boost Software License,
  Version 1.0. (See accompanying file LICENSE_1_0.txt
  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -7,40 +7,34 @@
 
 /* Linker script for RaspberryPi(R) ARM(R) A11 MCU */
 
+ENTRY(__my_startup)
+
 INPUT(libc.a libm.a libgcc.a)
 
 OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
 OUTPUT_ARCH(arm)
 
-/* The beginning and end of the program ROM area */
-/* Set up a ROM area with a size of 32K */
-_rom_begin = 0x00008000;
-_rom_end   = 0x00010000;
-
-/* The beginning of the RAM area */
-_ram_begin = 0x00010000;
-
 /* Set up the various stacks with total size of 16K. */
 
-__SYS_STACK_SIZE = 0x3800;
-__SVC_STACK_SIZE = 0x0200;
-__ABT_STACK_SIZE = 0x0100;
-__UND_STACK_SIZE = 0x0100;
-__IRQ_STACK_SIZE = 0x0200;
-__FIQ_STACK_SIZE = 0x0200;
+__SYS_STACK_SIZE = 4K;
+__SVC_STACK_SIZE = 4K;
+__ABT_STACK_SIZE = 4K;
+__UND_STACK_SIZE = 4K;
+__IRQ_STACK_SIZE = 4K;
+__FIQ_STACK_SIZE = 4K;
 
 /* Set up the memory regions. */
 
 MEMORY
 {
-  ROM   (rwx) : ORIGIN = 0x00008000, LENGTH = 0x00008000
-  RAM   (rwx) : ORIGIN = 0x00010000, LENGTH = 0x00004000
-  STACKS(rwx) : ORIGIN = 0x00014000, LENGTH =   __SYS_STACK_SIZE
+  ROM   (rwx) : ORIGIN = 0x00008000, LENGTH = 0x0007A000
+  STACKS(rwx) : ORIGIN = 0x00082000, LENGTH =   __SYS_STACK_SIZE
                                               + __SVC_STACK_SIZE
                                               + __ABT_STACK_SIZE
                                               + __UND_STACK_SIZE
                                               + __IRQ_STACK_SIZE
                                               + __FIQ_STACK_SIZE
+  RAM   (rwx) : ORIGIN = 0x00088000, LENGTH = 24M - 512K
 }
 
 SECTIONS
@@ -57,7 +51,7 @@ SECTIONS
     KEEP(*(.isr_vector))
   } > ROM = 0xAAAA
 
-  /* Startup: This is where the program starts. */
+  /* Startup: This the C/C++ run-time initialization and call to main(). */
   .startup :
   {
     *(.startup)
@@ -110,36 +104,7 @@ SECTIONS
     *(.ARM.attributes)
   } > ROM
 
-  . = 0x00010000;
-  . = ALIGN(4);
-
-  /* The ROM-to-RAM initialized data section */
-  .data :
-  {
-    _data_begin = .;
-    *(.data)
-    . = ALIGN(4);
-    KEEP (*(.data))
-    *(.data*)
-    . = ALIGN(4);
-    KEEP (*(.data*))
-    _data_end = .;
-  } > RAM AT > ROM
-
-  /* The uninitialized (zero-cleared) data section */
-  .bss :
-  {
-    _bss_begin = .;
-    *(.bss)
-    . = ALIGN(4);
-    KEEP (*(.bss))
-    *(.bss*)
-    . = ALIGN(4);
-    KEEP (*(.bss*))
-    _bss_end = .;
-  } > RAM
-
-  . = 0x00014000;
+  . = 0x00082000;
   . = ALIGN(4);
 
   /* user-system mode stack definition */
@@ -183,6 +148,35 @@ SECTIONS
     . = ALIGN(MAX(__FIQ_STACK_SIZE , .), 8);
     PROVIDE(__FIQ_STACK_TOP = .) ;
   } > STACKS
+
+  . = 0x00088000;
+  . = ALIGN(4);
+
+  /* The ROM-to-RAM initialized data section */
+  .data :
+  {
+    _data_begin = .;
+    *(.data)
+    . = ALIGN(4);
+    KEEP (*(.data))
+    *(.data*)
+    . = ALIGN(4);
+    KEEP (*(.data*))
+    _data_end = .;
+  } > RAM AT > ROM
+
+  /* The uninitialized (zero-cleared) data section */
+  .bss :
+  {
+    _bss_begin = .;
+    *(.bss)
+    . = ALIGN(4);
+    KEEP (*(.bss))
+    *(.bss*)
+    . = ALIGN(4);
+    KEEP (*(.bss*))
+    _bss_end = .;
+  } > RAM
 
   PROVIDE(end = .);
 

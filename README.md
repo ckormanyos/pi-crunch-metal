@@ -1,6 +1,16 @@
-pi-crunch-metal\
-[![Build Status](https://github.com/ckormanyos/pi-crunch-metal/actions/workflows/pi-crunch-metal.yml/badge.svg)](https://github.com/ckormanyos/pi-crunch-metal/actions)
+pi-crunch-metal
 ==================
+
+<p align="center">
+    <a href="https://github.com/ckormanyos/pi-crunch-metal/actions">
+        <img src="https://github.com/ckormanyos/pi-crunch-metal/actions/workflows/pi-crunch-metal.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://github.com/ckormanyos/pi-crunch-metal/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">
+        <img src="https://custom-icon-badges.herokuapp.com/github/issues-raw/ckormanyos/pi-crunch-metal?logo=github" alt="Issues" /></a>
+    <a href="https://github.com/ckormanyos/pi-crunch-metal/blob/master/LICENSE_1_0.txt">
+        <img src="https://img.shields.io/badge/license-BSL%201.0-blue.svg" alt="Boost Software License 1.0"></a>
+    <a href="https://github.com/ckormanyos/pi-crunch-metal">
+        <img src="https://img.shields.io/github/languages/code-size/ckormanyos/pi-crunch-metal" alt="GitHub code size in bytes" /></a>
+</p>
 
 pi-crunch-metal computes a million digits of $\pi$
 on a bare-metal RaspberryPi(R)-Zero (and other systems).
