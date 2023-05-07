@@ -50,36 +50,51 @@ constexpr std::array<std::uint32_t, 8U> const_pi_control_tail_32_1000001
 
 } } //   namespace math::constants
 
-namespace app { namespace benchmark {
+namespace local
+{
+  auto pi_count_of_calculations = static_cast<std::uint32_t>(UINT8_C(0));
 
-bool run_pi_calc();
+  auto pi_output_digits10 = static_cast<std::uint32_t>(UINT8_C(0));
 
-namespace detail {
+  auto pi_output_count_write(const std::uint32_t d10) -> void;
 
-void app_benchmark_callback_for_pi_digits10(const std::uint32_t d10);
+  auto pi_output_count_write(const std::uint32_t d10) -> void { local::pi_output_digits10 = d10; }
+} // namespace local
 
-std::uint32_t app_benchmark_pi_count;
+extern "C"
+{
+  auto mcal_led_toggle(void) -> void;
 
-} // namespace app::benchmark::local
+  auto pi_main() -> int;
 
-} } // namespace app::benchmark
+  auto pi_led_toggle(void) -> void;
 
-void app::benchmark::detail::app_benchmark_callback_for_pi_digits10(const std::uint32_t d10)
+  auto pi_lcd_progress(void) -> void;
+}
+
+extern "C"
+auto pi_led_toggle(void) -> void
+{
+  ::mcal_led_toggle();
+}
+
+extern "C"
+auto pi_lcd_progress(void) -> void
 {
   char pstr[10U] = { 0 };
 
-  const char* pend = util::baselexical_cast(d10, pstr);
+  const char* pend = util::baselexical_cast(local::pi_output_digits10, pstr);
 
-  mcal::lcd::lcd0().write(pstr, (std::uint_fast8_t) (pend - pstr), 0U);
+  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 0U);
 
   std::fill(pstr, pstr + sizeof(pstr), (char) 0);
 
-  pend = util::baselexical_cast(app_benchmark_pi_count, pstr);
+  pend = util::baselexical_cast(local::pi_count_of_calculations, pstr);
 
-  mcal::lcd::lcd0().write(pstr, (std::uint_fast8_t) (pend - pstr), 1U);
+  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 1U);
 }
 
-bool app::benchmark::run_pi_calc()
+auto pi_main() -> int
 {
   using local_limb_type = std::uint32_t;
 
@@ -96,10 +111,10 @@ bool app::benchmark::run_pi_calc()
   const local_wide_decimal_type my_pi =
     math::wide_decimal::pi<wide_decimal_digits10, local_limb_type, local_allocator_type, double, std::int32_t, double>
     (
-      detail::app_benchmark_callback_for_pi_digits10
+      local::pi_output_count_write
     );
 
-  bool result_is_ok = true;
+  auto result_is_ok = true;
 
   {
     const bool head_is_ok =
@@ -140,23 +155,7 @@ bool app::benchmark::run_pi_calc()
     result_is_ok &= tail_is_ok;
   }
 
-  ++detail::app_benchmark_pi_count;
+  ++local::pi_count_of_calculations;
 
-  return result_is_ok;
+  return (result_is_ok ? 0 : 1);
 }
-
-#if defined(APP_BENCHMARK_STANDALONE_MAIN)
-int main()
-{
-  // g++ -Wall -O3 -march=native -I./ref_app/src/mcal/host -I./ref_app/src -DAPP_BENCHMARK_TYPE=APP_BENCHMARK_TYPE_PI_AGM -DAPP_BENCHMARK_STANDALONE_MAIN ./ref_app/src/app/benchmark/app_benchmark_pi_agm.cpp -o ./ref_app/bin/app_benchmark_pi_agm.exe
-
-  bool result_is_ok = true;
-
-  for(unsigned i = 0U; i < 64U; ++i)
-  {
-    result_is_ok &= app::benchmark::run_pi_calc();
-  }
-
-  return result_is_ok ? 0 : -1;
-}
-#endif

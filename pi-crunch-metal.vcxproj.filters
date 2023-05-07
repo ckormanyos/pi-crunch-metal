@@ -82,6 +82,9 @@
     <Filter Include="src\app\Mcal\systimer">
       <UniqueIdentifier>{15e40721-5560-45dd-bb99-a8a3293c4759}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\app\Appli\pi_agm">
+      <UniqueIdentifier>{bfe4bf06-9038-416e-be87-e9e472b5d086}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mcal\mcal.cpp">
@@ -192,8 +195,8 @@
     <ClCompile Include="..\Osek_pi_spigot_metal\Mcal\systimer\systimer.c">
       <Filter>src\app\Mcal\systimer</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\Appli\pi_spigot\pi_agm.cpp">
-      <Filter>src\app\Appli\pi_spigot</Filter>
+    <ClCompile Include="src\app\Appli\pi_agm\pi_agm.cpp">
+      <Filter>src\app\Appli\pi_agm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -191,7 +191,7 @@
     <ClCompile Include="..\Osek_pi_spigot_metal\Mcal\gpt\gpt.c" />
     <ClCompile Include="..\Osek_pi_spigot_metal\Mcal\systimer\systimer.c" />
     <ClCompile Include="src\app\Appli\main.c" />
-    <ClCompile Include="src\app\Appli\pi_spigot\pi_agm.cpp" />
+    <ClCompile Include="src\app\Appli\pi_agm\pi_agm.cpp" />
     <ClCompile Include="src\app\Appli\pi_spigot\pi_spigot.cpp" />
     <ClCompile Include="src\app\Appli\tasks.c" />
     <ClCompile Include="src\app\Osek\OS.c" />

@@ -11,12 +11,12 @@
 //===============================================================================================================================
 TASK(T1)
 {
-  extern void pi_spigot_led_toggle(void);
-  extern void pi_spigot_lcd_progress(void);
+  extern void pi_led_toggle(void);
+  extern void pi_lcd_progress(void);
 
-  pi_spigot_led_toggle();
+  pi_led_toggle();
 
-  pi_spigot_lcd_progress();
+  pi_lcd_progress();
 
   // Get some prime cycle times with:
   //   Table[Prime[n], {n, 60, 180, 1}]
@@ -38,14 +38,14 @@ TASK(T1)
       {
         OS_ClearEvent(EVT_LED_BLINK);
 
-        pi_spigot_led_toggle();
+        pi_led_toggle();
       }
 
       if((Events & EVT_LCD_PROGRESS) == EVT_LCD_PROGRESS)
       {
         OS_ClearEvent(EVT_LCD_PROGRESS);
 
-        pi_spigot_lcd_progress();
+        pi_lcd_progress();
       }
     }
     else
@@ -63,13 +63,13 @@ TASK(Idle)
 {
   for(;;)
   {
-    extern int pi_spigot_main(void);
+    extern int pi_main(void);
 
     OS_Schedule();
 
-    const int pi_spigot_result = pi_spigot_main();
+    const int pi_result = pi_main();
 
-    if(pi_spigot_result != 0)
+    if(pi_result != 0)
     {
       /* In case of error we switch off the task */
       OS_TerminateTask();
