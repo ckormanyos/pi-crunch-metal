@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2021.
+//  Copyright Christopher Kormanyos 2021 - 2023.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -18,7 +18,6 @@
 #define WIDE_DECIMAL_DISABLE_CACHED_CONSTANTS
 
 #include <math/wide_decimal/decwide_t.h>
-#include <mcal_memory/mcal_memory_progmem_array.h>
 #include <util/memory/util_n_slot_array_allocator.h>
 
 namespace math { namespace constants {
