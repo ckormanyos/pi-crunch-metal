@@ -10,6 +10,16 @@
 #include <mcal_led/mcal_led_port_inverted.h>
 #include <mcal_port.h>
 
+extern "C"
+auto mcal_led_toggle(void) -> void;
+
+extern "C"
+auto mcal_led_toggle(void) -> void
+{
+  mcal::led::led0().toggle();
+  mcal::led::led1().toggle();
+}
+
 namespace
 {
   // LED port pin expander configuration.
@@ -31,7 +41,7 @@ mcal::led::led_base& mcal::led::led1()
 {
   using led1_port_pin_type = mcal_led_port_pin_expander_port_pin_a4_type;
 
-  using led1_led_type = mcal::led::led_port<led1_port_pin_type>;
+  using led1_led_type  = mcal::led::led_port<led1_port_pin_type>;
 
   static led1_led_type l1;
 

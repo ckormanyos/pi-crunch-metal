@@ -188,15 +188,17 @@
     </CustomBuildStep>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\app\benchmark\app_benchmark_pi_agm.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\app\benchmark\app_benchmark_pi_spigot.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\app\led\app_led.cpp" />
+    <ClCompile Include="..\Osek_pi_spigot_metal\Mcal\gpt\gpt.c" />
+    <ClCompile Include="..\Osek_pi_spigot_metal\Mcal\systimer\systimer.c" />
+    <ClCompile Include="src\app\Appli\main.c" />
+    <ClCompile Include="src\app\Appli\pi_spigot\pi_agm.cpp" />
+    <ClCompile Include="src\app\Appli\pi_spigot\pi_spigot.cpp" />
+    <ClCompile Include="src\app\Appli\tasks.c" />
+    <ClCompile Include="src\app\Osek\OS.c" />
+    <ClCompile Include="src\app\Osek\OsAlarm.c" />
+    <ClCompile Include="src\app\Osek\OsEvt.c" />
+    <ClCompile Include="src\app\Osek\OsTask.c" />
+    <ClCompile Include="src\app\Osek\TCB.c" />
     <ClCompile Include="src\mcal\bcm2835_raspi_b\mcal_cpu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -274,9 +276,20 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\sys\start\sys_start.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Osek_pi_spigot_metal\Mcal\gpt\gpt.h" />
+    <ClInclude Include="..\Osek_pi_spigot_metal\Mcal\mcu\mcu.h" />
+    <ClInclude Include="..\Osek_pi_spigot_metal\Mcal\systimer\systimer.h" />
+    <ClInclude Include="src\app\Osek\HwPlatform\ARM11\HwPltfm.h" />
+    <ClInclude Include="src\app\Osek\HwPlatform\ARM11\OsAsm.h" />
+    <ClInclude Include="src\app\Osek\OsAPIs.h" />
+    <ClInclude Include="src\app\Osek\OsCfg.h" />
+    <ClInclude Include="src\app\Osek\OsGenMac.h" />
+    <ClInclude Include="src\app\Osek\OsInternal.h" />
+    <ClInclude Include="src\app\Osek\OsTypes.h" />
+    <ClInclude Include="src\app\Osek\TCB.h" />
+    <ClInclude Include="src\app\Std\Platform_Types.h" />
     <ClInclude Include="src\math\checksums\hash\hash_base.h" />
     <ClInclude Include="src\math\checksums\hash\hash_detail.h" />
     <ClInclude Include="src\math\checksums\hash\hash_sha1.h" />
@@ -296,10 +309,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_gpt.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_irq.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
@@ -430,11 +439,9 @@
     <ClInclude Include="src\util\utility\util_utype_helper.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Osek_pi_spigot_metal\Mcal\mcu\mcu.s" />
+    <None Include="src\app\Osek\HwPlatform\ARM11\OsAsm.s" />
     <None Include="src\mcal\bcm2835_raspi_b\mcal_cpu_detail_secure.s">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="src\mcal\bcm2835_raspi_b\mcal_reg.s">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>

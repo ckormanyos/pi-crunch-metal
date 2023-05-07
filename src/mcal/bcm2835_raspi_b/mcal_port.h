@@ -21,10 +21,6 @@
   {
     namespace port
     {
-      using config_type = void;
-
-      void init(const config_type*);
-
       auto port_expander_device() -> port_expander_base&;
 
       inline auto port_expander_set_direction_output(const uint8_t bpos) -> void { port_expander_device().set_direction_output(bpos); }

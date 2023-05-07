@@ -9,13 +9,13 @@
 # List of the source files in the project
 # ------------------------------------------------------------------------------
 
-FILES_CPP  = $(PATH_APP)/app/benchmark/app_benchmark_pi_agm                          \
-             $(PATH_APP)/app/led/app_led                                             \
+FILES_CPP  = $(PATH_APP)/app/Appli/main                                              \
+             $(PATH_APP)/app/Appli/tasks                                             \
+             $(PATH_APP)/app/Appli/pi_spigot/pi_spigot                               \
              $(PATH_APP)/mcal/$(TGT)/mcal_cpu                                        \
              $(PATH_APP)/mcal/$(TGT)/mcal_gpt                                        \
              $(PATH_APP)/mcal/$(TGT)/mcal_irq                                        \
              $(PATH_APP)/mcal/$(TGT)/mcal_led                                        \
              $(PATH_APP)/mcal/$(TGT)/mcal_port                                       \
              $(PATH_APP)/mcal/$(TGT)/mcal_spi                                        \
-             $(PATH_APP)/mcal/mcal                                                   \
-             $(PATH_APP)/sys/start/sys_start
+             $(PATH_APP)/mcal/mcal

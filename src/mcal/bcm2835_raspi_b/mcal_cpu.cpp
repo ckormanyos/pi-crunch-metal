@@ -7,11 +7,8 @@
 
 #include <mcal_cpu.h>
 #include <mcal_cpu_detail_secure.h>
-#include <mcal_port.h>
 
 void mcal::cpu::init()
 {
-  mcal::port::init(nullptr);
-
   detail::init();
 }

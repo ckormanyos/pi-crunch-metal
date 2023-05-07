@@ -20,13 +20,12 @@ void mcal::init()
   // Initialize the microcontroller abstraction layer.
 
   // Note: mcal::cpu::init() has already been called from the startup code.
-  // Therefore, the following subroutines have already been called:
-  //   mcal::wdg::init(nullptr);
-  //   mcal::port::init(nullptr);
-  //   mcal::osc::init(nullptr);
 
   mcal::gpt::init(nullptr);
   mcal::spi::init(nullptr);
 
-  (void) mcal::lcd::lcd0().init();
+  static_cast<void>
+  (
+    mcal::lcd::lcd0().init()
+  );
 }

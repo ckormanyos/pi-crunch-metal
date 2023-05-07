@@ -30,7 +30,12 @@ TGT_CXXFLAGS  = -std=c++14                                     \
                 -Wno-psabi                                     \
                 $(TGT_ALLFLAGS)
 
-TGT_INCLUDES  =
+TGT_INCLUDES  = -I$(PATH_APP)/app/Mcal/gpt                     \
+                -I$(PATH_APP)/app/Mcal/mcu                     \
+                -I$(PATH_APP)/app/Mcal/systimer                \
+                -I$(PATH_APP)/app/Osek/HwPlatform/ARM11        \
+                -I$(PATH_APP)/app/Osek                         \
+                -I$(PATH_APP)/app/Std
 
 TGT_AFLAGS    =
 

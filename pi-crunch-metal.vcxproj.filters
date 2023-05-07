@@ -4,10 +4,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{c53407a0-4776-444d-8e59-390c1235403a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\app">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="src\mcal">
       <UniqueIdentifier>{554e29f2-746f-4c6a-8998-eb715891d0f1}</UniqueIdentifier>
     </Filter>
@@ -23,20 +19,11 @@
     <Filter Include="src\util\memory">
       <UniqueIdentifier>{fb6afa64-87b9-489c-bf74-fff0df6f7822}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\sys">
-      <UniqueIdentifier>{ede03732-bfee-4556-a8b7-14eaa5c8d374}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\sys\start">
-      <UniqueIdentifier>{41a9ec66-7b1d-45ca-b5d9-4195aa12cc5f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\mcal\bcm2835_raspi_b">
       <UniqueIdentifier>{7b9388d6-f502-4205-b264-1d91355a71bf}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\math\checksums">
       <UniqueIdentifier>{01aad933-5ecb-4ed6-ab76-8cca16bd0d60}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\app\benchmark">
-      <UniqueIdentifier>{8692e096-13a3-44ae-ab6a-cc5a7a96c3f0}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\mcal\x86_64-w64-mingw32">
       <UniqueIdentifier>{2b7c4ec7-869e-40b2-a6de-a8e387212a34}</UniqueIdentifier>
@@ -59,17 +46,44 @@
     <Filter Include="src\math\wide_decimal">
       <UniqueIdentifier>{600114e0-a873-4e3b-8b5b-06844c801c31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\app\led">
-      <UniqueIdentifier>{522e0801-ac9a-4e93-b224-84f642f06a04}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\math\pi_spigot">
       <UniqueIdentifier>{26302f2b-b650-413a-bee9-9a7c10615706}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\app">
+      <UniqueIdentifier>{663a1e76-ddea-4b8f-9b76-84caeb6380fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Appli">
+      <UniqueIdentifier>{753db38e-c025-4ea7-ad47-afec3a1d688f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Appli\pi_spigot">
+      <UniqueIdentifier>{20637582-214b-487a-a739-f66f2b02e913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Osek">
+      <UniqueIdentifier>{769d3a1c-1a99-4765-b599-98840b6493da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Osek\HwPlatform">
+      <UniqueIdentifier>{07187721-754b-4ad8-b8db-2c8b04566ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Osek\HwPlatform\ARM11">
+      <UniqueIdentifier>{f5857421-e5ba-4b20-adf4-3c3622346216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Std">
+      <UniqueIdentifier>{201b19b5-fb73-4523-8f86-034729410fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Mcal">
+      <UniqueIdentifier>{eab9edcc-f136-40c6-8e4e-2249bb747ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Mcal\gpt">
+      <UniqueIdentifier>{bddefb08-a280-4a20-85e2-cd033ecce5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Mcal\mcu">
+      <UniqueIdentifier>{50fa7d4a-f40e-4248-8246-2fa5cd29be35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\app\Mcal\systimer">
+      <UniqueIdentifier>{15e40721-5560-45dd-bb99-a8a3293c4759}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\sys\start\sys_start.cpp">
-      <Filter>src\sys\start</Filter>
-    </ClCompile>
     <ClCompile Include="src\mcal\mcal.cpp">
       <Filter>src\mcal</Filter>
     </ClCompile>
@@ -93,9 +107,6 @@
     </ClCompile>
     <ClCompile Include="src\mcal\host\mcal_cpu.cpp">
       <Filter>src\mcal\host</Filter>
-    </ClCompile>
-    <ClCompile Include="src\app\benchmark\app_benchmark_pi_agm.cpp">
-      <Filter>src\app\benchmark</Filter>
     </ClCompile>
     <ClCompile Include="src\mcal\mcal_gcc_cxx_completion.cpp">
       <Filter>src\mcal</Filter>
@@ -124,9 +135,6 @@
     <ClCompile Include="src\mcal\host\mcal_lcd.cpp">
       <Filter>src\mcal\host</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\led\app_led.cpp">
-      <Filter>src\app\led</Filter>
-    </ClCompile>
     <ClCompile Include="src\mcal\bcm2835_raspi_b\mcal_spi.cpp">
       <Filter>src\mcal\bcm2835_raspi_b</Filter>
     </ClCompile>
@@ -154,8 +162,38 @@
     <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_cpu.cpp">
       <Filter>src\mcal\x86_64-w64-mingw32</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\benchmark\app_benchmark_pi_spigot.cpp">
-      <Filter>src\app\benchmark</Filter>
+    <ClCompile Include="src\app\Appli\main.c">
+      <Filter>src\app\Appli</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Appli\tasks.c">
+      <Filter>src\app\Appli</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Appli\pi_spigot\pi_spigot.cpp">
+      <Filter>src\app\Appli\pi_spigot</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Osek\OsAlarm.c">
+      <Filter>src\app\Osek</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Osek\OsEvt.c">
+      <Filter>src\app\Osek</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Osek\OsTask.c">
+      <Filter>src\app\Osek</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Osek\TCB.c">
+      <Filter>src\app\Osek</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Osek\OS.c">
+      <Filter>src\app\Osek</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Osek_pi_spigot_metal\Mcal\gpt\gpt.c">
+      <Filter>src\app\Mcal\gpt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Osek_pi_spigot_metal\Mcal\systimer\systimer.c">
+      <Filter>src\app\Mcal\systimer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\Appli\pi_spigot\pi_agm.cpp">
+      <Filter>src\app\Appli\pi_spigot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -342,9 +380,6 @@
     <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_gpt.h">
       <Filter>src\mcal\bcm2835_raspi_b</Filter>
     </ClInclude>
-    <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_irq.h">
-      <Filter>src\mcal\bcm2835_raspi_b</Filter>
-    </ClInclude>
     <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_lcd.h">
       <Filter>src\mcal\bcm2835_raspi_b</Filter>
     </ClInclude>
@@ -405,13 +440,52 @@
     <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_port_expander_base.h">
       <Filter>src\mcal\bcm2835_raspi_b</Filter>
     </ClInclude>
+    <ClInclude Include="src\app\Osek\OsAPIs.h">
+      <Filter>src\app\Osek</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Osek\OsCfg.h">
+      <Filter>src\app\Osek</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Osek\OsGenMac.h">
+      <Filter>src\app\Osek</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Osek\OsInternal.h">
+      <Filter>src\app\Osek</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Osek\OsTypes.h">
+      <Filter>src\app\Osek</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Osek\TCB.h">
+      <Filter>src\app\Osek</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Osek\HwPlatform\ARM11\HwPltfm.h">
+      <Filter>src\app\Osek\HwPlatform\ARM11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Osek\HwPlatform\ARM11\OsAsm.h">
+      <Filter>src\app\Osek\HwPlatform\ARM11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\Std\Platform_Types.h">
+      <Filter>src\app\Std</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Osek_pi_spigot_metal\Mcal\gpt\gpt.h">
+      <Filter>src\app\Mcal\gpt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Osek_pi_spigot_metal\Mcal\mcu\mcu.h">
+      <Filter>src\app\Mcal\mcu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Osek_pi_spigot_metal\Mcal\systimer\systimer.h">
+      <Filter>src\app\Mcal\systimer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\mcal\bcm2835_raspi_b\mcal_reg.s">
-      <Filter>src\mcal\bcm2835_raspi_b</Filter>
-    </None>
     <None Include="src\mcal\bcm2835_raspi_b\mcal_cpu_detail_secure.s">
       <Filter>src\mcal\bcm2835_raspi_b</Filter>
+    </None>
+    <None Include="src\app\Osek\HwPlatform\ARM11\OsAsm.s">
+      <Filter>src\app\Osek\HwPlatform\ARM11</Filter>
+    </None>
+    <None Include="..\Osek_pi_spigot_metal\Mcal\mcu\mcu.s">
+      <Filter>src\app\Mcal\mcu</Filter>
     </None>
   </ItemGroup>
 </Project>

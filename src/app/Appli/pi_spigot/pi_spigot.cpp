@@ -1,4 +1,4 @@
-///////////////////////////////////////////////////////////////////
+﻿///////////////////////////////////////////////////////////////////
 //                                                               //
 //  Copyright Iliass Mahjoub 2022.                               //
 //  Copyright Christopher Kormanyos 2019 - 2023.                 //
@@ -28,35 +28,6 @@
 
 //#define PI_SPIGOT_USE_10K_DIGITS
 
-namespace app { namespace benchmark {
-
-bool run_pi_calc();
-
-namespace detail {
-
-void app_benchmark_callback_for_pi_digits10(const std::uint32_t d10);
-
-std::uint32_t app_benchmark_pi_count;
-
-} // namespace app::benchmark::local
-
-} } // namespace app::benchmark
-
-void app::benchmark::detail::app_benchmark_callback_for_pi_digits10(const std::uint32_t d10)
-{
-  char pstr[10U] = { 0 };
-
-  const char* pend = util::baselexical_cast(d10, pstr);
-
-  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 0U);
-
-  std::fill(pstr, pstr + sizeof(pstr), (char) 0);
-
-  pend = util::baselexical_cast(app_benchmark_pi_count, pstr);
-
-  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 1U);
-}
-
 namespace local
 {
   #if defined(PI_SPIGOT_USE_10K_DIGITS)
@@ -76,11 +47,50 @@ namespace local
   hash_type pi_spigot_hash;
 
   auto pi_spigot_count_of_calculations = static_cast<std::uint32_t>(UINT8_C(0));
+
+  auto pi_spigot_output_digits10 = static_cast<std::uint32_t>(UINT8_C(0));
+
+  auto pi_spigot_output_count_write(const std::uint32_t d10) -> void;
+
+  auto pi_spigot_output_count_write(const std::uint32_t d10) -> void { local::pi_spigot_output_digits10 = d10; }
 }
 
-auto app::benchmark::run_pi_calc() -> bool
+extern "C"
 {
-  local::pi_spigot_instance.calculate(detail::app_benchmark_callback_for_pi_digits10, &local::pi_spigot_hash);
+  auto mcal_led_toggle(void) -> void;
+
+  auto pi_spigot_main() -> int;
+
+  auto pi_spigot_led_toggle(void) -> void;
+
+  auto pi_spigot_lcd_progress(void) -> void;
+}
+
+extern "C"
+auto pi_spigot_led_toggle(void) -> void
+{
+  ::mcal_led_toggle();
+}
+
+extern "C"
+auto pi_spigot_lcd_progress(void) -> void
+{
+  char pstr[10U] = { 0 };
+
+  const char* pend = util::baselexical_cast(local::pi_spigot_output_digits10, pstr);
+
+  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 0U);
+
+  std::fill(pstr, pstr + sizeof(pstr), (char) 0);
+
+  pend = util::baselexical_cast(local::pi_spigot_count_of_calculations, pstr);
+
+  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 1U);
+}
+
+auto pi_spigot_main() -> int
+{
+  local::pi_spigot_instance.calculate(local::pi_spigot_output_count_write, &local::pi_spigot_hash);
 
   // Check the hash result of the pi calculation.
   const auto hash_control =
@@ -108,7 +118,7 @@ auto app::benchmark::run_pi_calc() -> bool
   const auto result_pi_spigot_is_ok =
     std::equal(hash_result.cbegin(), hash_result.cend(), hash_control.cbegin());
 
-  ++app::benchmark::detail::app_benchmark_pi_count;
+  ++local::pi_spigot_count_of_calculations;
 
-  return result_pi_spigot_is_ok;
+  return (result_pi_spigot_is_ok ? 0 : -1);
 }

@@ -69,7 +69,7 @@
     <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" />
     <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
     <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'">$(SolutionDir)/src;$(SolutionDir)src\mcal\x86_64-w64-mingw32</NMakeIncludeSearchPath>
-    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">$(SolutionDir)/src;$(SolutionDir)/src/mcal/bcm2835_raspi_b</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">$(ProjectDir)/src/app/Mcal/gpt; $(ProjectDir)/src/app/Mcal/mcu; $(ProjectDir)/src/app/Mcal/systimer; $(ProjectDir)/src/app/Osek/HwPlatform/ARM11; $(ProjectDir)/src/app/Osek; $(ProjectDir)/src/app/Std; $(ProjectDir)/src; $(ProjectDir)/src/mcal/bcm2835_raspi_b;</NMakeIncludeSearchPath>
     <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" />
     <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
     <NMakeAssemblySearchPath Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" />

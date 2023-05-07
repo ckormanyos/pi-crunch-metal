@@ -6,20 +6,18 @@
 //
 
 #include <mcal_cpu.h>
-#include <mcal_gpt.h>
-#include <mcal_irq.h>
-#include <mcal_reg.h>
 
-void mcal::irq::init(const config_type*)
+extern "C"
 {
-  // Maskable interrupts are not used in this derivative.
-  // Do not enable all global (maskable) interrupts.
-}
+  void __int_vect_undef_instr_handler   (void);
+  void __int_vect_prefetch_abort_handler(void);
+  void __int_vect_data_abort_handler    (void);
+  void __int_vect_unused_05_handler     (void);
+  void OsCat1Isr                        (void);
 
-extern "C" void __int_vect_undef_instr_handler   () { for(;;) { mcal::cpu::nop(); } }
-extern "C" void __int_vect_sw_interrupt_handler  () { for(;;) { mcal::cpu::nop(); } }
-extern "C" void __int_vect_prefetch_abort_handler() { for(;;) { mcal::cpu::nop(); } }
-extern "C" void __int_vect_data_abort_handler    () { for(;;) { mcal::cpu::nop(); } }
-extern "C" void __int_vect_unused_05_handler     () { for(;;) { mcal::cpu::nop(); } }
-extern "C" void __int_vect_irq_handler           () { for(;;) { mcal::cpu::nop(); } } // For future use: Query, clear and handle the active interrupt bit(s).
-extern "C" void __int_vect_fiq_handler           () { for(;;) { mcal::cpu::nop(); } }
+  void __int_vect_undef_instr_handler   () { for(;;) { mcal::cpu::nop(); } }
+  void __int_vect_prefetch_abort_handler() { for(;;) { mcal::cpu::nop(); } }
+  void __int_vect_data_abort_handler    () { for(;;) { mcal::cpu::nop(); } }
+  void __int_vect_unused_05_handler     () { for(;;) { mcal::cpu::nop(); } }
+  void OsCat1Isr                        () { for(;;) { mcal::cpu::nop(); } }
+}

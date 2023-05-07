@@ -9,11 +9,19 @@
 # File list of the RaspberryPi(R) ARM(R) A11 files in the project
 # ------------------------------------------------------------------------------
 
-FILES_TGT  = $(PATH_APP)/mcal/mcal_gcc_cxx_completion                  \
+FILES_TGT  = $(PATH_APP)/app/Mcal/gpt/gpt                              \
+             $(PATH_APP)/app/Mcal/mcu/mcu                              \
+             $(PATH_APP)/app/Mcal/systimer/systimer                    \
+             $(PATH_APP)/app/Osek/OS                                   \
+             $(PATH_APP)/app/Osek/OsAlarm                              \
+             $(PATH_APP)/app/Osek/OsEvt                                \
+             $(PATH_APP)/app/Osek/OsTask                               \
+             $(PATH_APP)/app/Osek/TCB                                  \
+             $(PATH_APP)/app/Osek/HwPlatform/ARM11/OsAsm               \
+             $(PATH_APP)/mcal/mcal_gcc_cxx_completion                  \
              $(PATH_APP)/mcal/$(TGT)/mcal_cpu_detail                   \
              $(PATH_APP)/mcal/$(TGT)/mcal_cpu_detail_secure            \
              $(PATH_APP)/mcal/$(TGT)/mcal_lcd                          \
-             $(PATH_APP)/mcal/$(TGT)/mcal_reg                          \
              $(PATH_TGT)/startup/crt0                                  \
              $(PATH_TGT)/startup/crt0_init_ram                         \
              $(PATH_TGT)/startup/crt1                                  \

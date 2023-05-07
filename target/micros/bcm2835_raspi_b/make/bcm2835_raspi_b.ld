@@ -43,13 +43,21 @@ SECTIONS
   . = ALIGN(4);
 
   /* Interrupt vector table */
-  .isr_vector :
+  .intvect :
   {
     PROVIDE(__INTVECT_BASE_ADDRESS = .) ;
-    *(.isr_vector)
+    *(.intvect)
     . = ALIGN(0x10);
-    KEEP(*(.isr_vector))
+    KEEP(*(.intvect))
   } > ROM = 0xAAAA
+
+  /* reset: This is where the program starts. */
+  .reset :
+  {
+    *(.reset)
+    . = ALIGN(0x10);
+    KEEP(*(.reset))
+  } > ROM = 0x5555
 
   /* Startup: This the C/C++ run-time initialization and call to main(). */
   .startup :
