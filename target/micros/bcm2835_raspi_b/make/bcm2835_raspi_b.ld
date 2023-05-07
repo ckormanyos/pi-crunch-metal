@@ -1,5 +1,5 @@
 /*
- Copyright Christopher Kormanyos 2013 - 2021.
+ Copyright Christopher Kormanyos 2013 - 2023.
  Distributed under the Boost Software License,
  Version 1.0. (See accompanying file LICENSE_1_0.txt
  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -7,18 +7,12 @@
 
 /* Linker script for RaspberryPi(R) ARM(R) A11 MCU */
 
+ENTRY(__my_startup)
+
 INPUT(libc.a libm.a libgcc.a)
 
 OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
 OUTPUT_ARCH(arm)
-
-/* The beginning and end of the program ROM area */
-/* Set up a ROM area with a size of 32K */
-_rom_begin = 0x00008000;
-_rom_end   = 0x00010000;
-
-/* The beginning of the RAM area */
-_ram_begin = 0x00014000;
 
 /* Set up the various stacks with total size of 16K. */
 
@@ -57,7 +51,7 @@ SECTIONS
     KEEP(*(.isr_vector))
   } > ROM = 0xAAAA
 
-  /* Startup: This is where the program starts. */
+  /* Startup: This the C/C++ run-time initialization and call to main(). */
   .startup :
   {
     *(.startup)

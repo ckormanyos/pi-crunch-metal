@@ -40,6 +40,7 @@ TGT_LDFLAGS   = -nostartfiles                                                   
                 -nostdlib                                                         \
                 -specs=nano.specs                                                 \
                 -specs=nosys.specs                                                \
+                -e __my_startup                                                   \
                 -Wl,--gc-sections                                                 \
                 -Wl,-Map,$(APP).map                                               \
                 -T $(LINKER_DEFINITION_FILE)
