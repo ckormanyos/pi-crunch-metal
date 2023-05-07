@@ -112,9 +112,6 @@
     <ClCompile Include="src\sys\start\sys_start.cpp">
       <Filter>src\sys\start</Filter>
     </ClCompile>
-    <ClCompile Include="src\mcal\mcal_gcc_cxx_completion.cpp">
-      <Filter>src\mcal</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\STD_LIBC\memory.c">
       <Filter>src\util\STD_LIBC</Filter>
     </ClCompile>
@@ -572,6 +569,9 @@
     </ClInclude>
     <ClInclude Include="src\math\checksums\hash\hash_stream_base.h">
       <Filter>src\math\checksums\hash</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_port_expander_base.h">
+      <Filter>src\mcal\bcm2835_raspi_b</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

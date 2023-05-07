@@ -12,7 +12,7 @@
   {
     namespace port
     {
-      typedef void config_type;
+      using config_type = void;
 
       void init(const config_type*);
 

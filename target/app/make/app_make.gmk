@@ -1,5 +1,5 @@
 ﻿#
-#  Copyright Christopher Kormanyos 2007 - 2021.
+#  Copyright Christopher Kormanyos 2007 - 2023.
 #  Distributed under the Boost Software License,
 #  Version 1.0. (See accompanying file LICENSE_1_0.txt
 #  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -123,9 +123,7 @@ CC        = $(PATH_TOOLS_CC)\$(GCC_PREFIX)-g++.exe
 CPPFILT   = $(PATH_TOOLS_CC)\$(GCC_PREFIX)-c++filt.exe
 NM        = $(PATH_TOOLS_CC)\$(GCC_PREFIX)-nm.exe
 OBJDUMP   = $(PATH_TOOLS_CC)\$(GCC_PREFIX)-objdump.exe
-ifeq ($(OBJCOPY),)
 OBJCOPY   = $(PATH_TOOLS_CC)\$(GCC_PREFIX)-objcopy.exe
-endif
 READELF   = $(PATH_TOOLS_CC)\$(GCC_PREFIX)-readelf.exe
 SIZE      = $(PATH_TOOLS_CC)\$(GCC_PREFIX)-size.exe
 endif
@@ -163,6 +161,9 @@ GCCFLAGS    = -g                                \
               $(WARN_FLAGS)                     \
               -Wno-comment                      \
               -gdwarf-2                         \
+              -fomit-frame-pointer              \
+              -finline-functions                \
+              -finline-limit=64                 \
               -fno-exceptions                   \
               -ffunction-sections               \
               -fdata-sections

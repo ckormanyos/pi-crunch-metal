@@ -5,16 +5,17 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef MCAL_PORT_WORD_EXPANDER_MICROCHIP_MCP23S17_2020_04_21_H_
-  #define MCAL_PORT_WORD_EXPANDER_MICROCHIP_MCP23S17_2020_04_21_H_
+#ifndef MCAL_PORT_EXPANDER_MICROCHIP_MCP23S17_2020_04_21_H
+  #define MCAL_PORT_EXPANDER_MICROCHIP_MCP23S17_2020_04_21_H
 
+  #include <mcal_port_expander_base.h>
   #include <mcal_spi.h>
   #include <util/utility/util_two_part_data_manipulation.h>
 
   namespace mcal { namespace port {
 
   template<const std::uint8_t hardware_address>
-  class port_regs_expander_microchip_mcp23s17
+  class port_regs_expander_microchip_mcp23s17 : public port_expander_base
   {
   protected:
     static constexpr std::uint8_t reg_iodira   = UINT8_C(0x00);  // MCP23x17 I/O Direction Register
@@ -78,7 +79,7 @@
       my_com.deselect();
     }
 
-    std::uint16_t read__word(const std::uint8_t reg)
+    std::uint16_t read__word(const std::uint8_t reg) noexcept override
     {
       std::uint8_t byte_to_read_lo = std::uint8_t();
       std::uint8_t byte_to_read_hi = std::uint8_t();
@@ -95,7 +96,7 @@
       return util::make_long(byte_to_read_lo, byte_to_read_hi);
     }
 
-    void write_word(const std::uint8_t reg, const std::uint16_t word_to_write) noexcept
+    void write_word(const std::uint8_t reg, const std::uint16_t word_to_write) noexcept override
     {
       my_com.select();
       my_com.send(my_cmd_write);
@@ -120,9 +121,9 @@
     port_pin_expander_microchip_mcp23s17(util::communication_base& com) noexcept
       : base_class_type(com) { }
 
-    virtual ~port_pin_expander_microchip_mcp23s17() = default;
+    ~port_pin_expander_microchip_mcp23s17() override = default;
 
-    void set_direction_output(const std::uint8_t bpos) noexcept
+    void set_direction_output(const std::uint8_t bpos) noexcept override
     {
       base_class_type::my_reg_iodira_value =
         std::uint16_t(base_class_type::my_reg_iodira_value & std::uint16_t(~std::uint16_t(1ULL << bpos)));
@@ -130,7 +131,7 @@
       base_class_type::write_word(base_class_type::reg_iodira, base_class_type::my_reg_iodira_value);
     }
 
-    void set_direction_input(const std::uint8_t bpos) noexcept
+    void set_direction_input(const std::uint8_t bpos) noexcept override
     {
       base_class_type::my_reg_iodira_value =
         std::uint16_t(base_class_type::my_reg_iodira_value | std::uint16_t(1ULL << bpos));
@@ -138,7 +139,7 @@
       base_class_type::write_word(base_class_type::reg_iodira,  base_class_type::my_reg_iodira_value);
     }
 
-    void set_pin_high(const std::uint8_t bpos) noexcept
+    void set_pin_high(const std::uint8_t bpos) noexcept override
     {
       base_class_type::my_reg_gpioa__value =
         std::uint16_t(base_class_type::my_reg_gpioa__value | std::uint16_t(1ULL << bpos));
@@ -146,7 +147,7 @@
       base_class_type::write_word(base_class_type::reg_gpioa, base_class_type::my_reg_gpioa__value);
     }
 
-    void set_pin_low(const std::uint8_t bpos) noexcept
+    void set_pin_low(const std::uint8_t bpos) noexcept override
     {
       base_class_type::my_reg_gpioa__value =
         std::uint16_t(std::uint16_t(base_class_type::my_reg_gpioa__value & std::uint16_t(~std::uint16_t(1ULL << bpos))));
@@ -154,7 +155,7 @@
       base_class_type::write_word(base_class_type::reg_gpioa, base_class_type::my_reg_gpioa__value);
     }
 
-    void toggle_pin(const std::uint8_t bpos) noexcept
+    void toggle_pin(const std::uint8_t bpos) noexcept override
     {
       base_class_type::my_reg_gpioa__value =
         std::uint16_t(base_class_type::my_reg_gpioa__value ^ std::uint16_t(1ULL << bpos));
@@ -165,4 +166,4 @@
 
   } } // namespace mcal::port
 
-#endif // MCAL_PORT_WORD_EXPANDER_MICROCHIP_MCP23S17_2020_04_21_H_
+#endif // MCAL_PORT_EXPANDER_MICROCHIP_MCP23S17_2020_04_21_H

@@ -34,7 +34,7 @@ TGT_INCLUDES  =
 
 TGT_AFLAGS    =
 
-LINKER_DEFINITION_FILE := $(PATH_TGT_MAKE)/bcm2835_raspi_b_with_stdlib.ld
+LINKER_DEFINITION_FILE := $(PATH_TGT_MAKE)/bcm2835_raspi_b.ld
 
 TGT_LDFLAGS   = -nostartfiles                                                     \
                 -nostdlib                                                         \
