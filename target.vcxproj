@@ -5,10 +5,6 @@
       <Configuration>target bcm2835_raspi_b</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="target x86_64-w64-mingw32|x64">
-      <Configuration>target x86_64-w64-mingw32</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{30CE370B-40F3-4BCD-8986-64AAFF8971BD}</ProjectGuid>
@@ -18,12 +14,6 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" Label="Configuration">
-    <ConfigurationType>Makefile</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
@@ -49,32 +39,20 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'">target\build\build.bat x86_64-w64-mingw32</NMakeBuildCommandLine>
     <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">target\build\build.bat bcm2835_raspi_b</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'">target\build\build.bat x86_64-w64-mingw32 rebuild</NMakeReBuildCommandLine>
     <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">target\build\build.bat bcm2835_raspi_b rebuild</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'">target\build\build.bat x86_64-w64-mingw32 clean_all</NMakeCleanCommandLine>
     <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">target\build\build.bat bcm2835_raspi_b clean_all</NMakeCleanCommandLine>
-    <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'">$(SolutionDir)bin\pi-crunch-metal.exe</NMakeOutput>
     <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">$(SolutionDir)bin\pi-crunch-metal.hex</NMakeOutput>
-    <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" />
     <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
-    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'">$(SolutionDir)/src;$(SolutionDir)src\mcal\x86_64-w64-mingw32</NMakeIncludeSearchPath>
     <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">$(ProjectDir)/src/app/Mcal/gpt; $(ProjectDir)/src/app/Mcal/mcu; $(ProjectDir)/src/app/Mcal/systimer; $(ProjectDir)/src/app/Osek/HwPlatform/ARM11; $(ProjectDir)/src/app/Osek; $(ProjectDir)/src/app/Std; $(ProjectDir)/src; $(ProjectDir)/src/mcal/bcm2835_raspi_b;</NMakeIncludeSearchPath>
-    <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" />
     <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
-    <NMakeAssemblySearchPath Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" />
     <NMakeAssemblySearchPath Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
-    <NMakeForcedUsingAssemblies Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'" />
     <NMakeForcedUsingAssemblies Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
     <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Target|Win32'">Build\Build.bat R8C</NMakeBuildCommandLine>
     <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Target|x64'">Build\Build.bat R8C</NMakeBuildCommandLine>
@@ -119,11 +97,6 @@
       <Path>$(SolutionDir)..\Bin\App.log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='target x86_64-w64-mingw32|x64'">
-    <BuildLog>
-      <Path>$(SolutionDir)tmp\log\pi-crunch-metal.log</Path>
-    </BuildLog>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">
     <BuildLog>
       <Path>$(SolutionDir)tmp\log\pi-crunch-metal.log</Path>
@@ -153,9 +126,6 @@
     <None Include="target\micros\bcm2835_raspi_b\startup\SD_CARD\PiZero\bootcode.bin" />
     <None Include="target\micros\bcm2835_raspi_b\startup\SD_CARD\PiZero\kernel.img" />
     <None Include="target\micros\bcm2835_raspi_b\startup\SD_CARD\PiZero\start.elf" />
-    <None Include="target\micros\x86_64-w64-mingw32\make\x86_64-w64-mingw32.ld" />
-    <None Include="target\micros\x86_64-w64-mingw32\make\x86_64-w64-mingw32_files.gmk" />
-    <None Include="target\micros\x86_64-w64-mingw32\make\x86_64-w64-mingw32_flags.gmk" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="target\micros\bcm2835_raspi_b\startup\crt0.cpp" />

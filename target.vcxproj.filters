@@ -22,15 +22,6 @@
     <Filter Include="micros\bcm2835_raspi_b\startup">
       <UniqueIdentifier>{1f5312f0-2137-4a89-aee2-60f6c6f08196}</UniqueIdentifier>
     </Filter>
-    <Filter Include="micros\x86_64-w64-mingw32">
-      <UniqueIdentifier>{73125d5a-08cb-4db7-906c-eec7d4cdb72f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="micros\x86_64-w64-mingw32\make">
-      <UniqueIdentifier>{b8efd83a-7cd5-4ba7-82b4-763bdc2c567f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="micros\x86_64-w64-mingw32\startup">
-      <UniqueIdentifier>{80cb37c7-9856-4bf9-8bc4-2b91611ab9f1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="micros\bcm2835_raspi_b\startup\SD_CARD">
       <UniqueIdentifier>{c2f430f9-0b5e-4a53-84e8-81546089efe1}</UniqueIdentifier>
     </Filter>
@@ -65,15 +56,6 @@
     </None>
     <None Include="target\app\make\app_make_linux.gmk">
       <Filter>app\make</Filter>
-    </None>
-    <None Include="target\micros\x86_64-w64-mingw32\make\x86_64-w64-mingw32_flags.gmk">
-      <Filter>micros\x86_64-w64-mingw32\make</Filter>
-    </None>
-    <None Include="target\micros\x86_64-w64-mingw32\make\x86_64-w64-mingw32_files.gmk">
-      <Filter>micros\x86_64-w64-mingw32\make</Filter>
-    </None>
-    <None Include="target\micros\x86_64-w64-mingw32\make\x86_64-w64-mingw32.ld">
-      <Filter>micros\x86_64-w64-mingw32\make</Filter>
     </None>
     <None Include="target\micros\bcm2835_raspi_b\startup\int_vect.s">
       <Filter>micros\bcm2835_raspi_b\startup</Filter>

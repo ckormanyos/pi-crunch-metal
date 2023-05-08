@@ -5,9 +5,17 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
+#if defined(_MSC_VER) && !defined(PI_CRUNCH_METAL_STANDALONE_MAIN)
+#define PI_CRUNCH_METAL_STANDALONE_MAIN
+#endif
+
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
+#if defined(PI_CRUNCH_METAL_STANDALONE_MAIN)
+#include <iomanip>
+#include <iostream>
+#endif // PI_CRUNCH_METAL_STANDALONE_MAIN
 
 #include <mcal_lcd.h>
 #include <util/utility/util_baselexical_cast.h>
@@ -159,3 +167,25 @@ auto pi_main() -> int
 
   return (result_is_ok ? 0 : 1);
 }
+
+#if defined(PI_CRUNCH_METAL_STANDALONE_MAIN)
+
+extern "C"
+auto mcal_init(void) -> void;
+
+auto main(void) -> int
+{
+  ::mcal_init();
+
+  std::cout << "Begin pi AGM calculation..." << std::endl;
+
+  const auto result_pi_main = ::pi_main();
+
+  const auto result_is_ok = (result_pi_main == 0);
+
+  std::cout << "result_is_ok: " << std::boolalpha << result_is_ok << std::endl;
+
+  return (result_is_ok ? 0 : -1);
+}
+
+#endif // PI_CRUNCH_METAL_STANDALONE_MAIN

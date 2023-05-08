@@ -25,9 +25,6 @@
     <Filter Include="src\math\checksums">
       <UniqueIdentifier>{01aad933-5ecb-4ed6-ab76-8cca16bd0d60}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\mcal\x86_64-w64-mingw32">
-      <UniqueIdentifier>{2b7c4ec7-869e-40b2-a6de-a8e387212a34}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\mcal\host">
       <UniqueIdentifier>{069e32de-cf68-440e-9742-c4a776f49af0}</UniqueIdentifier>
     </Filter>
@@ -140,30 +137,6 @@
     </ClCompile>
     <ClCompile Include="src\mcal\bcm2835_raspi_b\mcal_spi.cpp">
       <Filter>src\mcal\bcm2835_raspi_b</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_gpt.cpp">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_irq.cpp">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_lcd.cpp">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_led.cpp">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_osc.cpp">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_port.cpp">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_spi.cpp">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClCompile>
-    <ClCompile Include="src\mcal\x86_64-w64-mingw32\mcal_cpu.cpp">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
     </ClCompile>
     <ClCompile Include="src\app\Appli\main.c">
       <Filter>src\app\Appli</Filter>
@@ -391,36 +364,6 @@
     </ClInclude>
     <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_spi.h">
       <Filter>src\mcal\bcm2835_raspi_b</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_cpu.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_gpt.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_irq.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_lcd.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_led.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_osc.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_port.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_reg.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_ser.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
-    </ClInclude>
-    <ClInclude Include="src\mcal\x86_64-w64-mingw32\mcal_spi.h">
-      <Filter>src\mcal\x86_64-w64-mingw32</Filter>
     </ClInclude>
     <ClInclude Include="src\math\wide_decimal\decwide_t_detail_namespace.h">
       <Filter>src\math\wide_decimal</Filter>

@@ -19,7 +19,7 @@ This fascinating, educational and fun project combines the domain
 of high-performance numerical computing with the raw simplicity of
 bare-metal embedded microcontroller systems.
 
-Exihbiting the utmost in portability realized through modern header-only C++14
+Exihbiting the utmost in portability realized primarily through modern header-only C++14
 template code, pi-crunch-metal is intended to run out of the box on both
 a PC system as well as selected bare-metal microcontroller systems.
 
@@ -28,15 +28,17 @@ float back end provides the big-number engine for pi-crunch-metal.
 Computation progress can be displayed on either the console (for PC systems)
 or on a simple industry-standard LCD character display.
 
+The backbone real-time operating system is taken directly
+from the OSEK-like OS implemented in
+[Chalandi/OSEK_Raspberry_Pi_Zero](https://github.com/Chalandi/OSEK_Raspberry_Pi_Zero)
+
 # Software Details
 
 ## AGM Algorithm
 
-In this project, $1,000,001$ decmal digits of $\pi$ (i.e., one million and 1)
+In this project, $1,000,001$ decmal digits of $\pi$ (i.e., one-million-and-1)
 are computed with a quadratically converging Gauss arithmetic geometric mean
-iteration. Memory management uses a custom C++ allocator that manages
-memory slots aligned to the size of the limb-storage of the individual
-multiprecision type.
+iteration.
 
 Multiplication is the hot-spot of this program. The multiplication
 implementation uses a combination of school multiplication for low
@@ -49,11 +51,12 @@ startup code. Hardware setup including clock initialization,
 FPU enable, instruction caching, etc. is carried out with self-written
 hybrid assembly/C++ code shortly after reaching `main()`.
 
-Compact code size is in focus and the entire project easily fits within 32k
-of program code, with slight variations depending on the target system selected.
+Compact code size is in focus and the entire project easily fits within 40k
+of program code, with slight variations depending on the optimization settings,
+compiler and target system selected.
 The calculation does, however, require ample RAM of about 16 Mbyte.
 
-GNU/GCC `arm-non-eabi` is used for the target system.
+GNU/GCC `gcc-arm-non-eabi` is used for the target system.
 Cross development with `Win*` and/or `*nix` host is
 supported. Build tools, the build system and the compilers
 are essentially the same as those used in the
@@ -66,13 +69,13 @@ In addition to the AGM algorithm mentioned above, a slower
 quadratic pi-spigot algorithm of order $N^2$ is also supported
 in this project.
 Switching to use the (interchangeable) file
-[app_benchmark_pi_spigot.cpp](./src/app/benchmark/app_benchmark_pi_spigot.cpp)
-instead of
-[app_benchmark_pi_agm.cpp](./src/app/benchmark/app_benchmark_pi_agm.cpp)
+[pi_spigot.cpp](./src/app/Appli/pi_spigot/pi_spigot.cpp)
+instead of the default
+[pi_agm.cpp](./src/app/Appli/pi_agm/pi_agm.cpp)
 alternately uses the pi-spigot algorithm.
 
 The spigot calculation
-is slower than the AGM calculatoin and requires sightly
+is slower than the AGM calculation and requires sightly
 more time to compute a count of $100,001$ decimal digits,
 a factor of ten fewer.
 
