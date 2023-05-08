@@ -8,10 +8,6 @@
 #include <mcal_port.h>
 #include <mcal_port_expander_microchip_mcp23s17.h>
 
-void mcal::port::init(const config_type*)
-{
-}
-
 auto mcal::port::port_expander_device() -> mcal::port::port_expander_base&
 {
   using local_port_pin_expander_type =

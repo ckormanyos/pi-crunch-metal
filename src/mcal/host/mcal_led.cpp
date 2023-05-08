@@ -8,6 +8,15 @@
 #include <mcal_led.h>
 #include <mcal_led/mcal_led_console.h>
 
+extern "C"
+auto mcal_led_toggle(void) -> void;
+
+extern "C"
+auto mcal_led_toggle(void) -> void
+{
+  mcal::led::led0().toggle();
+}
+
 mcal::led::led_base& mcal::led::led0()
 {
   static mcal::led::led_console l0(0U);

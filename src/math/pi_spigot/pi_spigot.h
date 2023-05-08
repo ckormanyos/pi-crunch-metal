@@ -116,6 +116,11 @@
       my_output_count    = static_cast<std::uint32_t>(UINT8_C(0));
       my_operation_count = static_cast<std::uintmax_t>(UINT8_C(0));
 
+      if(pfn_callback_to_report_digits10 != nullptr)
+      {
+        pfn_callback_to_report_digits10(my_output_count);
+      }
+
       const auto p10 = static_cast<unsigned_large_type>(pow10(loop_digit()));
 
       // Operation count Mathematica(R), example for loop_digit=9.

@@ -12,7 +12,7 @@
   #include <type_traits>
 
   #include <mcal_cpu.h>
-  #include <mcal_irq.h>
+  #include <OsAPIs.h>
 
   namespace mcal { namespace helper {
 
@@ -43,14 +43,14 @@
   void disable_all_interrupts(const bool = has_disable_enable_interrupts,
                               const typename std::enable_if<(has_disable_enable_interrupts == true)>::type* = nullptr) noexcept
   {
-    mcal::irq::disable_all();
+    OS_DisableAllInterrupts();
   }
 
   template<const bool has_disable_enable_interrupts>
   void enable_all_interrupts(const bool = has_disable_enable_interrupts,
                              const typename std::enable_if<(has_disable_enable_interrupts == true)>::type* = nullptr) noexcept
   {
-    mcal::irq::enable_all();
+    OS_EnableAllInterrupts();
   }
 
   template<const bool has_disable_enable_interrupts>
