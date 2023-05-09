@@ -57,7 +57,7 @@ extern void IODebug_Toggle_P123(void);
 void OS_StartOS(OsAppModeType Mode)
 {
   (void) Mode;
-  
+
   if(TRUE == OsIsInterruptContext())
   {
     return;
@@ -65,7 +65,6 @@ void OS_StartOS(OsAppModeType Mode)
 
   if(NB_OF_TASKS > 0)
   {
-
     /* INIT TCBs */
     for(int tcbIdx = 0; tcbIdx < NB_OF_TASKS; tcbIdx++)
     {
@@ -304,7 +303,6 @@ uint32 OS_Dispatcher(uint32 StackPtr);
 
 uint32 OS_Dispatcher(uint32 StackPtr)
 {
-
   /* Save the current stack pointer of the running task before switching the context */
   if(OCB_Cfg.CurrentTaskIdx < NB_OF_TASKS)
   {
@@ -332,11 +330,10 @@ uint32 OS_Dispatcher(uint32 StackPtr)
 
   if(OCB_Cfg.CurrentTaskIdx < NB_OF_TASKS)  
   {
-    /* check if we need to create a new stack frame for the new task */
+    /* Check if we need to create a new stack frame for the new task */
     if(OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->TaskStatus == PRE_READY)
     {
-
-      /* cupdate the current task state */
+      /* Update the current task state */
       OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->TaskStatus = RUNNING;
 
       /* Call PreTaskHook */
@@ -374,6 +371,7 @@ uint32 OS_Dispatcher(uint32 StackPtr)
        an event will be occurred */
     return(OCB_Cfg.OsCurrentSystemStackPtr);
   }
+
   return(OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->pCurrentStackPointer);
 }
 
@@ -406,8 +404,7 @@ static void OsCreateNewContext(uint32* StackFramePtr, pFunc TaskFuncPtr)
   *(volatile uint32*)(*StackFramePtr - 0x3C) = (uint32)TaskFuncPtr;                    //PC
   *(volatile uint32*)(*StackFramePtr - 0x40) = (uint32)0x11F;                          //CPSR
 
-
-  /* update the stack pointer */
+  /* Update the stack pointer */
   *StackFramePtr -= 0x40;
 }
 
@@ -519,7 +516,7 @@ uint32 OsIsrCallDispatch(uint32 StackPtr)
       return(StackPtr);
     }
   }
-}  
+}
 
 //------------------------------------------------------------------------------------------------------------------
 /// \brief  OS_GetActiveApplicationMode
@@ -548,7 +545,6 @@ OsAppModeType OS_GetActiveApplicationMode(void)
 //------------------------------------------------------------------------------------------------------------------
 void OS_ShutdownOS(OsStatusType Error)
 {
-
 #if(SHUTDOWNHOOK)
   ShutdownHook(Error);
 #else
@@ -562,6 +558,7 @@ void OS_ShutdownOS(OsStatusType Error)
   {
     OCB_Cfg.pTcb[tcbIdx]->TaskStatus = SUSPENDED;
   }
+
   for(;;);
 }
 
@@ -739,7 +736,6 @@ void OsUndefinedIsr(void)
   for(;;);
 }
 
-
 //------------------------------------------------------------------------------------------------------------------
 /// \brief  OsFeUndefinedIsr
 ///
@@ -759,9 +755,8 @@ void OsFeUndefinedIsr(void)
   for(;;);
 }
 
-
 //-----------------------------------------------------------------------------
-/// \brief  OsGetSystemTicks
+/// \brief  OsGetSystemTicksCounter
 ///
 /// \descr  Get the system tick counter
 ///
@@ -773,7 +768,6 @@ uint64 OsGetSystemTicksCounter(void)
 {
   return(OCB_Cfg.OsSysTickCounter);
 }
-
 
 //-----------------------------------------------------------------------------
 /// \brief  OsGetSystemTicksElapsedTime

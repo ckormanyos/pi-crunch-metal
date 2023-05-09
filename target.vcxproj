@@ -49,8 +49,8 @@
     <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">target\build\build.bat bcm2835_raspi_b rebuild</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">target\build\build.bat bcm2835_raspi_b clean_all</NMakeCleanCommandLine>
     <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">$(SolutionDir)bin\pi-crunch-metal.hex</NMakeOutput>
-    <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
-    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">$(ProjectDir)/src/app/Mcal/gpt; $(ProjectDir)/src/app/Mcal/mcu; $(ProjectDir)/src/app/Mcal/systimer; $(ProjectDir)/src/app/Osek/HwPlatform/ARM11; $(ProjectDir)/src/app/Osek; $(ProjectDir)/src/app/Std; $(ProjectDir)/src; $(ProjectDir)/src/mcal/bcm2835_raspi_b;</NMakeIncludeSearchPath>
+    <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">__GNUC__=9;__attribute__()</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'">$(ProjectDir)/src/app/Mcal/gpt;$(ProjectDir)/src/app/Mcal/mcu;$(ProjectDir)/src/app/Mcal/systimer;$(ProjectDir)/src/app/Osek/HwPlatform/ARM11;$(ProjectDir)/src/app/Osek;$(ProjectDir)/src/app/Std;$(ProjectDir)/src;$(ProjectDir)/src/mcal/bcm2835_raspi_b;</NMakeIncludeSearchPath>
     <NMakeForcedIncludes Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
     <NMakeAssemblySearchPath Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
     <NMakeForcedUsingAssemblies Condition="'$(Configuration)|$(Platform)'=='target bcm2835_raspi_b|x64'" />
