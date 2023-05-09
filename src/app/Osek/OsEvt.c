@@ -54,12 +54,11 @@ OsStatusType OS_GetResource(OsResourceType ResID)
       /* Resource is occupied by another task */
       return(E_OS_ACCESS);
     }
-        
   }
   else
   {
     return(E_OS_ID);
-  }      
+  }
 }
 
 //------------------------------------------------------------------------------------------------------------------
@@ -80,38 +79,37 @@ OsStatusType OS_ReleaseResource(OsResourceType ResID)
     {
       /* Release the resource */
       OCB_Cfg.pRes[ResID]->CurrentOccupiedTask = INVALID_TASK;
-      
+
       /* Set the default prio to the current task */
       OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->CeilingPrio = 0;
       OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->Prio = OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->FixedPrio;
 
-      
-        if(OCB_Cfg.CurrentTaskIdx < NB_OF_TASKS)
+      if(OCB_Cfg.CurrentTaskIdx < NB_OF_TASKS)
+      {
+        if(OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->TaskSchedType == FULL_PREEMPT)
         {
-          if(OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->TaskSchedType == FULL_PREEMPT)
-          {
-            /* Call the scheduler */
-            (void)OS_Schedule();
-          }
-        }
-        else
-        {
-          /* No active task, system in Idle state (OS_IdleLoop) */
           /* Call the scheduler */
-          (void)OS_Schedule();          
-        }        
-      
+          (void)OS_Schedule();
+        }
+      }
+      else
+      {
+        /* No active task, system in Idle state (OS_IdleLoop) */
+        /* Call the scheduler */
+        (void)OS_Schedule();
+      }
+
       return(E_OK);
     }
     else
     {
       return(E_OS_NOFUNC);
-    }  
+    }
   }
   else
   {
     return(E_OS_ID);
-  }  
+  }
 }
 
 //------------------------------------------------------------------------------------------------------------------
@@ -139,15 +137,15 @@ OsStatusType OS_SetEvent(OsTaskType TaskID, OsEventMaskType Mask)
   else if(OCB_Cfg.pTcb[TaskID]->TaskStatus == SUSPENDED)
   {
     return(E_OS_STATE);
-  }  
+  }
   else
   {
     OCB_Cfg.pTcb[TaskID]->SetEvtMask |= Mask;
-    
+
     if(OCB_Cfg.pTcb[TaskID]->TaskStatus == WAITING)
     {
       if((OCB_Cfg.pTcb[TaskID]->SetEvtMask & OCB_Cfg.pTcb[TaskID]->WaitEvtMask) != 0)
-      {  
+      {
         /* Switch state to Ready */
         OCB_Cfg.pTcb[TaskID]->TaskStatus = READY;
         
@@ -163,8 +161,8 @@ OsStatusType OS_SetEvent(OsTaskType TaskID, OsEventMaskType Mask)
         {
           /* No active task, system in Idle state (OS_IdleLoop) */
           /* Call the scheduler */
-          (void)OS_Schedule();          
-        }        
+          (void)OS_Schedule();
+        }
       }
     }
     return(E_OK);
@@ -189,7 +187,7 @@ OsStatusType OS_ClearEvent(OsEventMaskType Mask)
   else if(TRUE == OsIsInterruptContext())
   {
     return(E_OS_CALLEVEL);
-  }  
+  }
   else
   {
     OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->SetEvtMask &=(OsEventMaskType)(~Mask);
@@ -221,12 +219,12 @@ OsStatusType OS_GetEvent(OsTaskType TaskID, OsEventMaskRefType Event)
   else if(OCB_Cfg.pTcb[TaskID]->TaskStatus == SUSPENDED)
   {
     return(E_OS_STATE);
-  }  
+  }
   else
   {
     *Event = OCB_Cfg.pTcb[TaskID]->SetEvtMask;
-    return(E_OK);    
-  }  
+    return(E_OK);
+  }
 }
 
 //------------------------------------------------------------------------------------------------------------------
@@ -259,14 +257,14 @@ OsStatusType OS_WaitEvent(OsEventMaskType Mask)
   {
   #if(ERRORHOOK)
     ErrorHook(E_OS_CALLEVEL);
-  #endif  
+  #endif
     return(E_OS_CALLEVEL);
-  }   
+  }
   else
-  {  
+  {
     /* Store the new event mask*/
     OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->WaitEvtMask = Mask;
-    
+
     /* Check if the event waiting for is already set */
     if((OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->SetEvtMask & OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->WaitEvtMask) == 0)
     {
@@ -274,10 +272,9 @@ OsStatusType OS_WaitEvent(OsEventMaskType Mask)
       OCB_Cfg.pTcb[OCB_Cfg.CurrentTaskIdx]->TaskStatus = WAITING;
       
       /* Call the scheduler */
-      (void)OS_Schedule();  
-    }    
-    
+      (void)OS_Schedule();
+    }
+
     return(E_OK);
   }
 }
-      

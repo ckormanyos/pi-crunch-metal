@@ -36,13 +36,13 @@ OsStatusType OS_GetAlarmBase(OsAlarmType AlarmID, OsAlarmBaseRefType Info)
   if(AlarmID < NB_OF_ALARMS)
   {
     Info = &OCB_Cfg.pAlarm[AlarmID];
-    return(E_OK);  
+    return(E_OK);
   }
   else
   {
     (void)Info;
     return(E_OS_ID);
-  }    
+  }
 }
 
 //------------------------------------------------------------------------------------------------------------------
@@ -60,12 +60,12 @@ OsStatusType OS_GetAlarm(OsAlarmType AlarmID, OsTickRefType Tick)
   if(AlarmID < NB_OF_ALARMS)
   {
     *Tick = OCB_Cfg.pAlarm[AlarmID]->AlarmCheckPoint - (uint32)OCB_Cfg.OsSysTickCounter;
-    return(E_OK);  
+    return(E_OK);
   }
   else
   {
     return(E_OS_ID);
-  }    
+  }
 }
 
 //------------------------------------------------------------------------------------------------------------------
@@ -189,14 +189,14 @@ OsStatusType OS_CancelAlarm(OsAlarmType AlarmID)
 {
   if(AlarmID < NB_OF_ALARMS)
   {
-      OCB_Cfg.pAlarm[AlarmID]->Status          = ALARM_FREE;
-      OCB_Cfg.pAlarm[AlarmID]->AlarmCheckPoint = 0;
-      return(E_OK);    
+    OCB_Cfg.pAlarm[AlarmID]->Status          = ALARM_FREE;
+    OCB_Cfg.pAlarm[AlarmID]->AlarmCheckPoint = 0;
+    return(E_OK);
   }
   else
   {
     return(E_OS_ID);
-  }  
+  }
 }
 
 //------------------------------------------------------------------------------------------------------------------
@@ -238,7 +238,7 @@ void OS_AlarmsManagement(void)
       {
         /* Do Nothing */
       }
-      
+
       /* Execute Action */
       if(OCB_Cfg.pAlarm[AlarmID]->Action == ALARM_SET_EVENT)
       {
@@ -258,12 +258,11 @@ void OS_AlarmsManagement(void)
         {
           /* NULL function pointer -> HookError could be called */
         }
-      }      
+      }
       else
       {
         /* Do nothing */
       }
     }
   }
-
 }
