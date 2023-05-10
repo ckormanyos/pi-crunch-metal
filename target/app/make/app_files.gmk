@@ -9,9 +9,10 @@
 # List of the source files in the project
 # ------------------------------------------------------------------------------
 
-FILES_CPP  = $(PATH_APP)/app/Appli/main                                              \
+FILES_APP  = $(PATH_APP)/app/Appli/main                                              \
              $(PATH_APP)/app/Appli/tasks                                             \
              $(PATH_APP)/app/Appli/pi_agm/pi_agm                                     \
+             $(PATH_APP)/app/Appli/pi_spigot/pi_spigot                               \
              $(PATH_APP)/mcal/$(TGT)/mcal_cpu                                        \
              $(PATH_APP)/mcal/$(TGT)/mcal_gpt                                        \
              $(PATH_APP)/mcal/$(TGT)/mcal_irq                                        \

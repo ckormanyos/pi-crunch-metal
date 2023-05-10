@@ -81,7 +81,7 @@ include $(PATH_TGT_MAKE)/$(TGT)_flags.gmk   # Target compiler flags
 # ------------------------------------------------------------------------------
 # object files
 # ------------------------------------------------------------------------------
-FILES_TMP   = $(FILES_CPP) $(FILES_TGT)
+FILES_TMP   = $(FILES_APP) $(FILES_TGT)
 FILES_O     = $(addprefix $(PATH_OBJ)/, $(notdir $(addsuffix .o, $(FILES_TMP))))
 
 

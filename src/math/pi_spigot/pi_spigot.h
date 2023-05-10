@@ -101,15 +101,14 @@
         p_hash->initialize();
       }
 
-      // Invalidate the input container values at three randomly chosen indices.
-      my_pi_in.front() =
-        (std::numeric_limits<typename input_container_type::value_type>::max)();
+      // Invalidate the input container values at a few indices.
+      const auto invalidate_size =
+        (std::min)(static_cast<typename input_container_type::size_type>(UINT8_C(4)),
+                   static_cast<typename input_container_type::size_type>(std::tuple_size<input_container_type>::value));
 
-      my_pi_in.back() =
-        (std::numeric_limits<typename input_container_type::value_type>::max)();
-
-      my_pi_in[static_cast<typename input_container_type::size_type>(get_input_static_size() / 2U)] =
-        (std::numeric_limits<typename input_container_type::value_type>::max)();
+      std::fill(my_pi_in.begin(),
+                my_pi_in.begin() + invalidate_size,
+                (std::numeric_limits<typename input_container_type::value_type>::max)());
 
       auto val_c = static_cast<unsigned_small_type>(static_cast<unsigned>(UINT8_C(0)));
 
