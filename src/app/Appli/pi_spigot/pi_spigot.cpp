@@ -139,7 +139,7 @@ auto main(void) -> int
 {
   ::mcal_init();
 
-  std::cout << "Begin pi AGM calculation..." << std::endl;
+  std::cout << "Begin pi spigot calculation..." << std::endl;
 
   const auto result_pi_main = ::pi_main();
 

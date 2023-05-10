@@ -56,17 +56,32 @@
       return
         static_cast<std::uint32_t>
         (
-          static_cast<std::uint32_t>(x * static_cast<std::uint32_t>((static_cast<std::uint32_t>(UINT32_C(10) * loop_digit()) / UINT32_C(3)) + UINT32_C(1))) / loop_digit()
+          static_cast<std::uint32_t>
+          (
+              x
+            * static_cast<std::uint32_t>
+              (
+                  static_cast<std::uint32_t>
+                  (
+                      static_cast<std::uint32_t>(static_cast<std::uint32_t>(UINT8_C(10)) * loop_digit())
+                    / static_cast<std::uint32_t>(UINT8_C(3))
+                  )
+                + static_cast<std::uint32_t>(UINT8_C(1))
+              )
+          )
+          / loop_digit()
         );
     }
 
   public:
+    static constexpr auto input_static_size = input_scale(result_digit());
+
     static constexpr auto get_input_static_size() -> std::uint32_t
     {
       return input_scale(result_digit());
     }
 
-    using input_container_type = std::array<std::uint32_t, get_input_static_size()>;
+    using input_container_type = std::array<std::uint32_t, input_static_size>;
 
     constexpr pi_spigot() = default; // LCOV_EXCL_LINE
 
