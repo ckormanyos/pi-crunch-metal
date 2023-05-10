@@ -39,7 +39,7 @@
     static_assert(loop_digit() <= static_cast<std::uint32_t>(std::numeric_limits<unsigned_small_type>::digits10),
                   "Error: loop_digit exceeds the number of base-10 digits in its constituent unsigned_small_type");
 
-    static_assert(result_digit() <= UINT32_C(100001),
+    static_assert(result_digit() <= static_cast<std::uint32_t>(UINT32_C(100001)),
                   "Error: result_digit exceeds its limit of 100,001");
 
     static_assert(std::numeric_limits<unsigned_small_type>::digits * 2 == std::numeric_limits<unsigned_large_type>::digits,
@@ -76,12 +76,9 @@
   public:
     static constexpr auto input_static_size = input_scale(result_digit());
 
-    static constexpr auto get_input_static_size() -> std::uint32_t
-    {
-      return input_scale(result_digit());
-    }
+    static constexpr auto get_input_static_size() -> std::uint32_t { return input_static_size; }
 
-    using input_container_type = std::array<std::uint32_t, input_static_size>;
+    using input_container_type = std::array<std::uint32_t, static_cast<std::size_t>(input_static_size)>;
 
     constexpr pi_spigot() = default; // LCOV_EXCL_LINE
 
@@ -148,7 +145,7 @@
 
         const auto ilim = input_scale(result_digit() - j);
 
-        for(auto   i = static_cast<std::uint32_t>(INT8_C(0));
+        for(auto   i = static_cast<std::uint32_t>(UINT8_C(0));
                    i < ilim;
                  ++i)
         {
@@ -164,7 +161,12 @@
               ? static_cast<unsigned_large_type>(d_init())
               : static_cast<unsigned_large_type>(my_pi_in[my_index]));
 
-          val_d += (di * p10);
+          val_d =
+            static_cast<unsigned_large_type>
+            (
+                val_d
+              + static_cast<unsigned_large_type>(di * p10)
+            );
 
           const auto val_b =
             static_cast<std::uint32_t>
@@ -209,7 +211,7 @@
             static_cast<std::uint32_t>(result_digit() - j)
           );
 
-        unsigned_small_type scale10 = pow10(loop_digit() - UINT32_C(1));
+        auto scale10 = pow10(loop_digit() - static_cast<std::uint32_t>(UINT8_C(1)));
 
         auto output_chars_as_bytes_hash_array =
           std::array<std::uint8_t, static_cast<std::size_t>(loop_digit())> { };
@@ -217,12 +219,12 @@
         for(auto i = static_cast<std::size_t>(UINT8_C(0)); i < static_cast<std::size_t>(n); ++i)
         {
           const auto output_value =
-            static_cast<std::uint8_t>
+            static_cast<std::uint_fast8_t>
             (
               static_cast<unsigned_small_type>
               (
                   static_cast<unsigned_small_type>(next_digits / scale10)
-                % static_cast<unsigned_small_type>(UINT8_C(10))
+                % static_cast<unsigned>(UINT8_C(10))
               )
             );
 
@@ -235,7 +237,7 @@
               );
           }
 
-          scale10 = static_cast<unsigned_small_type>(scale10 / UINT32_C(10));
+          scale10 = static_cast<unsigned_small_type>(scale10 / static_cast<unsigned>(UINT8_C(10)));
         }
 
         if(p_hash != nullptr)
@@ -269,9 +271,13 @@
     {
       return
       (
-        (n == UINT32_C(0))
-          ? static_cast<unsigned_small_type>(UINT32_C(1))
-          : static_cast<unsigned_small_type>(pow10(n - static_cast<std::uint32_t>(UINT8_C(1))) * UINT32_C(10))
+        (n == static_cast<std::uint32_t>(UINT8_C(0)))
+          ? static_cast<unsigned_small_type>(UINT8_C(1))
+          : static_cast<unsigned_small_type>
+            (
+                pow10(n - static_cast<std::uint32_t>(UINT8_C(1)))
+              * static_cast<unsigned>(UINT8_C(10))
+            )
       );
     }
 

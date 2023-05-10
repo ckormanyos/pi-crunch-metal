@@ -28,7 +28,7 @@
 #include <iostream>
 #endif // PI_CRUNCH_METAL_STANDALONE_MAIN
 
-#if (defined(PI_CRUNCH_METAL_PI_CALC_CFG_METHOD) && (PI_CRUNCH_METAL_PI_CALC_CFG_METHOD == PI_CRUNCH_METAL_PI_CALC_CFG_USE_PI_SPIGOT))
+#if (defined(PI_CRUNCH_METAL_CFG_METHOD) && (PI_CRUNCH_METAL_CFG_METHOD == PI_CRUNCH_METAL_CFG_USE_PI_SPIGOT))
 
 #include <math/checksums/hash/hash_sha1.h>
 #include <mcal_lcd.h>
@@ -37,7 +37,7 @@
 
 namespace local
 {
-  #if defined(PI_CRUNCH_METAL_PI_CALC_CFG_PI_SPIGOT_USE_10K_DIGITS)
+  #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS)
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(10001));
   #else
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(100001));
@@ -102,7 +102,7 @@ auto pi_main() -> int
   // Check the hash result of the pi calculation.
   const auto hash_control =
     typename local::hash_type::result_type
-    #if defined(PI_CRUNCH_METAL_PI_CALC_CFG_PI_SPIGOT_USE_10K_DIGITS)
+    #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS)
     {
       // 10001: 4BDF69A5FF25B9BED6BA9802BD2A68306FAB71EC
       0x4BU, 0xDFU, 0x69U, 0xA5U, 0xFFU, 0x25U, 0xB9U, 0xBEU,

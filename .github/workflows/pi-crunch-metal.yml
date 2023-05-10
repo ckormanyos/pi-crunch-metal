@@ -51,4 +51,5 @@ jobs:
           set INCLUDE=%cd%\src\mcal\host;%cd%\src;%INCLUDE%
           MSBuild -m pi-crunch-metal.sln -p:useenv=true -p:Configuration=${{ matrix.suite }} -p:Platform=x64 /t:Rebuild
           dir .\tmp\${{ matrix.suite }}\pi-crunch-metal.exe
+          .\tmp\${{ matrix.suite }}\pi-crunch-metal.exe
         working-directory: ./
