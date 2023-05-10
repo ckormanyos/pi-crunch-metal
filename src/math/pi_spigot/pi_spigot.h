@@ -56,17 +56,32 @@
       return
         static_cast<std::uint32_t>
         (
-          static_cast<std::uint32_t>(x * static_cast<std::uint32_t>((static_cast<std::uint32_t>(UINT32_C(10) * loop_digit()) / UINT32_C(3)) + UINT32_C(1))) / loop_digit()
+          static_cast<std::uint32_t>
+          (
+              x
+            * static_cast<std::uint32_t>
+              (
+                  static_cast<std::uint32_t>
+                  (
+                      static_cast<std::uint32_t>(static_cast<std::uint32_t>(UINT8_C(10)) * loop_digit())
+                    / static_cast<std::uint32_t>(UINT8_C(3))
+                  )
+                + static_cast<std::uint32_t>(UINT8_C(1))
+              )
+          )
+          / loop_digit()
         );
     }
 
   public:
+    static constexpr auto input_static_size = input_scale(result_digit());
+
     static constexpr auto get_input_static_size() -> std::uint32_t
     {
       return input_scale(result_digit());
     }
 
-    using input_container_type = std::array<std::uint32_t, get_input_static_size()>;
+    using input_container_type = std::array<std::uint32_t, input_static_size>;
 
     constexpr pi_spigot() = default; // LCOV_EXCL_LINE
 
@@ -101,15 +116,14 @@
         p_hash->initialize();
       }
 
-      // Invalidate the input container values at three randomly chosen indices.
-      my_pi_in.front() =
-        (std::numeric_limits<typename input_container_type::value_type>::max)();
+      // Invalidate the input container values at a few indices.
+      const auto invalidate_size =
+        (std::min)(static_cast<typename input_container_type::size_type>(UINT8_C(4)),
+                   static_cast<typename input_container_type::size_type>(std::tuple_size<input_container_type>::value));
 
-      my_pi_in.back() =
-        (std::numeric_limits<typename input_container_type::value_type>::max)();
-
-      my_pi_in[static_cast<typename input_container_type::size_type>(get_input_static_size() / 2U)] =
-        (std::numeric_limits<typename input_container_type::value_type>::max)();
+      std::fill(my_pi_in.begin(),
+                my_pi_in.begin() + invalidate_size,
+                (std::numeric_limits<typename input_container_type::value_type>::max)());
 
       auto val_c = static_cast<unsigned_small_type>(static_cast<unsigned>(UINT8_C(0)));
 

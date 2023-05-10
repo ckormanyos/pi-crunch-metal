@@ -21,16 +21,23 @@
 // cd /mnt/c/Users/User/Documents/Ks/PC_Software/NumericalPrograms/pi_spigot
 // g++ -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Winit-self -O3 -std=c++17 -I. -finline-functions pi_spigot.cpp pi_spigot/pi_spigot_ctrl.cpp -o pi_spigot.exe
 
+#include <app/Appli/pi_calc_cfg.h>
+
+#if defined(PI_CRUNCH_METAL_STANDALONE_MAIN)
+#include <iomanip>
+#include <iostream>
+#endif // PI_CRUNCH_METAL_STANDALONE_MAIN
+
+#if (defined(PI_CRUNCH_METAL_PI_CALC_CFG_METHOD) && (PI_CRUNCH_METAL_PI_CALC_CFG_METHOD == PI_CRUNCH_METAL_PI_CALC_CFG_USE_PI_SPIGOT))
+
 #include <math/checksums/hash/hash_sha1.h>
 #include <mcal_lcd.h>
 #include <math/pi_spigot/pi_spigot.h>
 #include <util/utility/util_baselexical_cast.h>
 
-//#define PI_SPIGOT_USE_10K_DIGITS
-
 namespace local
 {
-  #if defined(PI_SPIGOT_USE_10K_DIGITS)
+  #if defined(PI_CRUNCH_METAL_PI_CALC_CFG_PI_SPIGOT_USE_10K_DIGITS)
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(10001));
   #else
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(100001));
@@ -95,7 +102,7 @@ auto pi_main() -> int
   // Check the hash result of the pi calculation.
   const auto hash_control =
     typename local::hash_type::result_type
-    #if defined(PI_SPIGOT_USE_10K_DIGITS)
+    #if defined(PI_CRUNCH_METAL_PI_CALC_CFG_PI_SPIGOT_USE_10K_DIGITS)
     {
       // 10001: 4BDF69A5FF25B9BED6BA9802BD2A68306FAB71EC
       0x4BU, 0xDFU, 0x69U, 0xA5U, 0xFFU, 0x25U, 0xB9U, 0xBEU,
@@ -122,3 +129,33 @@ auto pi_main() -> int
 
   return (result_is_ok ? 0 : -1);
 }
+
+#if defined(PI_CRUNCH_METAL_STANDALONE_MAIN)
+
+extern "C"
+auto mcal_init(void) -> void;
+
+auto main(void) -> int
+{
+  ::mcal_init();
+
+  std::cout << "Begin pi spigot calculation..." << std::endl;
+
+  const auto result_pi_main = ::pi_main();
+
+  const auto result_is_ok = (result_pi_main == 0);
+
+  std::cout << "result_is_ok: " << std::boolalpha << result_is_ok << std::endl;
+
+  return (result_is_ok ? 0 : -1);
+}
+
+#endif // PI_CRUNCH_METAL_STANDALONE_MAIN
+
+#else
+
+auto pi_calc_dummy() -> void;
+
+auto pi_calc_dummy() -> void { }
+
+#endif
