@@ -10,9 +10,9 @@
 # ------------------------------------------------------------------------------
 
 FILES_APP  = $(PATH_APP)/app/Appli/main                                              \
-             $(PATH_APP)/app/Appli/tasks                                             \
              $(PATH_APP)/app/Appli/pi_agm/pi_agm                                     \
              $(PATH_APP)/app/Appli/pi_spigot/pi_spigot                               \
+             $(PATH_APP)/app/Appli/tasks                                             \
              $(PATH_APP)/mcal/$(TGT)/mcal_cpu                                        \
              $(PATH_APP)/mcal/$(TGT)/mcal_gpt                                        \
              $(PATH_APP)/mcal/$(TGT)/mcal_irq                                        \
@@ -20,6 +20,3 @@ FILES_APP  = $(PATH_APP)/app/Appli/main                                         
              $(PATH_APP)/mcal/$(TGT)/mcal_port                                       \
              $(PATH_APP)/mcal/$(TGT)/mcal_spi                                        \
              $(PATH_APP)/mcal/mcal
-
-#             $(PATH_APP)/app/Appli/pi_agm/pi_agm                                     \
-#             $(PATH_APP)/app/Appli/pi_spigot/pi_spigot                               \

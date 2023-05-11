@@ -5,6 +5,9 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
+// cd /mnt/c/Users/User/Documents/Ks/uC_Software/Boards/pi-crunch-metal
+// g++ -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Winit-self -O3 -std=c++17 -finline-functions -finline-limit=64 -Isrc -Isrc/mcal/host -DPI_CRUNCH_METAL_STANDALONE_MAIN -DPI_CRUNCH_METAL_CFG_METHOD=PI_CRUNCH_METAL_CFG_USE_PI_AGM ./src/app/Appli/pi_agm/pi_agm.cpp ./src/app/Appli/pi_spigot/pi_spigot.cpp ./src/mcal/host/mcal_cpu.cpp ./src/mcal/host/mcal_gpt.cpp ./src/mcal/host/mcal_irq.cpp ./src/mcal/host/mcal_lcd.cpp ./src/mcal/host/mcal_led.cpp ./src/mcal/host/mcal_port.cpp ./src/mcal/host/mcal_spi.cpp ./src/mcal/mcal.cpp -o pi-crunch-metal
+
 #include <app/Appli/pi_calc_cfg.h>
 
 #if defined(PI_CRUNCH_METAL_STANDALONE_MAIN)
