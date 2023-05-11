@@ -242,7 +242,7 @@
 
         if(p_hash != nullptr)
         {
-          p_hash->process(output_chars_as_bytes_hash_array.data(), static_cast<std::size_t>(n));
+          p_hash->process(output_chars_as_bytes_hash_array.data(), static_cast<typename ::math::checksums::hash::hash_stream_base::count_type>(n));
         }
 
         my_output_count += n;
