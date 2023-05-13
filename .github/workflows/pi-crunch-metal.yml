@@ -121,7 +121,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        digits: [ 1K_DIGITS, 10K_DIGITS, 100K_DIGITS, 1M_DIGITS ]
+        digits: [ 100_DIGITS, 1K_DIGITS, 10K_DIGITS, 100K_DIGITS, 1M_DIGITS ]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -140,7 +140,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        digits: [ 1K_DIGITS, 10K_DIGITS, 100K_DIGITS ]
+        digits: [ 100_DIGITS, 1K_DIGITS, 10K_DIGITS, 100K_DIGITS ]
     steps:
       - uses: actions/checkout@v3
         with:
