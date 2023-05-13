@@ -37,11 +37,13 @@
 
 namespace local
 {
-  #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS)
+  #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100_DIGITS)
+  constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(101));
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS)
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(1001));
   #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS)
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(10001));
-  #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100K_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS))
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100K_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS))
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(100001));
   #else
   #error Error: Wrong pi_spigot digit configuration
@@ -106,7 +108,13 @@ auto pi_main() -> int
   // Check the hash result of the pi calculation.
   const auto hash_control =
     typename local::hash_type::result_type
-    #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS)
+    #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100_DIGITS)
+    {
+      0x93U, 0xF1U, 0xB4U, 0xEAU, 0xABU, 0xCBU, 0xC9U, 0xB9U,
+      0x0CU, 0x93U, 0x93U, 0x24U, 0xF7U, 0x85U, 0x13U, 0x2EU,
+      0xDFU, 0x3BU, 0xF2U, 0x01U
+    };
+    #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS)
     {
       0xA0U, 0x92U, 0x47U, 0x1FU, 0xD5U, 0xFEU, 0x41U, 0x51U,
       0x20U, 0xE7U, 0xDDU, 0x18U, 0x5BU, 0x93U, 0x0DU, 0x05U,
@@ -119,7 +127,7 @@ auto pi_main() -> int
       0xD6U, 0xBAU, 0x98U, 0x02U, 0xBDU, 0x2AU, 0x68U, 0x30U,
       0x6FU, 0xABU, 0x71U, 0xECU
     };
-    #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100K_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS))
+    #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100K_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS))
     {
       // 100001: D9D56240EB6B626A8FE179E3054D332F1767071D
       0xD9U, 0xD5U, 0x62U, 0x40U, 0xEBU, 0x6BU, 0x62U, 0x6AU,

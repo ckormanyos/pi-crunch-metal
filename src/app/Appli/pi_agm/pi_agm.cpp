@@ -46,7 +46,23 @@ constexpr auto pi_control_head =
     static_cast<std::uint32_t>(UINT32_C(10582097))
   };
 
-#if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS)
+#if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100_DIGITS)
+
+constexpr auto pi_control_tail =
+  pi_control_array_type
+  {
+    // tail 1 + 10^2 std::uint32_t
+    static_cast<std::uint32_t>(UINT32_C(28841971)),
+    static_cast<std::uint32_t>(UINT32_C(69399375)),
+    static_cast<std::uint32_t>(UINT32_C(10582097)),
+    static_cast<std::uint32_t>(UINT32_C(49445923)),
+    static_cast<std::uint32_t>(UINT32_C( 7816406)),
+    static_cast<std::uint32_t>(UINT32_C(28620899)),
+    static_cast<std::uint32_t>(UINT32_C(86280348)),
+    static_cast<std::uint32_t>(UINT32_C(25342117))
+  };
+
+#elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS)
 
 constexpr auto pi_control_tail =
   pi_control_array_type
@@ -94,7 +110,7 @@ constexpr auto pi_control_tail =
     static_cast<std::uint32_t>(UINT32_C(93624646))
   };
 
-#elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1M_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS))
+#elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1M_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS))
 
 constexpr auto pi_control_tail =
   pi_control_array_type
@@ -171,13 +187,15 @@ namespace local
 {
   using limb_type = std::uint32_t;
 
-  #if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS)
+  #if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100_DIGITS)
+  constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(101));
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS)
   constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(1001));
   #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS)
   constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(10001));
   #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS)
   constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(100001));
-  #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1M_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS))
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1M_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS))
   constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(1000001));
   #else
   #error Error: Wrong pi_agm digit configuration
