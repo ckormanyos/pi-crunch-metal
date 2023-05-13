@@ -46,7 +46,39 @@ constexpr auto pi_control_head =
     static_cast<std::uint32_t>(UINT32_C(10582097))
   };
 
-#if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS)
+#if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS)
+
+constexpr auto pi_control_tail =
+  pi_control_array_type
+  {
+    // tail 1 + 10^3 std::uint32_t
+    static_cast<std::uint32_t>(UINT32_C(78759375)),
+    static_cast<std::uint32_t>(UINT32_C(19577818)),
+    static_cast<std::uint32_t>(UINT32_C(57780532)),
+    static_cast<std::uint32_t>(UINT32_C(17122680)),
+    static_cast<std::uint32_t>(UINT32_C(66130019)),
+    static_cast<std::uint32_t>(UINT32_C(27876611)),
+    static_cast<std::uint32_t>(UINT32_C(19590921)),
+    static_cast<std::uint32_t>(UINT32_C(64201989))
+  };
+
+#elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS)
+
+constexpr auto pi_control_tail =
+  pi_control_array_type
+  {
+    // tail 1 + 10^4 std::uint32_t
+    static_cast<std::uint32_t>(UINT32_C(29552498)),
+    static_cast<std::uint32_t>(UINT32_C(87275846)),
+    static_cast<std::uint32_t>(UINT32_C(10126483)),
+    static_cast<std::uint32_t>(UINT32_C(69998922)),
+    static_cast<std::uint32_t>(UINT32_C(56959688)),
+    static_cast<std::uint32_t>(UINT32_C(15920560)),
+    static_cast<std::uint32_t>(UINT32_C( 1016552)),
+    static_cast<std::uint32_t>(UINT32_C(56375678))
+  };
+
+#elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS)
 
 constexpr auto pi_control_tail =
   pi_control_array_type
@@ -62,7 +94,7 @@ constexpr auto pi_control_tail =
     static_cast<std::uint32_t>(UINT32_C(93624646))
   };
 
-#else
+#elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1M_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS))
 
 constexpr auto pi_control_tail =
   pi_control_array_type
@@ -77,6 +109,10 @@ constexpr auto pi_control_tail =
     static_cast<std::uint32_t>(UINT32_C( 1061057)),
     static_cast<std::uint32_t>(UINT32_C(79458151))
   };
+
+#else
+
+#error Error: Wrong pi_agm digit configuration
 
 #endif
 
@@ -131,34 +167,43 @@ auto pi_lcd_progress(void) -> void
   mcal::lcd::lcd0().write(p_str, static_cast<std::uint_fast8_t>(p_end - p_str), 1U);
 }
 
-auto pi_main() -> int
+namespace local
 {
-  using local_limb_type = std::uint32_t;
+  using limb_type = std::uint32_t;
 
-  #if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS)
+  #if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS)
+  constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(1001));
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS)
+  constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(10001));
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS)
   constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(100001));
-  #else
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1M_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS))
   constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(1000001));
+  #else
+  #error Error: Wrong pi_agm digit configuration
   #endif
 
-  constexpr auto local_elem_number =
-    ::math::wide_decimal::detail::decwide_t_helper<wide_decimal_digits10, local_limb_type>::elem_number;
+  constexpr auto elem_number =
+    ::math::wide_decimal::detail::decwide_t_helper<wide_decimal_digits10, local::limb_type>::elem_number;
 
-  using local_allocator_type =
-    util::n_slot_array_allocator<void, local_elem_number, static_cast<std::size_t>(UINT8_C(16))>;
+  using allocator_type =
+    util::n_slot_array_allocator<void, local::elem_number, static_cast<std::size_t>(UINT8_C(16))>;
 
-  using local_wide_decimal_type =
-    ::math::wide_decimal::decwide_t<wide_decimal_digits10, local_limb_type, local_allocator_type, double, std::int32_t, double>;
+  using wide_decimal_type =
+    ::math::wide_decimal::decwide_t<wide_decimal_digits10, local::limb_type, local::allocator_type, double, std::int32_t, double>;
+}
 
-  const local_wide_decimal_type my_pi =
-    ::math::wide_decimal::pi<wide_decimal_digits10, local_limb_type, local_allocator_type, double, std::int32_t, double>
+auto pi_main() -> int
+{
+  const local::wide_decimal_type my_pi =
+    ::math::wide_decimal::pi<local::wide_decimal_digits10, local::limb_type, local::allocator_type, double, std::int32_t, double>
     (
       local::pi_output_count_write
     );
 
   auto result_is_ok = true;
 
-  using local_difference_type = typename local_wide_decimal_type::representation_type::difference_type;
+  using local_difference_type = typename local::wide_decimal_type::representation_type::difference_type;
 
   {
     const bool head_is_ok =
@@ -174,7 +219,7 @@ auto pi_main() -> int
 
   {
     constexpr auto local_elem_digits10 =
-      math::wide_decimal::detail::decwide_t_helper<wide_decimal_digits10, local_limb_type>::elem_digits10;
+      ::math::wide_decimal::detail::decwide_t_helper<local::wide_decimal_digits10, local::limb_type>::elem_digits10;
 
     const auto distance_to_ctrl =
       static_cast<local_difference_type>
@@ -186,7 +231,7 @@ auto pi_main() -> int
               (
                 static_cast<std::int32_t>
                 (
-                  wide_decimal_digits10 - static_cast<std::int32_t>(INT8_C(1))
+                  local::wide_decimal_digits10 - static_cast<std::int32_t>(INT8_C(1))
                 )
                 / local_elem_digits10
               )
@@ -227,7 +272,15 @@ auto main(void) -> int
 
   const auto result_is_ok = (result_pi_main == 0);
 
-  std::cout << "result_is_ok: " << std::boolalpha << result_is_ok << std::endl;
+  {
+    const auto flg = std::cout.flags();
+
+    std::cout << "digits10:     "                   << std::numeric_limits<local::wide_decimal_type>::digits10 << '\n';
+    std::cout << "result_is_ok: " << std::boolalpha << result_is_ok;
+    std::cout << std::endl;
+
+    std::cout.flags(flg);
+  }
 
   return (result_is_ok ? 0 : -1);
 }

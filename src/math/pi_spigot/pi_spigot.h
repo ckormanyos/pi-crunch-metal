@@ -29,11 +29,13 @@
            typename UnsignedLargeType = std::uint64_t>
   class pi_spigot
   {
+  public:
+    static constexpr auto result_digit() -> std::uint32_t { return ResultDigit; }
+
   private:
     using unsigned_small_type = UnsignedSmallType;
     using unsigned_large_type = UnsignedLargeType;
 
-    static constexpr auto result_digit() -> std::uint32_t { return ResultDigit; }
     static constexpr auto loop_digit  () -> std::uint32_t { return LoopDigit; }
 
     static_assert(loop_digit() <= static_cast<std::uint32_t>(std::numeric_limits<unsigned_small_type>::digits10),

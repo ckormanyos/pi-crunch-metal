@@ -37,10 +37,14 @@
 
 namespace local
 {
-  #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS)
+  #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS)
+  constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(1001));
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS)
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(10001));
-  #else
+  #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100K_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS))
   constexpr auto result_digit = static_cast<std::uint32_t>(UINT32_C(100001));
+  #else
+  #error Error: Wrong pi_spigot digit configuration
   #endif
 
   constexpr auto loop_digit = static_cast<std::uint32_t>(UINT8_C(9));
@@ -102,20 +106,28 @@ auto pi_main() -> int
   // Check the hash result of the pi calculation.
   const auto hash_control =
     typename local::hash_type::result_type
-    #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS)
+    #if defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS)
+    {
+      0xA0U, 0x92U, 0x47U, 0x1FU, 0xD5U, 0xFEU, 0x41U, 0x51U,
+      0x20U, 0xE7U, 0xDDU, 0x18U, 0x5BU, 0x93U, 0x0DU, 0x05U,
+      0x3AU, 0x86U, 0xF1U, 0x7EU
+    };
+    #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS)
     {
       // 10001: 4BDF69A5FF25B9BED6BA9802BD2A68306FAB71EC
       0x4BU, 0xDFU, 0x69U, 0xA5U, 0xFFU, 0x25U, 0xB9U, 0xBEU,
       0xD6U, 0xBAU, 0x98U, 0x02U, 0xBDU, 0x2AU, 0x68U, 0x30U,
       0x6FU, 0xABU, 0x71U, 0xECU
     };
-    #else
+    #elif defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_100K_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_SPIGOT_USE_10K_DIGITS))
     {
       // 100001: D9D56240EB6B626A8FE179E3054D332F1767071D
       0xD9U, 0xD5U, 0x62U, 0x40U, 0xEBU, 0x6BU, 0x62U, 0x6AU,
       0x8FU, 0xE1U, 0x79U, 0xE3U, 0x05U, 0x4DU, 0x33U, 0x2FU,
       0x17U, 0x67U, 0x07U, 0x1DU
     };
+    #else
+    #error Error: Wrong pi_spigot digit configuration
     #endif
 
   auto hash_result = typename local::hash_type::result_type { };
@@ -145,7 +157,14 @@ auto main(void) -> int
 
   const auto result_is_ok = (result_pi_main == 0);
 
-  std::cout << "result_is_ok: " << std::boolalpha << result_is_ok << std::endl;
+  {
+    const auto flg = std::cout.flags();
+
+    std::cout << "digits10:     "                   << local::pi_spigot_type::result_digit() << '\n';
+    std::cout << "result_is_ok: " << std::boolalpha << result_is_ok;
+
+    std::cout.flags(flg);
+  }
 
   return (result_is_ok ? 0 : -1);
 }

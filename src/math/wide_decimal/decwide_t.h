@@ -542,7 +542,7 @@
     static constexpr std::int32_t  decwide_t_elem_mask      = detail::decwide_t_helper<ParamDigitsBaseTen, LimbType>::elem_mask;
     static constexpr std::int32_t  decwide_t_elem_mask_half = detail::decwide_t_helper<ParamDigitsBaseTen, LimbType>::elem_mask_half;
     static constexpr std::int32_t  decwide_t_elem_mask_min1 = static_cast<std::int32_t>(decwide_t_elem_mask - static_cast<std::int32_t>(INT8_C(1)));
-    static constexpr std::int32_t  decwide_t_elems_for_kara = static_cast<std::int32_t>(INT32_C( 112) + INT32_C(1));
+    static constexpr std::int32_t  decwide_t_elems_for_kara = static_cast<std::int32_t>(INT32_C( 132) + INT32_C(1));
     static constexpr std::int32_t  decwide_t_elems_for_fft  = static_cast<std::int32_t>(INT32_C(1792) + INT32_C(1));
 
     static constexpr exponent_type decwide_t_max_exp10      =  static_cast<exponent_type>(UINTMAX_C(1) << static_cast<unsigned>(std::numeric_limits<exponent_type>::digits - (std::is_same<exponent_type, std::int64_t>::value ? 4 : (std::is_same<exponent_type, std::int32_t>::value ? 3 : (std::is_same<exponent_type, std::int16_t>::value ? 2 : 1)))));
