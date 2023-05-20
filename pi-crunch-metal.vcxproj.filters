@@ -425,6 +425,9 @@
     <ClInclude Include="src\app\Appli\pi_calc_cfg.h">
       <Filter>src\app\Appli</Filter>
     </ClInclude>
+    <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_irq.h">
+      <Filter>src\mcal\bcm2835_raspi_b</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\mcal\bcm2835_raspi_b\mcal_cpu_detail_secure.s">

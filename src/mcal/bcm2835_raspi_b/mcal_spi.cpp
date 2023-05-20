@@ -27,7 +27,7 @@ util::communication_base& mcal::spi::spi1()
                                         local_port_pin_mosi_type,
                                         local_port_pin_csn__type,
                                         mcal::port::port_pin_dummy,
-                                        32U,
+                                        static_cast<std::uint_fast16_t>(UINT8_C(32)),
                                         false>;
 
   static mcal_spi_channel1_type com1;
