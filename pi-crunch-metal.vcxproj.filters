@@ -173,69 +173,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\util\utility\util_bit_mask.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_noncopyable.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_nothing.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_time.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_two_part_data_manipulation.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_utype_helper.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\memory\util_factory.h">
-      <Filter>src\util\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\memory\util_placed_pointer.h">
-      <Filter>src\util\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_communication.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_dynamic_array.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\memory\util_ring_allocator.h">
-      <Filter>src\util\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\memory\util_static_allocator.h">
-      <Filter>src\util\memory</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_circular_buffer.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_linear_interpolate.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_point.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_stopwatch.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_countof.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_alignas.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_swdm.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_noexcept.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_dynamic_bitset.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
     <ClInclude Include="src\mcal\mcal.h">
       <Filter>src\mcal</Filter>
     </ClInclude>
@@ -305,17 +242,11 @@
     <ClInclude Include="src\mcal_led\mcal_led_boolean_state_base.h">
       <Filter>src\mcal_led</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\utility\util_narrow_cast.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\memory\util_n_slot_array_allocator.h">
       <Filter>src\util\memory</Filter>
     </ClInclude>
     <ClInclude Include="src\math\wide_decimal\decwide_t.h">
       <Filter>src\math\wide_decimal</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_baselexical_cast.h">
-      <Filter>src\util\utility</Filter>
     </ClInclude>
     <ClInclude Include="src\mcal_lcd\mcal_lcd_generic_st7066.h">
       <Filter>src\mcal_lcd</Filter>
@@ -427,6 +358,33 @@
     </ClInclude>
     <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_irq.h">
       <Filter>src\mcal\bcm2835_raspi_b</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_noexcept.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_noncopyable.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_time.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_two_part_data_manipulation.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_utype_helper.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_baselexical_cast.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_communication.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_display.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\utility\util_dynamic_array.h">
+      <Filter>src\util\utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

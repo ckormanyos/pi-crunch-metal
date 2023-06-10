@@ -6,7 +6,6 @@
   #include <cstring>
 
   #include <mcal_lcd/mcal_lcd_base.h>
-  #include <util/utility/util_time.h>
 
   namespace mcal { namespace lcd {
 
@@ -23,16 +22,8 @@
            typename port_pin_db7_type>
   class lcd_st7066u_newhaven_0216k1z final : public mcal::lcd::lcd_base
   {
-  private:
-    using timer_type = util::timer<std::uint32_t>;
-
-    static void blocking_delay(const typename timer_type::tick_type blocking_delay_value)
-    {
-      timer_type::blocking_delay(blocking_delay_value);
-    }
-
   public:
-    virtual bool init(void)
+    auto init() noexcept -> bool override
     {
       port_pin_rs__type::set_pin_low();
       port_pin_rw__type::set_pin_low();
@@ -49,64 +40,79 @@
       port_pin_e___type::set_pin_low();
 
       blocking_delay(timer_type::milliseconds(15U));    // Set a timer which is at least 15ms from system start.
-      command(UINT8_C(0x30));                           // Command 0x30 = Wake up
-      blocking_delay(timer_type::milliseconds(7U));     // Must wait 5ms, busy flag not available.
-      command(UINT8_C(0x30));                           // Command 0x30 = Wake up 2
-      blocking_delay(timer_type::microseconds(200U));   // Must wait 160us, busy flag not available
-      command(UINT8_C(0x30));                           // Command 0x30 = Wake up 3
-      blocking_delay(timer_type::microseconds(200U));   // Must wait 160us, busy flag not available
-      command(UINT8_C(0x38));                           // Function set: 8-bit/2-line
-      command(UINT8_C(0x10));                           // Set cursor
-      command(UINT8_C(0x0C));                           // Display ON; Cursor ON
-      command(UINT8_C(0x06));                           // Entry mode set
+      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                           // Command 0x30 = Wake up
+      blocking_delay(timer_type::milliseconds(static_cast<unsigned>(UINT8_C(7))));     // Must wait 5ms, busy flag not available.
+      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                           // Command 0x30 = Wake up 2
+      blocking_delay(timer_type::microseconds(static_cast<unsigned>(UINT8_C(200))));   // Must wait 160us, busy flag not available
+      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                           // Command 0x30 = Wake up 3
+      blocking_delay(timer_type::microseconds(static_cast<unsigned>(UINT8_C(200))));   // Must wait 160us, busy flag not available
+      command(static_cast<std::uint8_t>(UINT8_C(0x38)));                           // Function set: 8-bit/2-line
+      command(static_cast<std::uint8_t>(UINT8_C(0x10)));                           // Set cursor
+      command(static_cast<std::uint8_t>(UINT8_C(0x0C)));                           // Display ON; Cursor ON
+      command(static_cast<std::uint8_t>(UINT8_C(0x06)));                           // Entry mode set
 
-      clear_line(3U);
-      clear_line(2U);
-      clear_line(1U);
-      clear_line(0U);
+      clear_line(static_cast<std::uint8_t>(UINT8_C(3)));
+      clear_line(static_cast<std::uint8_t>(UINT8_C(2)));
+      clear_line(static_cast<std::uint8_t>(UINT8_C(1)));
+      clear_line(static_cast<std::uint8_t>(UINT8_C(0)));
 
       return true;
     }
 
-    virtual bool write(const char* pstr,
-                       const std::uint_fast8_t length,
-                       const std::uint_fast8_t line_index)
+    auto write(const char* pstr,
+               const std::uint_fast8_t length,
+               const std::uint_fast8_t line_index) noexcept -> bool override
     {
-      bool write_is_ok;
+      auto result_write_is_ok = bool { };
 
-      if((pstr != nullptr) && (length > 0U))
+      if((pstr != nullptr) && (length > static_cast<std::uint_fast8_t>(UINT8_C(0))))
       {
         // Clear the line and reset the address to the line.
         clear_line    (static_cast<std::uint8_t>(line_index));
         set_line_index(static_cast<std::uint8_t>(line_index));
 
         // Write the line at line_index.
-        for(std::uint_fast8_t i = 0U; i < (std::min)(std::uint_fast8_t(16U), length); ++i)
+        for(auto   i = static_cast<std::uint_fast8_t>(UINT8_C(0));
+                   i < (std::min)(static_cast<std::uint_fast8_t>(UINT8_C(16)), length);
+                 ++i)
         {
-          write(std::uint8_t(pstr[i]));
+          write_i(static_cast<std::uint8_t>(pstr[i]));
         }
 
-        write_is_ok = true;
+        result_write_is_ok = true;
       }
       else
       {
-        write_is_ok = false;
+        result_write_is_ok = false;
       }
 
-      return write_is_ok;
+      return result_write_is_ok;
     }
 
   private:
-    virtual bool set_line_index(const std::uint8_t line_index)
+    auto set_line_index(const std::uint8_t line_index) noexcept -> bool override
     {
-      bool set_line_index_is_ok;
+      auto set_line_index_is_ok = bool { };
 
-      if(line_index < 4U)
+      if(line_index < static_cast<std::uint8_t>(UINT8_C(4)))
       {
-        const std::uint8_t my_cmd =
-          static_cast<std::uint8_t>(0x80U | ((line_index * 0x40U) + ((line_index > 1U) ? 20U : 0U)));
+        const auto command_byte =
+          static_cast<std::uint8_t>
+          (
+              static_cast<std::uint8_t>(UINT8_C(0x80))
+            | static_cast<std::uint8_t>
+              (
+                  static_cast<std::uint8_t>(line_index * static_cast<std::uint8_t>(UINT8_C(0x40)))
+                + static_cast<std::uint8_t>
+                  (
+                    (line_index > static_cast<std::uint8_t>(UINT8_C(1)))
+                      ? static_cast<std::uint8_t>(UINT8_C(20))
+                      : static_cast<std::uint8_t>(UINT8_C(0))
+                  )
+              )
+          );
 
-        command(my_cmd);
+        command(command_byte);
 
         set_line_index_is_ok = true;
       }
@@ -118,67 +124,69 @@
       return set_line_index_is_ok;
     }
 
-    void clear_line(const std::uint8_t line_index)
+    auto clear_line(const std::uint8_t line_index) noexcept -> void
     {
-      set_line_index(line_index);
+      static_cast<void>(set_line_index(line_index));
 
       // Clear the line at line_index.
-      for(std::uint_fast8_t i = 0U; i < 20U; ++i)
+      for(auto   i = static_cast<std::uint_fast8_t>(UINT8_C(0));
+                 i < static_cast<std::uint_fast8_t>(UINT8_C(20));
+               ++i)
       {
-        write(std::uint8_t(char(' ')));
+        write_i(static_cast<std::uint8_t>(' '));
       }
 
-      set_line_index(line_index);
+      static_cast<void>(set_line_index(line_index));
     }
 
-    void write(const std::uint8_t i)
+    auto write_i(const std::uint8_t i) noexcept -> void
     {
-      P1_set(i);                                        // P1 = i;   // Put data on the output Port
-      port_pin_rs__type::set_pin_high();                // D_I =1;   // D/I=HIGH : send data
-      port_pin_rw__type::set_pin_low();                 // R_W =0;   // R/W=LOW : Write
-      port_pin_e___type::set_pin_high();                // E = 1;
-      blocking_delay(timer_type::microseconds(10U));    // Delay(1); //enable pulse width >= 300ns
-      port_pin_e___type::set_pin_low();                 // E = 0;    //Clock enable: falling edge
+      P1_set(i);                                                                      // P1 = i;   // Put data on the output Port
+      port_pin_rs__type::set_pin_high();                                              // D_I =1;   // D/I=HIGH : send data
+      port_pin_rw__type::set_pin_low();                                               // R_W =0;   // R/W=LOW : Write
+      port_pin_e___type::set_pin_high();                                              // E = 1;
+      blocking_delay(timer_type::microseconds(static_cast<unsigned>(UINT8_C(10))));   // Delay(1); //enable pulse width >= 300ns
+      port_pin_e___type::set_pin_low();                                               // E = 0;    //Clock enable: falling edge
     }
 
-    void command(std::uint8_t i)
+    auto command(std::uint8_t i) noexcept -> void
     {
-      P1_set(i);                                        // P1 = i;   //put data on output Port
-      port_pin_rs__type::set_pin_low();                 // D_I =0;   //D/I=LOW : send instruction
-      port_pin_rw__type::set_pin_low();                 // R_W =0;   //R/W=LOW : Write
-      port_pin_e___type::set_pin_high();                // E = 1;
-      blocking_delay(timer_type::microseconds(10U));    // Delay(1); //enable pulse width >= 300ns
-      port_pin_e___type::set_pin_low();                 // E = 0;    //Clock enable: falling edge
-      blocking_delay(timer_type::microseconds(40U));
+      P1_set(i);                                                                      // P1 = i;   //put data on output Port
+      port_pin_rs__type::set_pin_low();                                               // D_I =0;   //D/I=LOW : send instruction
+      port_pin_rw__type::set_pin_low();                                               // R_W =0;   //R/W=LOW : Write
+      port_pin_e___type::set_pin_high();                                              // E = 1;
+      blocking_delay(timer_type::microseconds(static_cast<unsigned>(UINT8_C(10))));   // Delay(1); //enable pulse width >= 300ns
+      port_pin_e___type::set_pin_low();                                               // E = 0;    //Clock enable: falling edge
+      blocking_delay(timer_type::microseconds(static_cast<unsigned>(UINT8_C(40))));
     }
 
-    void P1_set(const std::uint8_t c)
+    auto P1_set(const std::uint8_t c) noexcept -> void
     {
-      std::uint_fast8_t(c & UINT8_C(0x01)) != UINT8_C(0) ? port_pin_db0_type::set_pin_high() : port_pin_db0_type::set_pin_low();
-      std::uint_fast8_t(c & UINT8_C(0x02)) != UINT8_C(0) ? port_pin_db1_type::set_pin_high() : port_pin_db1_type::set_pin_low();
-      std::uint_fast8_t(c & UINT8_C(0x04)) != UINT8_C(0) ? port_pin_db2_type::set_pin_high() : port_pin_db2_type::set_pin_low();
-      std::uint_fast8_t(c & UINT8_C(0x08)) != UINT8_C(0) ? port_pin_db3_type::set_pin_high() : port_pin_db3_type::set_pin_low();
-      std::uint_fast8_t(c & UINT8_C(0x10)) != UINT8_C(0) ? port_pin_db4_type::set_pin_high() : port_pin_db4_type::set_pin_low();
-      std::uint_fast8_t(c & UINT8_C(0x20)) != UINT8_C(0) ? port_pin_db5_type::set_pin_high() : port_pin_db5_type::set_pin_low();
-      std::uint_fast8_t(c & UINT8_C(0x40)) != UINT8_C(0) ? port_pin_db6_type::set_pin_high() : port_pin_db6_type::set_pin_low();
-      std::uint_fast8_t(c & UINT8_C(0x80)) != UINT8_C(0) ? port_pin_db7_type::set_pin_high() : port_pin_db7_type::set_pin_low();
+      static_cast<std::uint_fast8_t>(c & UINT8_C(0x01)) != UINT8_C(0) ? port_pin_db0_type::set_pin_high() : port_pin_db0_type::set_pin_low();
+      static_cast<std::uint_fast8_t>(c & UINT8_C(0x02)) != UINT8_C(0) ? port_pin_db1_type::set_pin_high() : port_pin_db1_type::set_pin_low();
+      static_cast<std::uint_fast8_t>(c & UINT8_C(0x04)) != UINT8_C(0) ? port_pin_db2_type::set_pin_high() : port_pin_db2_type::set_pin_low();
+      static_cast<std::uint_fast8_t>(c & UINT8_C(0x08)) != UINT8_C(0) ? port_pin_db3_type::set_pin_high() : port_pin_db3_type::set_pin_low();
+      static_cast<std::uint_fast8_t>(c & UINT8_C(0x10)) != UINT8_C(0) ? port_pin_db4_type::set_pin_high() : port_pin_db4_type::set_pin_low();
+      static_cast<std::uint_fast8_t>(c & UINT8_C(0x20)) != UINT8_C(0) ? port_pin_db5_type::set_pin_high() : port_pin_db5_type::set_pin_low();
+      static_cast<std::uint_fast8_t>(c & UINT8_C(0x40)) != UINT8_C(0) ? port_pin_db6_type::set_pin_high() : port_pin_db6_type::set_pin_low();
+      static_cast<std::uint_fast8_t>(c & UINT8_C(0x80)) != UINT8_C(0) ? port_pin_db7_type::set_pin_high() : port_pin_db7_type::set_pin_low();
     }
 
-    static std::uint8_t P1_get(void)
+    static auto P1_get(void) noexcept -> std::uint8_t
     {
-      const std::uint8_t u =   std::uint8_t(std::uint_fast8_t(port_pin_db0_type::read_input_value() ? 1U : 0U) << 0U)
-                             | std::uint8_t(std::uint_fast8_t(port_pin_db1_type::read_input_value() ? 1U : 0U) << 1U)
-                             | std::uint8_t(std::uint_fast8_t(port_pin_db2_type::read_input_value() ? 1U : 0U) << 2U)
-                             | std::uint8_t(std::uint_fast8_t(port_pin_db3_type::read_input_value() ? 1U : 0U) << 3U)
-                             | std::uint8_t(std::uint_fast8_t(port_pin_db4_type::read_input_value() ? 1U : 0U) << 4U)
-                             | std::uint8_t(std::uint_fast8_t(port_pin_db5_type::read_input_value() ? 1U : 0U) << 5U)
-                             | std::uint8_t(std::uint_fast8_t(port_pin_db6_type::read_input_value() ? 1U : 0U) << 6U)
-                             | std::uint8_t(std::uint_fast8_t(port_pin_db7_type::read_input_value() ? 1U : 0U) << 7U);
+      const std::uint8_t u =   static_cast<std::uint8_t>(static_cast<std::uint_fast8_t>(port_pin_db0_type::read_input_value() ? 1U : 0U) << 0U)
+                             | static_cast<std::uint8_t>(static_cast<std::uint_fast8_t>(port_pin_db1_type::read_input_value() ? 1U : 0U) << 1U)
+                             | static_cast<std::uint8_t>(static_cast<std::uint_fast8_t>(port_pin_db2_type::read_input_value() ? 1U : 0U) << 2U)
+                             | static_cast<std::uint8_t>(static_cast<std::uint_fast8_t>(port_pin_db3_type::read_input_value() ? 1U : 0U) << 3U)
+                             | static_cast<std::uint8_t>(static_cast<std::uint_fast8_t>(port_pin_db4_type::read_input_value() ? 1U : 0U) << 4U)
+                             | static_cast<std::uint8_t>(static_cast<std::uint_fast8_t>(port_pin_db5_type::read_input_value() ? 1U : 0U) << 5U)
+                             | static_cast<std::uint8_t>(static_cast<std::uint_fast8_t>(port_pin_db6_type::read_input_value() ? 1U : 0U) << 6U)
+                             | static_cast<std::uint8_t>(static_cast<std::uint_fast8_t>(port_pin_db7_type::read_input_value() ? 1U : 0U) << 7U);
 
       return u;
     }
 
-    static void P1_set_direction_output()
+    static auto P1_set_direction_output() noexcept -> void
     {
       port_pin_db0_type::set_direction_output();
       port_pin_db1_type::set_direction_output();
@@ -190,7 +198,7 @@
       port_pin_db7_type::set_direction_output();
     }
 
-    static void P1_set_direction_input()
+    static auto P1_set_direction_input() noexcept -> void
     {
       port_pin_db0_type::set_direction_input();
       port_pin_db1_type::set_direction_input();

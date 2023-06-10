@@ -23,12 +23,12 @@
     {
       auto port_expander_device() -> port_expander_base&;
 
-      inline auto port_expander_set_direction_output(const uint8_t bpos) -> void { port_expander_device().set_direction_output(bpos); }
-      inline auto port_expander_set_direction_input (const uint8_t bpos) -> void { port_expander_device().set_direction_input(bpos); }
-      inline auto port_expander_set_pin_high        (const uint8_t bpos) -> void { port_expander_device().set_pin_high(bpos); }
-      inline auto port_expander_set_pin_low         (const uint8_t bpos) -> void { port_expander_device().set_pin_low(bpos); }
-      inline auto port_expander_read_input_value    (const uint8_t bpos) -> bool { static_cast<void>(bpos); return false; }
-      inline auto port_expander_toggle_pin          (const uint8_t bpos) -> void { port_expander_device().toggle_pin(bpos); }
+      inline auto port_expander_set_direction_output(const std::uint8_t bpos) noexcept -> void { port_expander_device().set_direction_output(bpos); }
+      inline auto port_expander_set_direction_input (const std::uint8_t bpos) noexcept -> void { port_expander_device().set_direction_input(bpos); }
+      inline auto port_expander_set_pin_high        (const std::uint8_t bpos) noexcept -> void { port_expander_device().set_pin_high(bpos); }
+      inline auto port_expander_set_pin_low         (const std::uint8_t bpos) noexcept -> void { port_expander_device().set_pin_low(bpos); }
+      inline auto port_expander_read_input_value    (const std::uint8_t bpos) noexcept -> bool { static_cast<void>(bpos); return false; }
+      inline auto port_expander_toggle_pin          (const std::uint8_t bpos) noexcept -> void { port_expander_device().toggle_pin(bpos); }
 
       constexpr auto gpio_pin02_h03 = static_cast<std::uint8_t>(UINT8_C(0x02));
       constexpr auto gpio_pin03_h05 = static_cast<std::uint8_t>(UINT8_C(0x03));
@@ -133,22 +133,18 @@
                          : static_cast<unsigned>(pos - static_cast<std::uint32_t>(UINT8_C(32)))
           );
 
-        static constexpr auto addset =
-          static_cast<std::uint32_t>
-          (
-            pos_is_lt_32 ? gpset0_addr : gpset1_addr
-          );
+        static constexpr auto addset = static_cast<std::uint32_t>(pos_is_lt_32 ? gpset0_addr : gpset1_addr);
 
         static constexpr auto valclr = static_cast<std::uint32_t>(gpio_set_gpio_pin_x << shl_amount);
         static constexpr auto valset = valclr;
 
       public:
-        static auto set_direction_output() -> void { mcal_reg_access32_reg_or(addfsel, valfout); }
-        static auto set_direction_input () -> void { } // TBD: Not yet implemented.
-        static auto set_pin_high        () -> void { mcal_reg_access32_reg_or(addset, valset); my_pin_is_high = true; }
-        static auto set_pin_low         () -> void { mcal_reg_access32_reg_or(addclr, valclr); my_pin_is_high = false; }
-        static auto read_input_value    () -> bool { return false; } // TBD: Not yet implemented.
-        static auto toggle_pin          () -> void { (my_pin_is_high ? set_pin_low() : set_pin_high()); }
+        static auto set_direction_output() noexcept -> void { mcal_reg_access32_reg_or(addfsel, valfout); }
+        static auto set_direction_input () noexcept -> void { } // TBD: Not yet implemented.
+        static auto set_pin_high        () noexcept -> void { mcal_reg_access32_reg_or(addset, valset); my_pin_is_high = true; }
+        static auto set_pin_low         () noexcept -> void { mcal_reg_access32_reg_or(addclr, valclr); my_pin_is_high = false; }
+        static auto read_input_value    () noexcept -> bool { return false; } // TBD: Not yet implemented.
+        static auto toggle_pin          () noexcept -> void { (my_pin_is_high ? set_pin_low() : set_pin_high()); }
       };
 
       template<const std::uint8_t PortPin>
@@ -158,12 +154,12 @@
       class port_pin_expander
       {
       public:
-        static auto set_direction_output() -> void {        port_expander_set_direction_output(bpos); }
-        static auto set_direction_input () -> void {        port_expander_set_direction_input (bpos); }
-        static auto set_pin_high        () -> void {        port_expander_set_pin_high        (bpos); }
-        static auto set_pin_low         () -> void {        port_expander_set_pin_low         (bpos); }
-        static auto read_input_value    () -> bool { return port_expander_read_input_value    (bpos); }
-        static auto toggle_pin          () -> void {        port_expander_toggle_pin          (bpos); }
+        static auto set_direction_output() noexcept -> void {        port_expander_set_direction_output(bpos); }
+        static auto set_direction_input () noexcept -> void {        port_expander_set_direction_input (bpos); }
+        static auto set_pin_high        () noexcept -> void {        port_expander_set_pin_high        (bpos); }
+        static auto set_pin_low         () noexcept -> void {        port_expander_set_pin_low         (bpos); }
+        static auto read_input_value    () noexcept -> bool { return port_expander_read_input_value    (bpos); }
+        static auto toggle_pin          () noexcept -> void {        port_expander_toggle_pin          (bpos); }
       };
     }
   }
