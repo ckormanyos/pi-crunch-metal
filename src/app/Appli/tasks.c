@@ -24,7 +24,7 @@ TASK(T1)
   pi_lcd_progress();
 
   (void) OS_SetRelAlarm(ALARM_LED_BLINK,    (OsTickType) 0, (OsTickType) 1000);
-  (void) OS_SetRelAlarm(ALARM_LCD_PROGRESS, (OsTickType) 0, (OsTickType)  773);
+  (void) OS_SetRelAlarm(ALARM_LCD_PROGRESS, (OsTickType) 0, (OsTickType)  359); // Prime[72] results in 359
 
   const OsEventMaskType OsWaitEventMask = (OsEventMaskType) (EVT_LED_BLINK | EVT_LCD_PROGRESS);
 

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2020.
+//  Copyright Christopher Kormanyos 2020 - 2024.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -7,6 +7,7 @@
 
 #include <mcal_lcd.h>
 #include <mcal_lcd_st7066u_newhaven_0216k1z.h>
+#include <mcal_lcd/mcal_lcd_buffered_instance.h>
 #include <mcal_port.h>
 
 void mcal::lcd::init(const config_type*)
@@ -29,19 +30,23 @@ mcal::lcd::lcd_base& mcal::lcd::lcd0()
   using mcal_lcd_port_pin_expander_port_pin_db6_type = mcal::port::port_pin_expander<14U>;
   using mcal_lcd_port_pin_expander_port_pin_db7_type = mcal::port::port_pin_expander<15U>;
 
-  using mcal_lcd0_type = mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal_lcd_port_pin_expander_port_pin_rs__type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_rw__type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_e___type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_db0_type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_db1_type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_db2_type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_db3_type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_db4_type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_db5_type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_db6_type,
-                                                                    mcal_lcd_port_pin_expander_port_pin_db7_type>;
+  using mcal_lcd0_backend_type = mcal::lcd::lcd_st7066u_newhaven_0216k1z<mcal_lcd_port_pin_expander_port_pin_rs__type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_rw__type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_e___type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_db0_type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_db1_type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_db2_type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_db3_type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_db4_type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_db5_type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_db6_type,
+                                                                         mcal_lcd_port_pin_expander_port_pin_db7_type>;
 
-  static mcal_lcd0_type lc0;
+  static mcal_lcd0_backend_type lc0_backend;
+
+  using mcal_lcd0_buffered_type = mcal::lcd::lcd_buffered_instance<mcal_lcd0_backend_type, 2U, 16U>;
+
+  static mcal_lcd0_buffered_type lc0(lc0_backend);
 
   return lc0;
 }
