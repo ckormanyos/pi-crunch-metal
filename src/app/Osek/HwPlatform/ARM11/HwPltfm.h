@@ -11,8 +11,8 @@
 // 
 // *****************************************************************************
 
-#ifndef __HARDWARE_PLATFORM_H__
-#define __HARDWARE_PLATFORM_H__
+#ifndef HARDWARE_PLATFORM_2017_12_27_H
+#define HARDWARE_PLATFORM_2017_12_27_H
 
 #define OS_DISPATCH()            __asm("SWI #0")
 
@@ -22,5 +22,4 @@
 #define EXCEPTION_CODE_MASK   (uint32)0x1F
 #define CPU_MODE              (uint32)0x1F
 
-
-#endif
+#endif /* HARDWARE_PLATFORM_2017_12_27_H */

@@ -1,4 +1,9 @@
-
+///////////////////////////////////////////////////////////////////////////////
+//  Copyright Christopher Kormanyos 2021 - 2024.
+//  Distributed under the Boost Software License,
+//  Version 1.0. (See accompanying file LICENSE_1_0.txt
+//  or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
 
 /*******************************************************************************************************************
 ** Includes
@@ -18,11 +23,8 @@ TASK(T1)
 
   pi_lcd_progress();
 
-  // Get some prime cycle times with:
-  //   Table[Prime[n], {n, 60, 180, 1}]
-
-  (void) OS_SetRelAlarm(ALARM_LED_BLINK,    0, 1009);
-  (void) OS_SetRelAlarm(ALARM_LCD_PROGRESS, 0,  463);
+  (void) OS_SetRelAlarm(ALARM_LED_BLINK,    (OsTickType) 0, (OsTickType) 1000);
+  (void) OS_SetRelAlarm(ALARM_LCD_PROGRESS, (OsTickType) 0, (OsTickType)  773);
 
   const OsEventMaskType OsWaitEventMask = (OsEventMaskType) (EVT_LED_BLINK | EVT_LCD_PROGRESS);
 

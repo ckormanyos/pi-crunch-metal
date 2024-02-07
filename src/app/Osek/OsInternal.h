@@ -1,7 +1,7 @@
 // *****************************************************************************
 // Filename    : OsInternal.h
 // 
-// OS          : OSEK 2.2.3  
+// OS          : OSEK 2.2.3
 // 
 // CC          : ECC1/BCC1
 //
@@ -15,13 +15,13 @@
 // 
 // *****************************************************************************
 
-#ifndef __OS_INTERNAL_H__
-#define __OS_INTERNAL_H__
+#ifndef OS_INTERNAL_2017_12_27_H
+#define OS_INTERNAL_2017_12_27_H
 
-#include"Platform_Types.h"
+#include <Platform_Types.h>
 
 boolean OsIsInterruptContext(void);
 boolean OsIsInterruptEILevelContext(void);
 boolean OsIsCat2IntContext(void);
 
-#endif
+#endif /* OS_INTERNAL_2017_12_27_H */

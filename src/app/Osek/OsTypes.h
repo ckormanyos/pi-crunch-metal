@@ -1,7 +1,7 @@
 // *****************************************************************************
 // Filename    : OsTypes.h
 // 
-// OS          : OSEK 2.2.3  
+// OS          : OSEK 2.2.3
 // 
 // CC          : ECC1/BCC1
 //
@@ -15,11 +15,11 @@
 // 
 // *****************************************************************************
 
-#ifndef __OS_TYPES_H__
-#define __OS_TYPES_H__
+#ifndef OS_TYPES_2017_12_27_H
+#define OS_TYPES_2017_12_27_H
 
-#include"Platform_Types.h"
-#include"HwPltfm.h"
+#include <Platform_Types.h>
+#include <HwPltfm.h>
 
 typedef void (*pTaskFunc)(void);
 
@@ -33,7 +33,6 @@ typedef enum
   INVALID_STATE
 }OsTaskStateType;
 
-
 typedef enum
 {
   BASIC,
@@ -45,7 +44,6 @@ typedef enum
   NONE_PREEMPT,
   FULL_PREEMPT
 }OsTasksSchedType;
-
 
 typedef enum
 {
@@ -80,7 +78,6 @@ typedef enum
   ALARM_SET_EVENT,
   ALARM_ACTIVE_TASK,
   ALARM_CALLBACK
-  
 }OsAlarmAction;
 
 typedef enum
@@ -211,5 +208,4 @@ typedef struct
 #define OS_FALSE 0U
 #define OS_TRUE  1U
 
-#endif
-
+#endif /* OS_TYPES_2017_12_27_H */

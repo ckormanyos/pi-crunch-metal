@@ -1,6 +1,18 @@
+// *****************************************************************************
+// Filename    : Platform_Types.h
+// 
+// Author      : Chalandi Amine
+//
+// Owner       : Chalandi Amine
+// 
+// Date        : 27.12.2017
+// 
+// Description : Platform types definition header file
+// 
+// *****************************************************************************
 
-#ifndef __PLATFORM_TYPES_H__
-#define __PLATFORM_TYPES_H__
+#ifndef PLATFORM_TYPES_2017_12_27_H
+#define PLATFORM_TYPES_2017_12_27_H
 
 typedef unsigned char uint8;
 typedef signed char sint8;
@@ -32,5 +44,4 @@ typedef unsigned long u_int;
 typedef signed long int32_t;
 typedef unsigned long long u_long;
 
-#endif
-
+#endif /* PLATFORM_TYPES_2017_12_27_H */

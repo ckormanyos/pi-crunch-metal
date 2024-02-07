@@ -1,7 +1,7 @@
 // *****************************************************************************
 // Filename    : TCB.h
 // 
-// OS          : OSEK 2.2.3  
+// OS          : OSEK 2.2.3
 // 
 // CC          : ECC1/BCC1
 //
@@ -15,10 +15,10 @@
 // 
 // *****************************************************************************
 
-#ifndef __TCB_H__
-#define __TCB_H__
+#ifndef TCB_2017_12_27_H
+#define TCB_2017_12_27_H
 
-#include"OsTypes.h"
+#include <OsTypes.h>
 
 /***************************************************/
 /*            X Macro System Generation            */
@@ -31,11 +31,8 @@
 #include"OsCfg.h"
 #undef OS_GEN_FUNC_PROTO
 
-
-
 /* OS Config */
 extern volatile Ocb_t OCB_Cfg;
-
 
 #define STARTUPHOOK      0
 #define ERRORHOOK        0
@@ -43,8 +40,7 @@ extern volatile Ocb_t OCB_Cfg;
 #define PRETASKHOOK      0
 #define POSTTASKHOOK     0
 
-
 #define RES_SCHEDULER_PRIO (uint32)0x7FFFFFFF
 #define RES_TRACE_PRIO     (uint32)1
 
-#endif
+#endif /* TCB_2017_12_27_H */
