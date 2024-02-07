@@ -6,6 +6,7 @@
   #include <cstring>
 
   #include <mcal_lcd/mcal_lcd_base.h>
+  #include <util/utility/util_time.h>
 
   namespace mcal { namespace lcd {
 
@@ -22,6 +23,9 @@
            typename port_pin_db7_type>
   class lcd_st7066u_newhaven_0216k1z final : public mcal::lcd::lcd_base
   {
+  private:
+    using timer_type = util::timer<std::uint32_t>;
+
   public:
     auto init() noexcept -> bool override
     {
@@ -39,17 +43,17 @@
 
       port_pin_e___type::set_pin_low();
 
-      blocking_delay(timer_type::milliseconds(15U));    // Set a timer which is at least 15ms from system start.
-      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                           // Command 0x30 = Wake up
+      blocking_delay(timer_type::milliseconds(15U));                                   // Set a timer which is at least 15ms from system start.
+      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                               // Command 0x30 = Wake up
       blocking_delay(timer_type::milliseconds(static_cast<unsigned>(UINT8_C(7))));     // Must wait 5ms, busy flag not available.
-      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                           // Command 0x30 = Wake up 2
+      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                               // Command 0x30 = Wake up 2
       blocking_delay(timer_type::microseconds(static_cast<unsigned>(UINT8_C(200))));   // Must wait 160us, busy flag not available
-      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                           // Command 0x30 = Wake up 3
+      command(static_cast<std::uint8_t>(UINT8_C(0x30)));                               // Command 0x30 = Wake up 3
       blocking_delay(timer_type::microseconds(static_cast<unsigned>(UINT8_C(200))));   // Must wait 160us, busy flag not available
-      command(static_cast<std::uint8_t>(UINT8_C(0x38)));                           // Function set: 8-bit/2-line
-      command(static_cast<std::uint8_t>(UINT8_C(0x10)));                           // Set cursor
-      command(static_cast<std::uint8_t>(UINT8_C(0x0C)));                           // Display ON; Cursor ON
-      command(static_cast<std::uint8_t>(UINT8_C(0x06)));                           // Entry mode set
+      command(static_cast<std::uint8_t>(UINT8_C(0x38)));                               // Function set: 8-bit/2-line
+      command(static_cast<std::uint8_t>(UINT8_C(0x10)));                               // Set cursor
+      command(static_cast<std::uint8_t>(UINT8_C(0x0C)));                               // Display ON; Cursor ON
+      command(static_cast<std::uint8_t>(UINT8_C(0x06)));                               // Entry mode set
 
       clear_line(static_cast<std::uint8_t>(UINT8_C(3)));
       clear_line(static_cast<std::uint8_t>(UINT8_C(2)));
@@ -90,6 +94,11 @@
     }
 
   private:
+    static auto blocking_delay(const typename timer_type::tick_type dt) -> void
+    {
+      timer_type::blocking_delay(dt);
+    }
+
     auto set_line_index(const std::uint8_t line_index) noexcept -> bool override
     {
       auto set_line_index_is_ok = bool { };
