@@ -386,9 +386,6 @@
     <ClInclude Include="src\util\utility\util_dynamic_array.h">
       <Filter>src\util\utility</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\utility\util_pseudorandom_time_point_seed.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
     <ClInclude Include="src\util\utility\util_constexpr_algorithm_unsafe.h">
       <Filter>src\util\utility</Filter>
     </ClInclude>
