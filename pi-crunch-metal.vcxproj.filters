@@ -386,12 +386,6 @@
     <ClInclude Include="src\util\utility\util_dynamic_array.h">
       <Filter>src\util\utility</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\utility\util_constexpr_algorithm_unsafe.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
-    <ClInclude Include="src\util\utility\util_constexpr_cmath_unsafe.h">
-      <Filter>src\util\utility</Filter>
-    </ClInclude>
     <ClInclude Include="src\mcal_lcd\mcal_lcd_buffered_instance.h">
       <Filter>src\mcal_lcd</Filter>
     </ClInclude>

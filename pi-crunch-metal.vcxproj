@@ -410,8 +410,6 @@
     <ClInclude Include="src\util\memory\util_n_slot_array_allocator.h" />
     <ClInclude Include="src\util\utility\util_baselexical_cast.h" />
     <ClInclude Include="src\util\utility\util_communication.h" />
-    <ClInclude Include="src\util\utility\util_constexpr_algorithm_unsafe.h" />
-    <ClInclude Include="src\util\utility\util_constexpr_cmath_unsafe.h" />
     <ClInclude Include="src\util\utility\util_display.h" />
     <ClInclude Include="src\util\utility\util_dynamic_array.h" />
     <ClInclude Include="src\util\utility\util_noexcept.h" />
