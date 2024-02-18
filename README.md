@@ -19,10 +19,12 @@ This fascinating, educational and fun project combines the domain
 of high-performance numerical computing with the raw simplicity of
 bare-metal embedded microcontroller systems.
 
-Exihbiting the utmost in portability and is realized primarily through modern,
-header-only C++14, 17, 20, 23 (and beyond) template code.
-`ckormanyos/pi-crunch-metal` is intended to run out of the box on both
-a PC system as well as selected bare-metal microcontroller systems.
+`ckormanyos/pi-crunch-metal` exihbits the utmost in portability
+and is realized primarily through modern, header-only C++14, 17, 20, 23 (and beyond)
+template code.
+
+The application software is intended to run out of the box on both
+PC/host systems as well as selected bare-metal microcontroller targets.
 
 The [wide-decimal](https://github.com/ckormanyos/wide-decimal) multiprecision
 float back end provides the big-number engine for pi-crunch-metal.
@@ -62,6 +64,9 @@ Cross development with `Win*` and/or `*nix` host is
 supported. Build tools, the build system and the compilers
 are essentially the same as those used in the
 [`real-time-cpp`](https://github.com/ckormanyos/real-time-cpp)
+project. These can also be found within a coherent collection
+of toolchains in the
+[`real-time-cpp-toolchains`](https://github.com/ckormanyos/real-time-cpp-toolchains)
 repository.
 
 ## Alternate Spigot Algorithm
