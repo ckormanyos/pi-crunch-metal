@@ -93,15 +93,15 @@ auto pi_lcd_progress(void) -> void
     '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0'
   };
 
-  const char* pend = util::baselexical_cast(local::pi_output_digits10, p_str, p_str + sizeof(p_str));
+  const char* p_end = util::baselexical_cast(local::pi_output_digits10, p_str, p_str + sizeof(p_str));
 
-  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 0U);
+  mcal::lcd::lcd0().write(p_str, static_cast<std::uint_fast8_t>(p_end - p_str), 0U);
 
-  std::fill(pstr, pstr + sizeof(pstr), (char) 0);
+  std::fill(p_str, p_str + sizeof(p_str), (char) 0);
 
-  pend = util::baselexical_cast(local::pi_count_of_calculations, pstr, p_str + sizeof(p_str));
+  p_end = util::baselexical_cast(local::pi_count_of_calculations, p_str, p_str + sizeof(p_str));
 
-  mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 1U);
+  mcal::lcd::lcd0().write(p_str, static_cast<std::uint_fast8_t>(p_end - p_str), 1U);
 }
 
 auto pi_main() -> int
