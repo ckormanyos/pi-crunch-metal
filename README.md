@@ -12,16 +12,19 @@ pi-crunch-metal
         <img src="https://img.shields.io/github/languages/code-size/ckormanyos/pi-crunch-metal" alt="GitHub code size in bytes" /></a>
 </p>
 
-pi-crunch-metal computes a million digits of $\pi$
+`ckormanyos/pi-crunch-metal` computes up to a million digits of $\pi$
 on a bare-metal RaspberryPi(R)-Zero (and other systems).
 
 This fascinating, educational and fun project combines the domain
 of high-performance numerical computing with the raw simplicity of
 bare-metal embedded microcontroller systems.
 
-Exihbiting the utmost in portability realized primarily through modern header-only C++14
-template code, pi-crunch-metal is intended to run out of the box on both
-a PC system as well as selected bare-metal microcontroller systems.
+`ckormanyos/pi-crunch-metal` exihbits the utmost in portability
+and is realized primarily through modern, header-only C++14, 17, 20, 23 (and beyond)
+template code.
+
+The application software is intended to run out of the box on both
+PC/host systems as well as selected bare-metal microcontroller targets.
 
 The [wide-decimal](https://github.com/ckormanyos/wide-decimal) multiprecision
 float back end provides the big-number engine for pi-crunch-metal.
@@ -36,7 +39,7 @@ from the OSEK-like OS implemented in
 
 ## AGM Algorithm
 
-In this project, $1,000,001$ decmal digits of $\pi$ (i.e., one-million-and-1)
+In this variation of the project, up to $1,000,001$ decmal digits of $\pi$ (i.e., one-million-and-1)
 are computed with a quadratically converging Gauss arithmetic geometric mean
 iteration.
 
@@ -61,13 +64,16 @@ Cross development with `Win*` and/or `*nix` host is
 supported. Build tools, the build system and the compilers
 are essentially the same as those used in the
 [`real-time-cpp`](https://github.com/ckormanyos/real-time-cpp)
+project. These can also be found within a coherent collection
+of toolchains in the
+[`real-time-cpp-toolchains`](https://github.com/ckormanyos/real-time-cpp-toolchains)
 repository.
 
 ## Alternate Spigot Algorithm
 
 In addition to the AGM algorithm mentioned above, a slower
 quadratic pi-spigot algorithm of order $N^2$ is also supported
-in this project.
+in this alternate variation of the project.
 Switching to use the (interchangeable) file
 [pi_spigot.cpp](./src/app/Appli/pi_spigot/pi_spigot.cpp)
 instead of the default
@@ -92,7 +98,7 @@ compiler taken directly from the
 [real-time-cpp-toolchains](https://github.com/ckormanyos/real-time-cpp-toolchains)
 repository.
 
-The default optimization setting is `-O2` and the million-and-one
+The default optimization setting is `-Os` and the million-and-one
 decimal digit pi calculation takes slightly under 30 minutes
 on this target system with the above-mentioned compiler.
 
@@ -105,7 +111,7 @@ mega-digit pi calculation and is almost done with a second one.
 Traditional wire-wrapping techniques connect the pins on a self-made
 breakout board to a solderless prototyping breadboard.
 Double and quadruple strands of skinny wire are used on the
-power and ground pins, as these might typically carry up to 150mA
+power and ground pins, as these might typically carry up to $150mA$
 of current in this setup.
 
 Bit banging is used to implement an all-software SPI-compatible
@@ -113,9 +119,9 @@ driver which controls a port expander chip. The port
 expander chip is used to control the pins on an industry-standard
 LCD character display.
 
-A classic logic-AND gate converts 3.3V to TTL 5V level.
-A little sawed out aluminum chunk is used as a heat-sink to cool
-the processor.
+A classic logic `AND`-gate converts $3.3V$ to TTL $5V$ level.
+A little sawed-out, semi-hollow aluminum chunk is used as a heat-sink
+to cool the processor.
 
 The output pin connections from the Rpi-Zero to the logic-AND gate
 are shown in the table below.

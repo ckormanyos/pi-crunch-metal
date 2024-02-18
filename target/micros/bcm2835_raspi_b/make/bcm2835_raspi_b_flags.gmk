@@ -1,5 +1,5 @@
 ﻿#
-#  Copyright Christopher Kormanyos 2013 - 2023.
+#  Copyright Christopher Kormanyos 2013 - 2024.
 #  Distributed under the Boost Software License,
 #  Version 1.0. (See accompanying file LICENSE_1_0.txt
 #  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -9,24 +9,25 @@
 # compiler flags for the target architecture
 # ------------------------------------------------------------------------------
 
-GCC_VERSION   = 11.2.0
+GCC_VERSION   = 13.2.1
 GCC_TARGET    = arm-none-eabi
 GCC_PREFIX    = arm-none-eabi
 
 TGT_SUFFIX    = elf
 
-TGT_ALLFLAGS  = -O2                                            \
-                -marm                                          \
+TGT_ALLFLAGS  = -marm                                          \
                 -march=armv6zk                                 \
                 -mtune=arm1176jzf-s                            \
                 -mfpu=vfpv2                                    \
                 -mfloat-abi=hard
 
-TGT_CFLAGS    = -std=c11                                       \
+TGT_CFLAGS    = -std=c17                                       \
+                -O1                                            \
                 -Wunsuffixed-float-constants                   \
                 $(TGT_ALLFLAGS)
 
-TGT_CXXFLAGS  = -std=c++14                                     \
+TGT_CXXFLAGS  = -std=c++20                                     \
+                -Os                                            \
                 -Wno-psabi                                     \
                 $(TGT_ALLFLAGS)
 
