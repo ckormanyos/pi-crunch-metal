@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////
 //                                                               //
 //  Copyright Iliass Mahjoub 2022.                               //
-//  Copyright Christopher Kormanyos 2019 - 2023.                 //
+//  Copyright Christopher Kormanyos 2019 - 2024.                 //
 //  Distributed under the Boost Software License,                //
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt          //
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)             //
@@ -88,15 +88,18 @@ auto pi_led_toggle(void) -> void
 extern "C"
 auto pi_lcd_progress(void) -> void
 {
-  char pstr[10U] = { 0 };
+  char p_str[static_cast<std::size_t>(UINT8_C(10))] =
+  {
+    '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0'
+  };
 
-  const char* pend = util::baselexical_cast(local::pi_output_digits10, pstr);
+  const char* pend = util::baselexical_cast(local::pi_output_digits10, p_str, p_str + sizeof(p_str));
 
   mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 0U);
 
   std::fill(pstr, pstr + sizeof(pstr), (char) 0);
 
-  pend = util::baselexical_cast(local::pi_count_of_calculations, pstr);
+  pend = util::baselexical_cast(local::pi_count_of_calculations, pstr, p_str + sizeof(p_str));
 
   mcal::lcd::lcd0().write(pstr, static_cast<std::uint_fast8_t>(pend - pstr), 1U);
 }

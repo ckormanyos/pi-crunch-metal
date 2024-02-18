@@ -1,5 +1,5 @@
 /*
- Copyright Christopher Kormanyos 2013 - 2023.
+ Copyright Christopher Kormanyos 2013 - 2024.
  Distributed under the Boost Software License,
  Version 1.0. (See accompanying file LICENSE_1_0.txt
  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -14,14 +14,14 @@ INPUT(libc.a libm.a libgcc.a)
 OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
 OUTPUT_ARCH(arm)
 
-/* Set up the various stacks with total size of 16K. */
+/* Set up the various stacks with total size of (8K * 6) = 48K. */
 
-__SYS_STACK_SIZE = 4K;
-__SVC_STACK_SIZE = 4K;
-__ABT_STACK_SIZE = 4K;
-__UND_STACK_SIZE = 4K;
-__IRQ_STACK_SIZE = 4K;
-__FIQ_STACK_SIZE = 4K;
+__SYS_STACK_SIZE = 8K;
+__SVC_STACK_SIZE = 8K;
+__ABT_STACK_SIZE = 8K;
+__UND_STACK_SIZE = 8K;
+__IRQ_STACK_SIZE = 8K;
+__FIQ_STACK_SIZE = 8K;
 
 /* Set up the memory regions. */
 
@@ -34,7 +34,7 @@ MEMORY
                                               + __UND_STACK_SIZE
                                               + __IRQ_STACK_SIZE
                                               + __FIQ_STACK_SIZE
-  RAM   (rwx) : ORIGIN = 0x00088000, LENGTH = 24M - 512K
+  RAM   (rwx) : ORIGIN = 0x0008E000, LENGTH = 23M
 }
 
 SECTIONS

@@ -15,21 +15,21 @@ GCC_PREFIX    = arm-none-eabi
 
 TGT_SUFFIX    = elf
 
-TGT_ALLFLAGS  = -marm                                          \
+TGT_ARMFLAGS  = -marm                                          \
                 -march=armv6zk                                 \
                 -mtune=arm1176jzf-s                            \
                 -mfpu=vfpv2                                    \
                 -mfloat-abi=hard
 
 TGT_CFLAGS    = -std=c17                                       \
-                -O1                                            \
+                -O2                                            \
                 -Wunsuffixed-float-constants                   \
-                $(TGT_ALLFLAGS)
+                $(TGT_ARMFLAGS)
 
 TGT_CXXFLAGS  = -std=c++20                                     \
                 -Os                                            \
                 -Wno-psabi                                     \
-                $(TGT_ALLFLAGS)
+                $(TGT_ARMFLAGS)
 
 TGT_INCLUDES  = -I$(PATH_APP)/app/Mcal/gpt                     \
                 -I$(PATH_APP)/app/Mcal/mcu                     \
@@ -38,7 +38,8 @@ TGT_INCLUDES  = -I$(PATH_APP)/app/Mcal/gpt                     \
                 -I$(PATH_APP)/app/Osek                         \
                 -I$(PATH_APP)/app/Std
 
-TGT_AFLAGS    =
+TGT_AFLAGS    = -O0                                            \
+                $(TGT_ARMFLAGS)
 
 LINKER_DEFINITION_FILE := $(PATH_TGT_MAKE)/bcm2835_raspi_b.ld
 

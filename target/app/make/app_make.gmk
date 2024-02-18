@@ -184,7 +184,6 @@ CXXFLAGS    = $(GCCFLAGS)                       \
               -Wzero-as-null-pointer-constant
 
 AFLAGS      = $(GCCFLAGS)                       \
-              $(TGT_CFLAGS)                     \
               $(TGT_AFLAGS)                     \
               -x assembler
 
