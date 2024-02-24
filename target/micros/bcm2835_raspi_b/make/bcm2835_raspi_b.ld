@@ -34,7 +34,7 @@ MEMORY
                                               + __UND_STACK_SIZE
                                               + __IRQ_STACK_SIZE
                                               + __FIQ_STACK_SIZE
-  RAM   (rwx) : ORIGIN = 0x0008E000, LENGTH = 23M
+  RAM   (rwx) : ORIGIN = 0x0008E000, LENGTH = 24M
 }
 
 SECTIONS
@@ -94,6 +94,7 @@ SECTIONS
   {
     . = ALIGN(4);
     *(.ARM.extab)
+    *(.ARM.extab*)
     *(.gnu.linkonce.armextab.*)
     . = ALIGN(4);
   } > ROM
@@ -157,7 +158,7 @@ SECTIONS
     PROVIDE(__FIQ_STACK_TOP = .) ;
   } > STACKS
 
-  . = 0x00088000;
+  . = 0x0008E000;
   . = ALIGN(4);
 
   /* The ROM-to-RAM initialized data section */

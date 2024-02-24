@@ -34,7 +34,7 @@ void operator delete(void*, std::size_t) noexcept;
 #endif
 
 void operator delete(void*)              noexcept { }
-#if (defined(__GNUC__) && (__GNUC__ > 12))
+#if (defined(__GNUC__) && (__GNUC__ >= 12))
 #else
 void operator delete(void*, void*)       noexcept { }
 #endif
