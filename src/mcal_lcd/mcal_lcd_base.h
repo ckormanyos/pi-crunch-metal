@@ -8,9 +8,10 @@
 #ifndef MCAL_LCD_BASE_2020_06_10_H // NOLINT(llvm-header-guard)
   #define MCAL_LCD_BASE_2020_06_10_H
 
-  #include <cstdint>
-
   #include <util/utility/util_noncopyable.h>
+
+  #include <cstddef>
+  #include <cstdint>
 
   #if(__cplusplus >= 201703L)
   namespace mcal::lcd {

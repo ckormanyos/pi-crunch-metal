@@ -8,14 +8,13 @@
 #ifndef MCAL_LCD_GENERIC_ST7066_2020_05_07_H // NOLINT(llvm-header-guard)
   #define MCAL_LCD_GENERIC_ST7066_2020_05_07_H
 
-  #include <algorithm>
-  #include <cstdint>
-  #include <cstring>
-
   #include <mcal_lcd/mcal_lcd_base.h>
   #include <mcal_wdg.h>
 
   #include <util/utility/util_time.h>
+
+  #include <algorithm>
+  #include <cstring>
 
   #if(__cplusplus >= 201703L)
   namespace mcal::lcd {
