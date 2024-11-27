@@ -1,3 +1,10 @@
+///////////////////////////////////////////////////////////////////////////////
+//  Copyright Christopher Kormanyos 2020 - 2024.
+//  Distributed under the Boost Software License,
+//  Version 1.0. (See accompanying file LICENSE_1_0.txt
+//  or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
 #ifndef MCAL_LCD_ST7066U_NEWHAVEN_0216K1Z_2020_05_07_H_
   #define MCAL_LCD_ST7066U_NEWHAVEN_0216K1Z_2020_05_07_H_
 
@@ -64,7 +71,7 @@
     }
 
     auto write(const char* pstr,
-               const std::uint_fast8_t length,
+               const std::size_t length,
                const std::uint_fast8_t line_index) noexcept -> bool override
     {
       auto result_write_is_ok = bool { };
@@ -76,8 +83,8 @@
         set_line_index(static_cast<std::uint8_t>(line_index));
 
         // Write the line at line_index.
-        for(auto   i = static_cast<std::uint_fast8_t>(UINT8_C(0));
-                   i < (std::min)(static_cast<std::uint_fast8_t>(UINT8_C(16)), length);
+        for(auto   i = static_cast<std::size_t>(UINT8_C(0));
+                   i < (std::min)(static_cast<std::size_t>(UINT8_C(16)), length);
                  ++i)
         {
           write_i(static_cast<std::uint8_t>(pstr[i]));

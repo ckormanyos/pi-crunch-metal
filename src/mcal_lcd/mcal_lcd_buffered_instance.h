@@ -52,9 +52,9 @@
 
     auto init() -> bool override { return my_backend_display.init(); }
 
-    auto write(const char*             pstr,
-                     std::uint_fast8_t length,
-                     std::uint_fast8_t line_index) -> bool override
+    auto write(const char* pstr,
+               const std::size_t length,
+               const std::uint_fast8_t line_index) -> bool override
     {
       bool result_write_is_ok { };
 
@@ -76,7 +76,7 @@
             my_backend_display.write
             (
               candidate_row.data(),
-              static_cast<std::uint_fast8_t>(width()),
+              static_cast<std::size_t>(width()),
               line_index
             );
 

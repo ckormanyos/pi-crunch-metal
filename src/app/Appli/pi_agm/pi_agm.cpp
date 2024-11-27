@@ -178,17 +178,25 @@ auto pi_lcd_progress(void) -> void
     '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0'
   };
 
-  auto p_end = static_cast<const char*>(nullptr);
+  std::span<char> str_span { p_str, sizeof(p_str) };
 
-  p_end = util::baselexical_cast(local::pi_output_digits10, p_str, p_str + sizeof(p_str));
+  {
+    const char* p_end { util::baselexical_cast(local::pi_output_digits10, str_span.data(), str_span.data() + str_span.size()) };
 
-  mcal::lcd::lcd0().write(p_str, static_cast<std::uint_fast8_t>(p_end - p_str), 0U);
+    const std::size_t len { static_cast<std::size_t>(std::distance(static_cast<const char*>(str_span.data()), p_end)) };
 
-  std::fill(p_str, p_str + sizeof(p_str), (char) 0);
+    mcal::lcd::lcd0().write(str_span.data(), len, std::uint_fast8_t { UINT8_C(0) });
+  }
 
-  p_end = util::baselexical_cast(local::pi_count_of_calculations, p_str, p_str + sizeof(p_str));
+  std::fill(str_span.data(), str_span.data() + str_span.size(), char { INT8_C(0) });
 
-  mcal::lcd::lcd0().write(p_str, static_cast<std::uint_fast8_t>(p_end - p_str), 1U);
+  {
+    const char* p_end { util::baselexical_cast(local::pi_count_of_calculations, str_span.data(), str_span.data() + str_span.size()) };
+
+    const std::size_t len { static_cast<std::size_t>(std::distance(static_cast<const char*>(str_span.data()), p_end)) };
+
+    mcal::lcd::lcd0().write(str_span.data(), len, std::uint_fast8_t { UINT8_C(1) });
+  }
 }
 
 namespace local
@@ -196,15 +204,15 @@ namespace local
   using limb_type = std::uint32_t;
 
   #if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100_DIGITS)
-  constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(101));
+  constexpr auto wide_decimal_digits10 = std::int32_t { INT32_C(101) };
   #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS)
-  constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(1001));
+  constexpr auto wide_decimal_digits10 = std::int32_t { INT32_C(1001) };
   #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS)
-  constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(10001));
+  constexpr auto wide_decimal_digits10 = std::int32_t { INT32_C(10001) };
   #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS)
-  constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(100001));
+  constexpr auto wide_decimal_digits10 = std::int32_t { INT32_C(100001) };
   #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1M_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS))
-  constexpr auto wide_decimal_digits10 = static_cast<std::int32_t>(INT32_C(1000001));
+  constexpr auto wide_decimal_digits10 = std::int32_t { INT32_C(1000001) };
   #else
   #error Error: Wrong pi_agm digit configuration
   #endif
@@ -213,7 +221,7 @@ namespace local
     ::math::wide_decimal::detail::decwide_t_helper<wide_decimal_digits10, local::limb_type>::elem_number;
 
   using allocator_type =
-    util::n_slot_array_allocator<void, local::elem_number, static_cast<std::size_t>(UINT8_C(16))>;
+    util::n_slot_array_allocator<void, local::elem_number, std::size_t { UINT8_C(16) }>;
 
   using wide_decimal_type =
     ::math::wide_decimal::decwide_t<wide_decimal_digits10, local::limb_type, local::allocator_type, double, std::int32_t, double>;

@@ -95,13 +95,13 @@ auto pi_lcd_progress(void) -> void
 
   const char* p_end = util::baselexical_cast(local::pi_output_digits10, p_str, p_str + sizeof(p_str));
 
-  mcal::lcd::lcd0().write(p_str, static_cast<std::uint_fast8_t>(p_end - p_str), 0U);
+  mcal::lcd::lcd0().write(p_str, static_cast<std::size_t>(p_end - p_str), 0U);
 
   std::fill(p_str, p_str + sizeof(p_str), (char) 0);
 
   p_end = util::baselexical_cast(local::pi_count_of_calculations, p_str, p_str + sizeof(p_str));
 
-  mcal::lcd::lcd0().write(p_str, static_cast<std::uint_fast8_t>(p_end - p_str), 1U);
+  mcal::lcd::lcd0().write(p_str, static_cast<std::size_t>(p_end - p_str), 1U);
 }
 
 auto pi_main() -> int
