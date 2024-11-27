@@ -1,4 +1,4 @@
-﻿#
+#
 #  Copyright Christopher Kormanyos 2013 - 2024.
 #  Distributed under the Boost Software License,
 #  Version 1.0. (See accompanying file LICENSE_1_0.txt
@@ -9,7 +9,7 @@
 # compiler flags for the target architecture
 # ------------------------------------------------------------------------------
 
-GCC_VERSION   = 13.2.1
+GCC_VERSION   = 13.3.1
 GCC_TARGET    = arm-none-eabi
 GCC_PREFIX    = arm-none-eabi
 
@@ -22,11 +22,11 @@ TGT_ARMFLAGS  = -marm                                          \
                 -mfloat-abi=hard
 
 TGT_CFLAGS    = -std=c17                                       \
-                -O2                                            \
+                -O1                                            \
                 -Wunsuffixed-float-constants                   \
                 $(TGT_ARMFLAGS)
 
-TGT_CXXFLAGS  = -std=c++20                                     \
+TGT_CXXFLAGS  = -std=c++23                                     \
                 -Os                                            \
                 -Wno-psabi                                     \
                 $(TGT_ARMFLAGS)

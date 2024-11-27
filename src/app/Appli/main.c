@@ -5,7 +5,7 @@
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-// cd /mnt/c/Users/User/Documents/Ks/uC_Software/Boards/OSEK_Raspberry_Pi_Zero
+// cd /mnt/c/Users/ckorm/Documents/Ks/uC_Software/Boards/pi-crunch-metal
 
 /*******************************************************************************************************************
 ** Includes

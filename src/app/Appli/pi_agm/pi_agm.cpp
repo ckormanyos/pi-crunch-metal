@@ -17,11 +17,6 @@
 
 #include <app/Appli/pi_calc_cfg.h>
 
-#if defined(PI_CRUNCH_METAL_STANDALONE_MAIN)
-#include <iomanip>
-#include <iostream>
-#endif // PI_CRUNCH_METAL_STANDALONE_MAIN
-
 #if (defined(PI_CRUNCH_METAL_CFG_METHOD) && (PI_CRUNCH_METAL_CFG_METHOD == PI_CRUNCH_METAL_CFG_USE_PI_AGM))
 
 #include <mcal_lcd.h>
@@ -35,6 +30,12 @@
 #include <math/wide_decimal/decwide_t.h>
 #include <util/memory/util_n_slot_array_allocator.h>
 
+#if defined(PI_CRUNCH_METAL_STANDALONE_MAIN)
+#include <iomanip>
+#include <iostream>
+#endif // PI_CRUNCH_METAL_STANDALONE_MAIN
+#include <span>
+
 namespace math { namespace constants {
 
 using pi_control_array_type = std::array<std::uint32_t, static_cast<std::size_t>(UINT8_C(8))>;
@@ -43,14 +44,14 @@ constexpr auto pi_control_head =
   pi_control_array_type
   {
     // head std::uint32_t
-    static_cast<std::uint32_t>(UINT32_C(3)),
-    static_cast<std::uint32_t>(UINT32_C(14159265)),
-    static_cast<std::uint32_t>(UINT32_C(35897932)),
-    static_cast<std::uint32_t>(UINT32_C(38462643)),
-    static_cast<std::uint32_t>(UINT32_C(38327950)),
-    static_cast<std::uint32_t>(UINT32_C(28841971)),
-    static_cast<std::uint32_t>(UINT32_C(69399375)),
-    static_cast<std::uint32_t>(UINT32_C(10582097))
+    std::uint32_t { UINT32_C(3) },
+    std::uint32_t { UINT32_C(14159265) },
+    std::uint32_t { UINT32_C(35897932) },
+    std::uint32_t { UINT32_C(38462643) },
+    std::uint32_t { UINT32_C(38327950) },
+    std::uint32_t { UINT32_C(28841971) },
+    std::uint32_t { UINT32_C(69399375) },
+    std::uint32_t { UINT32_C(10582097) }
   };
 
 #if defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100_DIGITS)
@@ -59,14 +60,14 @@ constexpr auto pi_control_tail =
   pi_control_array_type
   {
     // tail 1 + 10^2 std::uint32_t
-    static_cast<std::uint32_t>(UINT32_C(28841971)),
-    static_cast<std::uint32_t>(UINT32_C(69399375)),
-    static_cast<std::uint32_t>(UINT32_C(10582097)),
-    static_cast<std::uint32_t>(UINT32_C(49445923)),
-    static_cast<std::uint32_t>(UINT32_C( 7816406)),
-    static_cast<std::uint32_t>(UINT32_C(28620899)),
-    static_cast<std::uint32_t>(UINT32_C(86280348)),
-    static_cast<std::uint32_t>(UINT32_C(25342117))
+    std::uint32_t { UINT32_C(28841971) },
+    std::uint32_t { UINT32_C(69399375) },
+    std::uint32_t { UINT32_C(10582097) },
+    std::uint32_t { UINT32_C(49445923) },
+    std::uint32_t { UINT32_C( 7816406) },
+    std::uint32_t { UINT32_C(28620899) },
+    std::uint32_t { UINT32_C(86280348) },
+    std::uint32_t { UINT32_C(25342117) }
   };
 
 #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS)
@@ -75,14 +76,14 @@ constexpr auto pi_control_tail =
   pi_control_array_type
   {
     // tail 1 + 10^3 std::uint32_t
-    static_cast<std::uint32_t>(UINT32_C(78759375)),
-    static_cast<std::uint32_t>(UINT32_C(19577818)),
-    static_cast<std::uint32_t>(UINT32_C(57780532)),
-    static_cast<std::uint32_t>(UINT32_C(17122680)),
-    static_cast<std::uint32_t>(UINT32_C(66130019)),
-    static_cast<std::uint32_t>(UINT32_C(27876611)),
-    static_cast<std::uint32_t>(UINT32_C(19590921)),
-    static_cast<std::uint32_t>(UINT32_C(64201989))
+    std::uint32_t { UINT32_C(78759375) },
+    std::uint32_t { UINT32_C(19577818) },
+    std::uint32_t { UINT32_C(57780532) },
+    std::uint32_t { UINT32_C(17122680) },
+    std::uint32_t { UINT32_C(66130019) },
+    std::uint32_t { UINT32_C(27876611) },
+    std::uint32_t { UINT32_C(19590921) },
+    std::uint32_t { UINT32_C(64201989) }
   };
 
 #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS)
@@ -91,14 +92,14 @@ constexpr auto pi_control_tail =
   pi_control_array_type
   {
     // tail 1 + 10^4 std::uint32_t
-    static_cast<std::uint32_t>(UINT32_C(29552498)),
-    static_cast<std::uint32_t>(UINT32_C(87275846)),
-    static_cast<std::uint32_t>(UINT32_C(10126483)),
-    static_cast<std::uint32_t>(UINT32_C(69998922)),
-    static_cast<std::uint32_t>(UINT32_C(56959688)),
-    static_cast<std::uint32_t>(UINT32_C(15920560)),
-    static_cast<std::uint32_t>(UINT32_C( 1016552)),
-    static_cast<std::uint32_t>(UINT32_C(56375678))
+    std::uint32_t { UINT32_C(29552498) },
+    std::uint32_t { UINT32_C(87275846) },
+    std::uint32_t { UINT32_C(10126483) },
+    std::uint32_t { UINT32_C(69998922) },
+    std::uint32_t { UINT32_C(56959688) },
+    std::uint32_t { UINT32_C(15920560) },
+    std::uint32_t { UINT32_C( 1016552) },
+    std::uint32_t { UINT32_C(56375678) }
   };
 
 #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS)
@@ -107,14 +108,14 @@ constexpr auto pi_control_tail =
   pi_control_array_type
   {
     // tail 1 + 10^5 std::uint32_t
-    static_cast<std::uint32_t>(UINT32_C(38043299)),
-    static_cast<std::uint32_t>(UINT32_C(70695770)),
-    static_cast<std::uint32_t>(UINT32_C(15078933)),
-    static_cast<std::uint32_t>(UINT32_C(77286580)),
-    static_cast<std::uint32_t>(UINT32_C(35712790)),
-    static_cast<std::uint32_t>(UINT32_C(91376742)),
-    static_cast<std::uint32_t>(UINT32_C( 8056554)),
-    static_cast<std::uint32_t>(UINT32_C(93624646))
+    std::uint32_t { UINT32_C(38043299) },
+    std::uint32_t { UINT32_C(70695770) },
+    std::uint32_t { UINT32_C(15078933) },
+    std::uint32_t { UINT32_C(77286580) },
+    std::uint32_t { UINT32_C(35712790) },
+    std::uint32_t { UINT32_C(91376742) },
+    std::uint32_t { UINT32_C( 8056554) },
+    std::uint32_t { UINT32_C(93624646) }
   };
 
 #elif defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1M_DIGITS) || (!defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_1K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_10K_DIGITS) && !defined(PI_CRUNCH_METAL_CFG_PI_AGM_USE_100K_DIGITS))
@@ -123,14 +124,14 @@ constexpr auto pi_control_tail =
   pi_control_array_type
   {
     // tail 1 + 10^6 std::uint32_t
-    static_cast<std::uint32_t>(UINT32_C(20875424)),
-    static_cast<std::uint32_t>(UINT32_C(50598956)),
-    static_cast<std::uint32_t>(UINT32_C(78796130)),
-    static_cast<std::uint32_t>(UINT32_C(33116462)),
-    static_cast<std::uint32_t>(UINT32_C(83996346)),
-    static_cast<std::uint32_t>(UINT32_C(46042209)),
-    static_cast<std::uint32_t>(UINT32_C( 1061057)),
-    static_cast<std::uint32_t>(UINT32_C(79458151))
+    std::uint32_t { UINT32_C(20875424) },
+    std::uint32_t { UINT32_C(50598956) },
+    std::uint32_t { UINT32_C(78796130) },
+    std::uint32_t { UINT32_C(33116462) },
+    std::uint32_t { UINT32_C(83996346) },
+    std::uint32_t { UINT32_C(46042209) },
+    std::uint32_t { UINT32_C( 1061057) },
+    std::uint32_t { UINT32_C(79458151) }
   };
 
 #else
@@ -143,13 +144,13 @@ constexpr auto pi_control_tail =
 
 namespace local
 {
-  auto pi_count_of_calculations = static_cast<std::uint32_t>(UINT8_C(0));
+  std::uint32_t pi_count_of_calculations { std::uint32_t { UINT8_C(0) } };
 
-  auto pi_output_digits10 = static_cast<std::uint32_t>(UINT8_C(0));
+  std::uint32_t pi_output_digits10 = { std::uint32_t { UINT8_C(0) } };
 
-  auto pi_output_count_write(const std::uint32_t d10) -> void;
+  auto pi_output_count_write(const std::uint32_t d10) noexcept -> void;
 
-  auto pi_output_count_write(const std::uint32_t d10) -> void { local::pi_output_digits10 = d10; }
+  auto pi_output_count_write(const std::uint32_t d10) noexcept -> void { local::pi_output_digits10 = d10; }
 } // namespace local
 
 extern "C"
