@@ -69,15 +69,6 @@
   namespace math { namespace wide_decimal { // NOLINT(modernize-concat-nested-namespaces)
   #endif
 
-  // Forward declaration of the decwide_t template class.
-  template<const std::int32_t ParamDigitsBaseTen,
-           typename LimbType          = std::uint32_t,
-           typename AllocatorType     = std::allocator<void>,
-           typename InternalFloatType = double,
-           typename ExponentType      = std::int64_t,
-           typename FftFloatType      = double>
-  class decwide_t;
-
   // Forward declarations of various decwide_t namespace functions.
   template<const std::int32_t ParamDigitsBaseTen, typename LimbType, typename AllocatorType, typename InternalFloatType, typename ExponentType, typename FftFloatType>
   constexpr auto zero() -> decwide_t<ParamDigitsBaseTen, LimbType, AllocatorType, InternalFloatType, ExponentType, FftFloatType>;
@@ -599,126 +590,12 @@
     // In particular, support for NaN is already being
     // partially used through the specialization of limits.
     // When starting, maybe begin with FP-class NaN.
-    enum class fpclass_type
+    enum class fpclass_type // NOLINT(performance-enum-size)
     {
       decwide_t_finite
     };
 
   private:
-    template<typename FloatingPointType>
-    class native_float_parts final
-    {
-    public:
-      // Emphasize: This template class can be used with native
-      // floating-point types like float, double and long double.
-
-      // Note: For long double, you need to verify that the
-      // mantissa fits in unsigned long long.
-
-      explicit native_float_parts(FloatingPointType f)
-      {
-        using native_float_type = FloatingPointType;
-
-        static_assert(std::numeric_limits<native_float_type>::digits <= std::numeric_limits<unsigned long long>::digits, // NOLINT(google-runtime-int)
-                      "Error: The width of the mantissa does not fit in unsigned long long");
-
-        const native_float_type ff = ((f < static_cast<native_float_type>(0)) ? static_cast<native_float_type>(-f) : f);
-
-        if(ff < (std::numeric_limits<native_float_type>::min)())
-        {
-          return;
-        }
-
-        using std::frexp;
-
-        // Get the fraction and base-2 exponent.
-
-        // TBD: Need to properly handle frexp when GCC's __float128
-        // is active (in case of -std=gnu++XX).
-        // This happens when native_float_type is of type __float128.
-
-        auto man = static_cast<native_float_type>(frexp(static_cast<long double>(f), &my_exponent_part));
-
-        auto n2 = static_cast<unsigned>(UINT8_C(0));
-
-        for(auto   i = static_cast<std::uint_fast16_t>(UINT8_C(0));
-                   i < static_cast<std::uint_fast16_t>(std::numeric_limits<native_float_type>::digits);
-                 ++i)
-        {
-          // Extract the mantissa of the floating-point type in base-2
-          // (one bit at a time) and store it in an unsigned long long.
-          man *= 2;
-
-          n2   = static_cast<unsigned>(man);
-          man -= static_cast<native_float_type>(n2);
-
-          if(n2 != static_cast<unsigned>(UINT8_C(0)))
-          {
-            my_mantissa_part |= static_cast<unsigned>(UINT8_C(1));
-          }
-
-          if(i < static_cast<unsigned>(std::numeric_limits<native_float_type>::digits - 1))
-          {
-            my_mantissa_part <<= static_cast<unsigned>(UINT8_C(1));
-          }
-        }
-
-        // Ensure that the value is normalized and adjust the exponent.
-
-        // TBD: Need to properly handle this left shift amount
-        // when GCC's __float128 is active (in case of -std=gnu++XX).
-        // This happens when native_float_type is of type __float128.
-        constexpr auto max_left_shift_amount =
-          static_cast<int>
-          (
-            (std::numeric_limits<native_float_type>::digits < std::numeric_limits<long double>::digits)
-              ? std::numeric_limits<native_float_type>::digits
-              : std::numeric_limits<long double>::digits
-          );
-
-        my_mantissa_part |= static_cast<unsigned long long>(1ULL << static_cast<unsigned>(max_left_shift_amount - 1)); // NOLINT(google-runtime-int)
-        my_exponent_part -= 1;
-      }
-
-      constexpr native_float_parts(const native_float_parts& other) noexcept
-        : my_mantissa_part(other.my_mantissa_part),
-          my_exponent_part(other.my_exponent_part) { }
-
-      constexpr native_float_parts(native_float_parts&& other) noexcept
-        : my_mantissa_part(other.my_mantissa_part),
-          my_exponent_part(other.my_exponent_part) { }
-
-      native_float_parts() = delete;
-
-      ~native_float_parts() noexcept = default; // LCOV_EXCL_LINE
-
-      auto operator=(const native_float_parts& other) noexcept -> native_float_parts& // NOLINT(cert-oop54-cpp)
-      {
-        if(this != &other)
-        {
-          my_mantissa_part = other.my_mantissa_part;
-          my_exponent_part = other.my_exponent_part;
-        }
-
-        return *this;
-      }
-
-      auto operator=(native_float_parts&& other) noexcept -> native_float_parts&
-      {
-        my_mantissa_part = other.my_mantissa_part;
-        my_exponent_part = other.my_exponent_part;
-
-        return *this;
-      }
-
-     WIDE_DECIMAL_NODISCARD constexpr auto get_mantissa() const noexcept -> unsigned long long { return my_mantissa_part; } // NOLINT(google-runtime-int)
-     WIDE_DECIMAL_NODISCARD constexpr auto get_exponent() const noexcept -> int                { return my_exponent_part; }
-
-    private:
-      unsigned long long my_mantissa_part { }; // NOLINT(readability-identifier-naming,google-runtime-int)
-      int                my_exponent_part { }; // NOLINT(readability-identifier-naming)
-    };
-
     #if !defined(WIDE_DECIMAL_DISABLE_CACHED_CONSTANTS)
     // LCOV_EXCL_START
     // Static data initializer
@@ -832,7 +709,7 @@
 
     // Constructors from built-in floating-point types.
     template<typename FloatingPointType,
-             typename std::enable_if<std::is_floating_point<FloatingPointType>::value == true>::type const* = nullptr>
+             typename std::enable_if<std::is_floating_point<FloatingPointType>::value>::type const* = nullptr>
     decwide_t(const FloatingPointType f) : my_data     (), // NOLINT(google-explicit-constructor,hicpp-explicit-conversions)
                                            my_exp      (static_cast<exponent_type>(INT8_C(0))),
                                            my_neg      (false),
@@ -1116,12 +993,12 @@
         else
         {
           std::copy(my_data.cbegin(),
-                    my_data.cend() - static_cast<std::ptrdiff_t>(-ofs),
-                    my_n_data_for_add_sub.begin() + static_cast<std::ptrdiff_t>(-ofs));
+                    my_data.cend() + static_cast<std::ptrdiff_t>(ofs), // LCOV_EXCL_LINE
+                    my_n_data_for_add_sub.begin() - static_cast<std::ptrdiff_t>(ofs));
 
           // LCOV_EXCL_START
           std::fill(my_n_data_for_add_sub.begin(),
-                    my_n_data_for_add_sub.begin() + static_cast<std::ptrdiff_t>(-ofs),
+                    my_n_data_for_add_sub.begin() - static_cast<std::ptrdiff_t>(ofs),
                     static_cast<limb_type>(UINT8_C(0)));
           // LCOV_EXCL_STOP
 
@@ -2823,7 +2700,7 @@
         && (i  <  static_cast<std::uint_fast32_t>(std::tuple_size<local_tmp_array_type>::value))
       )
       {
-        tmp[static_cast<std::size_t>(i)] =
+        tmp[static_cast<std::size_t>(i)] = // NOLINT(cppcoreguidelines-pro-bounds-constant-array-index)
           static_cast<limb_type>(uu % static_cast<unsigned long long>(decwide_t_elem_mask)); // NOLINT(google-runtime-int)
 
         uu = static_cast<unsigned long long>(uu / static_cast<unsigned long long>(decwide_t_elem_mask)); // NOLINT(google-runtime-int)
@@ -2868,7 +2745,7 @@
     {
       const auto b_neg = (flt < static_cast<FloatingPointType>(0.0F));
 
-      const native_float_parts<FloatingPointType> ld_parts((!b_neg) ? flt : -flt);
+      const detail::template native_float_parts<FloatingPointType> ld_parts((!b_neg) ? flt : -flt);
 
       // Create a decwide_t from the fractional part of the
       // mantissa expressed as an unsigned long long.
@@ -3499,7 +3376,7 @@
 
       // Get a possible +/- sign and remove it.
 
-      if((pos = str.find('-')) != std::string::npos)
+      if((pos = str.find('-')) != std::string::npos) // NOLINT(bugprone-assignment-in-if-condition)
       {
         my_neg = true;
 
@@ -3510,7 +3387,7 @@
         my_neg = false;
       }
 
-      if((pos = str.find('+')) != std::string::npos)
+      if((pos = str.find('+')) != std::string::npos) // NOLINT(bugprone-assignment-in-if-condition)
       {
         str.erase(pos, static_cast<std::uint_fast32_t>(UINT8_C(1)));
       }
@@ -4401,7 +4278,12 @@
     friend constexpr auto half() -> decwide_t<OtherMyDigits10, OtherLimbType, OtherAllocatorType, OtherInternalFloatType, OtherExponentType, OtherFftFloatType>; // NOLINT(readability-redundant-declaration)
   };
 
-
+  #if ((defined(__GNUC__) && (__GNUC__ >= 12)) && !defined(__clang__))
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Warray-bounds"
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wstringop-overread"
+  #endif
   template<const std::int32_t ParamDigitsBaseTen, typename LimbType, typename AllocatorType, typename InternalFloatType, typename ExponentType, typename FftFloatType>
   constexpr auto zero() -> decwide_t<ParamDigitsBaseTen, LimbType, AllocatorType, InternalFloatType, ExponentType, FftFloatType>
   {
@@ -4412,6 +4294,10 @@
 
     return other_wide_decimal_type::from_lst( { static_cast<other_limb_type>(UINT8_C(0)) } );
   }
+  #if ((defined(__GNUC__) && (__GNUC__ >= 12)) && !defined(__clang__))
+  #pragma GCC diagnostic pop
+  #pragma GCC diagnostic pop
+  #endif
 
   template<const std::int32_t ParamDigitsBaseTen, typename LimbType, typename AllocatorType, typename InternalFloatType, typename ExponentType, typename FftFloatType>
   constexpr auto one() -> decwide_t<ParamDigitsBaseTen, LimbType, AllocatorType, InternalFloatType, ExponentType, FftFloatType>
@@ -4496,9 +4382,10 @@
     using local_flags_type = std::ios::fmtflags;
 
     // Assess the format flags.
-    // Obtain the showpos flag.
-    const auto my_showpos   = (static_cast<local_flags_type>(ostrm_flags & std::ios::showpos)   != static_cast<local_flags_type>(UINT8_C(0)));
-    const auto my_uppercase = (static_cast<local_flags_type>(ostrm_flags & std::ios::uppercase) != static_cast<local_flags_type>(UINT8_C(0)));
+
+    // Obtain the showpos and uppercase flags.
+    const bool my_showpos   { static_cast<local_flags_type>(ostrm_flags & std::ios::showpos)   == static_cast<local_flags_type>(std::ios::showpos) };
+    const bool my_uppercase { static_cast<local_flags_type>(ostrm_flags & std::ios::uppercase) == static_cast<local_flags_type>(std::ios::uppercase) };
 
     using std::ilogb;
 
@@ -4508,9 +4395,9 @@
     // Determine the kind of output format requested (scientific, fixed, none).
     detail::os_float_field_type my_float_field { };
 
-    if     ((ostrm_flags & std::ios::scientific) != static_cast<local_flags_type>(UINT8_C(0))) { my_float_field = detail::os_float_field_type::scientific; }
-    else if((ostrm_flags & std::ios::fixed)      != static_cast<local_flags_type>(UINT8_C(0))) { my_float_field = detail::os_float_field_type::fixed; }
-    else                                                                                       { my_float_field = detail::os_float_field_type::none; }
+    if     (static_cast<local_flags_type>(ostrm_flags & std::ios::scientific) == static_cast<local_flags_type>(std::ios::scientific)) { my_float_field = detail::os_float_field_type::scientific; }
+    else if(static_cast<local_flags_type>(ostrm_flags & std::ios::fixed)      == static_cast<local_flags_type>(std::ios::fixed))      { my_float_field = detail::os_float_field_type::fixed; }
+    else                                                                                                                              { my_float_field = detail::os_float_field_type::none; }
 
     // Get the output stream's precision and limit it to max_digits10.
     // Erroneous negative precision (theoretically impossible) will be
@@ -4518,16 +4405,19 @@
     // at zero.
     const auto prec_default = static_cast<std::streamsize>(INT8_C(6));
 
-    auto os_precision =
-      static_cast<std::uint_fast32_t>
-      (
-        ((ostrm_precision <= static_cast<std::streamsize>(0))
-          ? ((my_float_field != detail::os_float_field_type::scientific) ? static_cast<std::uint_fast32_t>(prec_default) : static_cast<std::uint_fast32_t>(UINT8_C(0)))
-          : static_cast<std::uint_fast32_t>(ostrm_precision))
-      );
+    std::uint_fast32_t
+      os_precision
+      {
+        static_cast<std::uint_fast32_t>
+        (
+          ((ostrm_precision <= static_cast<std::streamsize>(0))
+            ? ((my_float_field != detail::os_float_field_type::scientific) ? static_cast<std::uint_fast32_t>(prec_default) : static_cast<std::uint_fast32_t>(UINT8_C(0)))
+            : static_cast<std::uint_fast32_t>(ostrm_precision))
+        )
+      };
 
-    auto use_scientific = false;
-    auto use_fixed      = false;
+    bool use_scientific { false };
+    bool use_fixed      { false };
 
     if     (my_float_field == detail::os_float_field_type::scientific) { use_scientific = true; }
     else if(my_float_field == detail::os_float_field_type::fixed)      { use_fixed      = true; }
@@ -4614,7 +4504,11 @@
     get_output_string(x, str, the_exp, number_of_digits10_i_want);
 
     // Obtain additional format information.
-    const auto my_showpoint = ((ostrm_flags & std::ios::showpoint) != static_cast<local_flags_type>(UINT8_C(0)));
+    const bool
+      my_showpoint
+      {
+        static_cast<local_flags_type>(ostrm_flags & std::ios::showpoint) == static_cast<local_flags_type>(std::ios::showpoint)
+      };
 
     // Write the output string in the desired format.
     if     (my_float_field == detail::os_float_field_type::scientific) { wr_string_scientific(str, the_exp, os_precision, my_showpoint, my_uppercase); }
@@ -4643,10 +4537,11 @@
       const auto n_fill = static_cast<std::uint_fast32_t>(my_width - str.length());
 
       // Left-justify is the exception, std::right and std::internal justify right.
-      const auto my_left =
-      (
-        static_cast<local_flags_type>(ostrm_flags & std::ios::left) != static_cast<local_flags_type>(static_cast<unsigned>(UINT8_C(0)))
-      );
+      const bool
+        my_left
+        {
+          static_cast<local_flags_type>(ostrm_flags & std::ios::left) == static_cast<local_flags_type>(std::ios::left)
+        };
 
       // Justify left or right and insert the fill characters.
       str.insert((my_left ? str.end() : str.begin()), static_cast<std::size_t>(n_fill), ostrm_fill);

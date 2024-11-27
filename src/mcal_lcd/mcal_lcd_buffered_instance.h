@@ -8,12 +8,10 @@
 #ifndef MCAL_LCD_BUFFERED_INSTANCE_2024_02_07_H // NOLINT(llvm-header-guard)
   #define MCAL_LCD_BUFFERED_INSTANCE_2024_02_07_H
 
+  #include <mcal_lcd/mcal_lcd_base.h>
+
   #include <algorithm>
   #include <array>
-  #include <cstddef>
-  #include <cstdint>
-
-  #include <mcal_lcd/mcal_lcd_base.h>
 
   #if(__cplusplus >= 201703L)
   namespace mcal::lcd {
@@ -52,9 +50,9 @@
 
     auto init() -> bool override { return my_backend_display.init(); }
 
-    auto write(const char*             pstr,
-                     std::uint_fast8_t length,
-                     std::uint_fast8_t line_index) -> bool override
+    auto write(const char* pstr,
+               const std::size_t length,
+               const std::uint_fast8_t line_index) -> bool override
     {
       bool result_write_is_ok { };
 
@@ -76,7 +74,7 @@
             my_backend_display.write
             (
               candidate_row.data(),
-              static_cast<std::uint_fast8_t>(width()),
+              static_cast<std::size_t>(width()),
               line_index
             );
 
