@@ -38,6 +38,7 @@ TGT_INCLUDES  = -I$(PATH_APP)/app/Mcal/gpt                               \
                 -I$(PATH_APP)/app/Osek                                   \
                 -I$(PATH_APP)/app/Std
 
+
 TGT_AFLAGS    = -O0                                                      \
                 $(TGT_ARMFLAGS)
 
