@@ -8,39 +8,12 @@
 #ifndef UTIL_BASELEXICAL_CAST_2020_06_28_H // NOLINT(llvm-header-guard)
   #define UTIL_BASELEXICAL_CAST_2020_06_28_H
 
-  #if ((defined(__cplusplus) && (__cplusplus >= 201703L)) || (defined(_MSVC_LANG) && (_MSVC_LANG >= 201703L)))
-  #if !(defined(__GNUC__) && defined(__AVR__))
-  #define UTIL_BASELEXICAL_CAST_HAS_CHARCONV
-  #endif
-  #endif
-
-  #if defined(UTIL_BASELEXICAL_CAST_HAS_CHARCONV)
-  #include <charconv>
-  #include <cstdint>
-  #else
   #include <algorithm>
   #include <cstddef>
   #include <cstdint>
   #include <iterator>
-  #endif
 
   namespace util {
-
-  #if defined(UTIL_BASELEXICAL_CAST_HAS_CHARCONV)
-
-  template<typename UnsignedIntegerType,
-           const std::uint_fast8_t BaseRepresentation = static_cast<std::uint_fast8_t>(UINT8_C(10)),
-           const bool UpperCase = true>
-  auto baselexical_cast(const UnsignedIntegerType& u, char* first, char* last) -> const char*
-  {
-    constexpr auto my_base = static_cast<int>(BaseRepresentation);
-
-    const auto result = std::to_chars(first, last, u, my_base);
-
-    return result.ptr;
-  }
-
-  #else
 
   template<typename OutputIterator,
            const bool UpperCase,
@@ -174,8 +147,6 @@
 
     return out + static_cast<std::size_t>(UINT8_C(1));
   }
-
-  #endif
 
   } // namespace util
 
