@@ -22,10 +22,11 @@
 #include <mcal_lcd.h>
 #include <util/utility/util_baselexical_cast.h>
 
-#define WIDE_DECIMAL_DISABLE_IOSTREAM
-#define WIDE_DECIMAL_DISABLE_DYNAMIC_MEMORY_ALLOCATION
-#define WIDE_DECIMAL_DISABLE_CONSTRUCT_FROM_STRING
 #define WIDE_DECIMAL_DISABLE_CACHED_CONSTANTS
+#define WIDE_DECIMAL_DISABLE_CONSTRUCT_FROM_STRING
+#define WIDE_DECIMAL_DISABLE_DYNAMIC_MEMORY_ALLOCATION
+#define WIDE_DECIMAL_DISABLE_IOSTREAM
+#define WIDE_DECIMAL_DISABLE_USE_STD_FUNCTION
 
 #include <math/wide_decimal/decwide_t.h>
 #include <util/memory/util_n_slot_array_allocator.h>

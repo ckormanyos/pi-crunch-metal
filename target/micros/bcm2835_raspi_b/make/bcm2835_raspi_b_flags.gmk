@@ -5,6 +5,7 @@
 #  or copy at http://www.boost.org/LICENSE_1_0.txt)
 #
 
+
 # ------------------------------------------------------------------------------
 # compiler flags for the target architecture
 # ------------------------------------------------------------------------------
@@ -37,6 +38,7 @@ TGT_INCLUDES  = -I$(PATH_APP)/app/Mcal/gpt                               \
                 -I$(PATH_APP)/app/Osek/HwPlatform/ARM11                  \
                 -I$(PATH_APP)/app/Osek                                   \
                 -I$(PATH_APP)/app/Std
+
 
 TGT_AFLAGS    = -O0                                                      \
                 $(TGT_ARMFLAGS)
