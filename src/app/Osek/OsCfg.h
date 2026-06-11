@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////
+//  Copyright Christopher Kormanyos 2023 - 2024.
+//  Distributed under the Boost Software License,
+//  Version 1.0. (See accompanying file LICENSE_1_0.txt
+//  or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
+
+// Originally from:
 // *****************************************************************************************************************
 // Filename    : OsCfg.h
 // 
@@ -30,8 +38,8 @@ OS_CONFIG_BEGIN
   OS_EVENT_END
 
   OS_ALARM_BEGIN
-    OS_ALARM_DEF(ALARM_LED_BLINK        ,ALARM_SET_EVENT     ,EVT_LED_BLINK             ,T1   ,0)
-    OS_ALARM_DEF(ALARM_LCD_PROGRESS     ,ALARM_SET_EVENT     ,EVT_LCD_PROGRESS          ,T1   ,0)
+    OS_ALARM_DEF(ALARM_LED_BLINK        ,ALARM_SET_EVENT   ,EVT_LED_BLINK             ,T1   ,0)
+    OS_ALARM_DEF(ALARM_LCD_PROGRESS     ,ALARM_SET_EVENT   ,EVT_LCD_PROGRESS          ,T1   ,0)
   OS_ALARM_END
 
   OS_RESOURCE_BEGIN
