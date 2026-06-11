@@ -20,7 +20,7 @@ of high-performance numerical computing with the raw simplicity of
 bare-metal embedded microcontroller systems.
 
 `ckormanyos/pi-crunch-metal` exihbits the utmost in portability
-and is realized primarily through modern, header-only C++14, 17, 20, 23 (and beyond)
+and is realized primarily through modern, header-only C++20, 23 (and beyond)
 template code.
 
 The application software is intended to run out of the box on both
