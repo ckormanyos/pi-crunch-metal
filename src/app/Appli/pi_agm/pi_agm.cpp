@@ -1,5 +1,5 @@
 ﻿///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2021 - 2024.
+//  Copyright Christopher Kormanyos 2021 - 2026.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -222,7 +222,7 @@ namespace local
     ::math::wide_decimal::detail::decwide_t_helper<wide_decimal_digits10, local::limb_type>::elem_number;
 
   using allocator_type =
-    util::n_slot_array_allocator<void, local::elem_number, std::size_t { UINT8_C(16) }>;
+    util::n_slot_array_allocator<void, local::elem_number, std::size_t { UINT8_C(18) }>;
 
   using wide_decimal_type =
     ::math::wide_decimal::decwide_t<wide_decimal_digits10, local::limb_type, local::allocator_type, double, std::int32_t, double>;

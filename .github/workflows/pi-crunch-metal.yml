@@ -21,7 +21,7 @@ jobs:
       matrix:
         suite: [ bcm2835_raspi_b ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: '0'
       - name: update-tools
@@ -38,10 +38,10 @@ jobs:
       matrix:
         suite: [ Debug, Release ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: '0'
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           toolset: 14.4
@@ -64,7 +64,7 @@ jobs:
         compiler: [ g++, clang++ ]
         calc: [ PI_AGM, PI_SPIGOT ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: '0'
       - name: gcc-clang-native
@@ -84,7 +84,7 @@ jobs:
         compiler: [ g++, clang++ ]
         calc: [ PI_AGM, PI_SPIGOT ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: '0'
       - name: gcc-clang-native-asan
@@ -104,7 +104,7 @@ jobs:
         compiler: [ g++, clang++ ]
         calc: [ PI_AGM, PI_SPIGOT ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: '0'
       - name: gcc-clang-native-ubsan
@@ -123,7 +123,7 @@ jobs:
       matrix:
         digits: [ 100_DIGITS, 1K_DIGITS, 10K_DIGITS, 100K_DIGITS, 1M_DIGITS ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: '0'
       - name: gcc-native-agm-digits
@@ -142,7 +142,7 @@ jobs:
       matrix:
         digits: [ 100_DIGITS, 1K_DIGITS, 10K_DIGITS, 100K_DIGITS ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: '0'
       - name: gcc-native-spigot-digits
