@@ -21,12 +21,12 @@ TGT_ARMFLAGS  = -marm                                                    \
                 -mfpu=vfpv2                                              \
                 -mfloat-abi=hard
 
-TGT_CFLAGS    = -std=c23                                                 \
+TGT_CFLAGS    = -std=c11                                                 \
                 -O1                                                      \
                 -Wunsuffixed-float-constants                             \
                 $(TGT_ARMFLAGS)
 
-TGT_CXXFLAGS  = -std=c++23                                               \
+TGT_CXXFLAGS  = -std=c++20                                               \
                 -Os                                                      \
                 -Wno-psabi                                               \
                 $(TGT_ARMFLAGS)
