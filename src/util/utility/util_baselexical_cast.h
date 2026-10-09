@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2020 - 2024.
+//  Copyright Christopher Kormanyos 2020 - 2026.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -8,144 +8,76 @@
 #ifndef UTIL_BASELEXICAL_CAST_2020_06_28_H // NOLINT(llvm-header-guard)
   #define UTIL_BASELEXICAL_CAST_2020_06_28_H
 
-  #include <algorithm>
-  #include <cstddef>
   #include <cstdint>
-  #include <iterator>
+  #include <type_traits>
 
   namespace util {
 
-  template<typename OutputIterator,
-           const bool UpperCase,
-           const std::uint_fast8_t BaseRepresentation>
-  struct baselexical_cast_helper
-  {
-  private:
-    using output_value_type = typename std::iterator_traits<OutputIterator>::value_type;
-
-  public:
-    static auto extract(output_value_type) noexcept -> output_value_type = delete;
-  };
-
-  template<typename OutputIterator,
-           const bool UpperCase>
-  struct baselexical_cast_helper<OutputIterator, UpperCase, static_cast<std::uint_fast8_t>(UINT8_C(16))>
-  {
-  private:
-    using output_value_type = typename std::iterator_traits<OutputIterator>::value_type;
-
-  public:
-    static auto extract(output_value_type c) noexcept -> output_value_type
-    {
-      if(c <= static_cast<output_value_type>(INT8_C(9)))
-      {
-        c =
-          static_cast<output_value_type>
-          (
-            c + static_cast<output_value_type>('0')
-          );
-      }
-      else if((c >= static_cast<output_value_type>(0xA)) && (c <= static_cast<output_value_type>(INT8_C(0xF)))) // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
-      {
-        c =
-          static_cast<output_value_type>
-          (
-              static_cast<output_value_type>(UpperCase ? static_cast<output_value_type>('A') : static_cast<output_value_type>('a'))
-            + static_cast<output_value_type>(c - static_cast<output_value_type>(INT8_C(0xA)))
-          );
-      }
-
-      return c;
-    }
-  };
-
-  template<typename OutputIterator,
-           const bool UpperCase>
-  struct baselexical_cast_helper<OutputIterator, UpperCase, static_cast<std::uint_fast8_t>(UINT8_C(10))>
-  {
-  private:
-    using output_value_type = typename std::iterator_traits<OutputIterator>::value_type;
-
-  public:
-    static auto extract(output_value_type c) noexcept -> output_value_type
-    {
-      if(c <= static_cast<output_value_type>(INT8_C(9)))
-      {
-        c =
-          static_cast<output_value_type>
-          (
-            c + static_cast<output_value_type>('0')
-          );
-      }
-
-      return c;
-    }
-  };
-
   template<typename UnsignedIntegerType,
-           typename OutputIterator,
            const std::uint_fast8_t BaseRepresentation = static_cast<std::uint_fast8_t>(UINT8_C(10)),
            const bool UpperCase = true>
-  auto baselexical_cast(const UnsignedIntegerType& u, OutputIterator out, OutputIterator out_dummy) -> OutputIterator
+  auto baselexical_cast(const UnsignedIntegerType& u, char* first, const char* last) -> const char*;
+
+  template<typename UnsignedIntegerType,
+           const std::uint_fast8_t BaseRepresentation,
+           const bool UpperCase>
+  auto baselexical_cast(const UnsignedIntegerType& u, char* first, const char* last) -> const char*
   {
-    static_cast<void>(out_dummy);
+    using local_integer_type = std::remove_cv_t<UnsignedIntegerType>;
 
-    using unsigned_integer_type = UnsignedIntegerType;
-    using output_value_type     = typename std::iterator_traits<OutputIterator>::value_type;
+    static_assert(std::is_integral_v<local_integer_type>,
+                  "baselexical_cast requires an integral input type.");
 
-    if(u == static_cast<unsigned_integer_type>(UINT8_C(0)))
+    static_assert(std::is_unsigned_v<local_integer_type> && (!std::is_same_v<local_integer_type, bool>),
+                  "baselexical_cast requires an unsigned, non-bool input type.");
+
+    static_assert((BaseRepresentation >= static_cast<std::uint_fast8_t>(UINT8_C(2)))
+                  && (BaseRepresentation <= static_cast<std::uint_fast8_t>(UINT8_C(36))),
+                  "BaseRepresentation must be in the range [2, 36].");
+
+    if(first == last)
     {
-      *out =
-        static_cast<output_value_type>
-        (
-          baselexical_cast_helper<OutputIterator, UpperCase, BaseRepresentation>::extract(static_cast<output_value_type>(UINT8_C(0)))
-        );
+      return nullptr;
     }
-    else
+
+    auto* out = first;
+
+    auto value = static_cast<local_integer_type>(u);
+
+    constexpr auto base = static_cast<local_integer_type>(BaseRepresentation);
+
+    do
     {
-      unsigned_integer_type x(u);
-
-      auto out_first = out;
-
-      while(x != static_cast<unsigned_integer_type>(UINT8_C(0))) // NOLINT(altera-id-dependent-backward-branch)
+      if(out == last)
       {
-        const auto c =
-          static_cast<output_value_type>
-          (
-            x % static_cast<unsigned_integer_type>(BaseRepresentation)
-          );
-
-        *out =
-          static_cast<output_value_type>
-          (
-            baselexical_cast_helper<OutputIterator, UpperCase, BaseRepresentation>::extract(c)
-          );
-
-        x =
-          static_cast<unsigned_integer_type>
-          (
-            x / static_cast<unsigned_integer_type>(BaseRepresentation)
-          );
-
-        if(x != static_cast<unsigned_integer_type>(UINT8_C(0)))
-        {
-          ++out;
-        }
+        return nullptr;
       }
 
-      #if (defined(__GNUC__) && !defined(__clang__)&& (__GNUC__ > 12))
-      #pragma GCC diagnostic push
-      #pragma GCC diagnostic ignored "-Wstringop-overflow="
-      #endif
+      const auto digit { static_cast<unsigned>(value % base) };
 
-      std::reverse(out_first, out + static_cast<std::size_t>(UINT8_C(1)));
+      *out++ = // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+        static_cast<char>
+        (
+          (digit < 10U) ? (static_cast<unsigned>('0') + digit)                         // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+                        : (static_cast<unsigned>(UpperCase ? 'A' : 'a') + digit - 10U) // NOLINT(cppcoreguidelines-avoid-magic-numbers,readability-magic-numbers)
+        );
 
-      #if (defined(__GNUC__) && !defined(__clang__)&& (__GNUC__ > 12))
-      #pragma GCC diagnostic pop
-      #endif
+      value = static_cast<local_integer_type>(value / base);
+    }
+    while(value != static_cast<local_integer_type>(UINT8_C(0)));
+
+    auto* reverse = out; // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+
+    while(first < --reverse) // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+    {
+      const auto digit { *first };
+
+      *first++ = *reverse; // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+
+      *reverse = digit;
     }
 
-    return out + static_cast<std::size_t>(UINT8_C(1));
+    return out;
   }
 
   } // namespace util

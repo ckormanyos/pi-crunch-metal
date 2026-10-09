@@ -157,15 +157,16 @@ WARN_FLAGS =  -Wall                             \
               -Wdouble-promotion
 endif
 
-GCCFLAGS    = -g                                \
-              $(WARN_FLAGS)                     \
+GCCFLAGS    = $(WARN_FLAGS)                     \
               -Wno-comment                      \
-              -gdwarf-2                         \
+              -gdwarf-4                         \
               -fomit-frame-pointer              \
-              -fno-inline-functions             \
               -ffunction-sections               \
               -fdata-sections                   \
-              -fno-exceptions
+              -fno-exceptions                   \
+              -fno-math-errno                   \
+              -flto=auto                        \
+              -flto-partition=none
 
 CFLAGS      = $(GCCFLAGS)                       \
               $(TGT_CFLAGS)                     \
@@ -194,7 +195,7 @@ LDFLAGS     = $(CXXFLAGS)                       \
 # Main-Dependencies (app: all)
 # ------------------------------------------------------------------------------
 .PHONY: all
-all: clean_prj version $(APP)_flash.hex $(APP)_nm.txt $(APP).$(TGT_SUFFIX)
+all: clean_prj version print_flags $(APP)_flash.hex $(APP)_nm.txt $(APP).$(TGT_SUFFIX)
 
 
 # ------------------------------------------------------------------------------
@@ -255,6 +256,23 @@ version:
 	@$(ECHO)
 	@$(ECHO) +++ Print compiler definitions
 	@$(ECHO) $(C_DEFINES)
+	@$(ECHO)
+
+
+# ------------------------------------------------------------------------------
+# print compiler flags
+# ------------------------------------------------------------------------------
+.PHONY: print_flags
+print_flags:
+  # Print compiler flags
+	@$(ECHO) +++ Print the compiler CFLAGS
+	@$(ECHO) $(CFLAGS)
+	@$(ECHO)
+	@$(ECHO) +++ Print the compiler CXXFLAGS
+	@$(ECHO) $(CXXFLAGS)
+	@$(ECHO)
+	@$(ECHO) +++ Print the linker LDFLAGS
+	@$(ECHO) $(LDFLAGS)
 	@$(ECHO)
 
 
