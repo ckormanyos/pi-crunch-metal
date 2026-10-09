@@ -18,6 +18,10 @@
 
 extern void mcal_init(void);
 
+#if defined(__GNUC__)
+int main(void) __attribute__((used));
+#endif
+
 int main(void)
 {
   mcal_init();

@@ -72,3 +72,10 @@ extern "C"
   int* __errno(void) { return nullptr; }
   std::uint8_t __fdlib_version;
 }
+
+namespace std
+{
+  [[noreturn]] void __throw_length_error(const char*);
+
+  [[noreturn]] void __throw_length_error(const char*) { for(;;) { mcal::cpu::nop(); } }
+}

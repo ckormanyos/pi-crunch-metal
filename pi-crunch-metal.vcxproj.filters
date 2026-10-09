@@ -389,6 +389,9 @@
     <ClInclude Include="src\mcal_lcd\mcal_lcd_buffered_instance.h">
       <Filter>src\mcal_lcd</Filter>
     </ClInclude>
+    <ClInclude Include="src\util\utility\util_pseudorandom_time_point_seed.h">
+      <Filter>src\util\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\mcal\bcm2835_raspi_b\mcal_cpu_detail_secure.s">

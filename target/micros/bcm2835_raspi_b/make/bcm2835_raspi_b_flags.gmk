@@ -26,8 +26,8 @@ TGT_CFLAGS    = -std=c11                                                 \
                 -Wunsuffixed-float-constants                             \
                 $(TGT_ARMFLAGS)
 
-TGT_CXXFLAGS  = -std=c++20                                               \
-                -Os                                                      \
+TGT_CXXFLAGS  = -std=c++23                                               \
+                -O2                                                      \
                 -Wno-psabi                                               \
                 $(TGT_ARMFLAGS)
 
