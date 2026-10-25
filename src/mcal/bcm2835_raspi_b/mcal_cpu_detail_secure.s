@@ -1,5 +1,5 @@
 @;///////////////////////////////////////////////////////////////////////////////
-@;//  Copyright Christopher Kormanyos 2013 - 2021.
+@;//  Copyright Christopher Kormanyos 2013 - 2026.
 @;//  Distributed under the Boost Software License,
 @;//  Version 1.0. (See accompanying file LICENSE_1_0.txt
 @;//  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -12,7 +12,7 @@ mcal_cpu_detail_secure_start_mmu:
   mov r2, #0
   mcr p15, 0, r2, c7, c7, 0  @; invalidate caches
   mcr p15, 0, r2, c8, c7, 0  @; invalidate tlb
-  mcr p15, 0, r2, c7, c10, 5 @; DSB (barrier instruction)
+  mcr p15, 0, r2, c7, c10, 5 @; dsb (barrier instruction)
 
   mvn r2, #0
   bic r2, #0xC

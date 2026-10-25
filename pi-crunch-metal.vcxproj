@@ -381,6 +381,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="src\mcal\bcm2835_raspi_b\mcal_wdg.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="src\mcal\host\mcal_cpu.h" />
     <ClInclude Include="src\mcal\host\mcal_gpt.h" />
     <ClInclude Include="src\mcal\host\mcal_irq.h" />
@@ -391,6 +395,7 @@
     <ClInclude Include="src\mcal\host\mcal_reg.h" />
     <ClInclude Include="src\mcal\host\mcal_ser.h" />
     <ClInclude Include="src\mcal\host\mcal_spi.h" />
+    <ClInclude Include="src\mcal\host\mcal_wdg.h" />
     <ClInclude Include="src\mcal\mcal.h" />
     <ClInclude Include="src\mcal\mcal_helper.h" />
     <ClInclude Include="src\mcal\mcal_reg_access_dynamic.h" />
@@ -411,10 +416,8 @@
     <ClInclude Include="src\util\utility\util_baselexical_cast.h" />
     <ClInclude Include="src\util\utility\util_communication.h" />
     <ClInclude Include="src\util\utility\util_display.h" />
-    <ClInclude Include="src\util\utility\util_dynamic_array.h" />
     <ClInclude Include="src\util\utility\util_noexcept.h" />
     <ClInclude Include="src\util\utility\util_noncopyable.h" />
-    <ClInclude Include="src\util\utility\util_pseudorandom_time_point_seed.h" />
     <ClInclude Include="src\util\utility\util_time.h" />
     <ClInclude Include="src\util\utility\util_two_part_data_manipulation.h" />
     <ClInclude Include="src\util\utility\util_utype_helper.h" />

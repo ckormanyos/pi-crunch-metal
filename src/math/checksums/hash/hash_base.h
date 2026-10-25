@@ -1,42 +1,50 @@
 ///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2013 - 2023.
+//  Copyright Christopher Kormanyos 2013 - 2026.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef HASH_BASE_2013_09_05_H_
-  #define HASH_BASE_2013_09_05_H_
-
-  #include <limits>
+#ifndef HASH_BASE_2013_09_05_H
+  #define HASH_BASE_2013_09_05_H
 
   #include <math/checksums/hash/hash_detail.h>
   #include <math/checksums/hash/hash_stream_base.h>
 
+  #include <array>
+  #include <algorithm>
+  #include <cstddef>
+  #include <cstdint>
+  #include <limits>
+  #include <tuple>
+
   namespace math { namespace checksums { namespace hash {
 
-  template<const std::uint16_t ResultBitCount,
-           const std::uint16_t MessageBufferSize,
-           const std::uint16_t MessageLengthTotalBitCount>
+  template<std::uint16_t ResultBitCount,
+           std::uint16_t MessageBlockBufferSize,
+           std::uint16_t MessageBlockBitCount>
   class hash_base : public hash_stream_base
   {
+  private:
+    using base_class_type = hash_stream_base;
+
   public:
     using result_type = std::array<std::uint8_t, static_cast<std::size_t>(ResultBitCount / static_cast<std::uint16_t>(UINT8_C(8)))>;
 
     static_assert
     (
-           std::numeric_limits<count_type>::is_specialized
-      &&   std::numeric_limits<count_type>::is_integer
-      && (!std::numeric_limits<count_type>::is_signed)
-      && (std::numeric_limits<count_type>::radix == static_cast<int>(INT8_C(2)))
-      && (std::numeric_limits<count_type>::digits >= static_cast<int>(INT8_C(16)))
-      && (static_cast<int>(std::numeric_limits<count_type>::digits % static_cast<int>(INT8_C(8))) == static_cast<int>(INT8_C(0))),
-      "Error: The count type must be an unsigned integer with radix 2, that is 16 bits or wider, and having a multiple of 8 bits"
+           std::numeric_limits<base_class_type::count_type>::is_specialized
+      &&   std::numeric_limits<base_class_type::count_type>::is_integer
+      && (!std::numeric_limits<base_class_type::count_type>::is_signed)
+      && (std::numeric_limits<base_class_type::count_type>::radix == static_cast<int>(INT8_C(2)))
+      && (std::numeric_limits<base_class_type::count_type>::digits >= static_cast<int>(INT8_C(32)))
+      && (static_cast<int>(std::numeric_limits<base_class_type::count_type>::digits % static_cast<int>(INT8_C(8))) == static_cast<int>(INT8_C(0))),
+      "Error: The count type must be an unsigned integer with radix 2, that is 32 bits or wider, and having a multiple of 8 bits"
     );
 
-    virtual ~hash_base() = default;
+    ~hash_base() override = default;
 
-    virtual auto initialize() -> void
+    auto initialize() -> void override
     {
       message_index        = static_cast<std::uint_least32_t>(UINT8_C(0));
       message_length_total = static_cast<count_type>(UINT8_C(0));
@@ -44,7 +52,7 @@
       message_buffer.fill(static_cast<std::uint8_t>(UINT8_C(0)));
     }
 
-    virtual auto process(const std::uint8_t* message, const count_type count) -> void
+    auto process(const std::uint8_t* message, const count_type count) -> void override
     {
       auto process_index      = count_type { };
       auto process_chunk_size = count_type { };
@@ -57,7 +65,7 @@
 
         if(message_index == message_buffer_static_size())
         {
-          my_perform_algorithm();
+          perform_algorithm();
         }
 
         process_chunk_size = (std::min)(static_cast<count_type>(count - process_index),
@@ -70,10 +78,10 @@
       }
     }
 
-    virtual auto finalize() -> void
+    auto finalize() -> void override
     {
       // Create the padding. Begin by setting the leading padding byte to 0x80.
-      message_buffer[message_index] = static_cast<std::uint8_t>(UINT8_C(0x80));
+      message_buffer[static_cast<std::size_t>(message_index)] = static_cast<std::uint8_t>(UINT8_C(0x80));
 
       ++message_index;
 
@@ -89,7 +97,7 @@
 
       if(message_top > message_buffer_static_size())
       {
-        my_perform_algorithm();
+        perform_algorithm();
       }
 
       // Encode the total number of bits in the final transform buffer.
@@ -125,10 +133,10 @@
           );
       }
 
-      my_perform_algorithm();
+      perform_algorithm();
     }
 
-    auto get_result(typename result_type::pointer result) -> void
+    auto get_result(typename result_type::pointer result) const -> void
     {
       // Extract the hash result from the message digest state.
       detail::convert_uint32_input_to_uint8_output_reverse
@@ -139,8 +147,15 @@
       );
     }
 
+    auto hash(const std::uint8_t* message, const count_type count) -> void
+    {
+      this->initialize();
+      this->process(message, count);
+      this->finalize();
+    }
+
   protected:
-    using message_block_type = std::array<std::uint8_t, static_cast<std::size_t>(MessageBufferSize)>;
+    using message_block_type = std::array<std::uint8_t, static_cast<std::size_t>(MessageBlockBufferSize)>;
 
     using context_type = std::array<std::uint32_t, static_cast<std::size_t>(std::tuple_size<result_type>::value / sizeof(std::uint32_t))>;
 
@@ -156,34 +171,28 @@
 
     hash_base() = default;
 
-    hash_base(const hash_base&) = default;
-    hash_base(hash_base&&) noexcept = default;
-
-    auto operator=(const hash_base& other) -> hash_base& = default;
-    auto operator=(hash_base&& other) noexcept -> hash_base& = default;
-
   private:
-    static constexpr auto message_length_total_width() noexcept -> std::uint16_t
+    static constexpr auto message_length_total_width() -> std::uint16_t
     {
       return
         static_cast<std::uint16_t>
         (
-          MessageLengthTotalBitCount / static_cast<std::uint16_t>(UINT8_C(8))
+          MessageBlockBitCount / static_cast<std::uint16_t>(UINT8_C(8))
         );
     }
 
-    virtual auto perform_algorithm() -> void = 0;
+    virtual auto my_perform_algorithm() -> void = 0;
 
-    auto my_perform_algorithm() -> void
+    auto perform_algorithm() -> void
     {
-      this->perform_algorithm();
+      this->my_perform_algorithm();
 
-      message_index = static_cast<std::uint_least32_t>(UINT8_C(0));
+      message_index = std::uint_least32_t { UINT8_C(0) };
 
-      message_buffer.fill(static_cast<std::uint8_t>(UINT8_C(0)));
+      message_buffer.fill(std::uint8_t { UINT8_C(0) });
     }
   };
 
   } } } // namespace math::checksums::hash
 
-#endif // HASH_BASE_2013_09_05_H_
+#endif // HASH_BASE_2013_09_05_H
