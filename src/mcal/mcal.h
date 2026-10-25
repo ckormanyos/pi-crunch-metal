@@ -15,6 +15,8 @@
   #include <mcal_port.h>
   #include <mcal_spi.h>
 
+  #include <limits>
+
   static_assert(   (std::numeric_limits<mcal::gpt::value_type>::digits >= 64)
                 && (std::numeric_limits<mcal::gpt::value_type>::is_integer == true)
                 && (std::numeric_limits<mcal::gpt::value_type>::is_signed  == false),

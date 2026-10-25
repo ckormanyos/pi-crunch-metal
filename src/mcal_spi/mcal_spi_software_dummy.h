@@ -1,5 +1,5 @@
 ﻿///////////////////////////////////////////////////////////////////////////////
-//  Copyright Christopher Kormanyos 2020 - 2023.
+//  Copyright Christopher Kormanyos 2020 - 2026.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -10,9 +10,9 @@
 
   #include <util/utility/util_communication.h>
 
-  namespace mcal { namespace spi {
+  namespace mcal { namespace spi { // NOLINT(modernize-concat-nested-namespaces)
 
-  class spi_software_dummy : public util::communication_buffer_depth_one_byte
+  class spi_software_dummy : public util::communication_buffer_depth_one_byte // NOLINT(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
   {
   private:
     using base_class_type = util::communication_buffer_depth_one_byte;
@@ -24,7 +24,7 @@
 
     ~spi_software_dummy() override = default;
 
-    auto send(const std::uint8_t byte_to_send) -> bool override
+    auto send(const std::uint8_t byte_to_send) noexcept -> bool override
     {
       static_cast<void>(byte_to_send);
 

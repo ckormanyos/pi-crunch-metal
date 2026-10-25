@@ -1,18 +1,19 @@
-//  Copyright Christopher Kormanyos 2013 - 2023.
+//  Copyright Christopher Kormanyos 2013 - 2026.
 //  Distributed under the Boost Software License,
 //  Version 1.0. (See accompanying file LICENSE_1_0.txt
 //  or copy at http://www.boost.org/LICENSE_1_0.txt)
 //
 
-#ifndef HASH_DETAIL_2020_05_18_H_
-  #define HASH_DETAIL_2020_05_18_H_
+#ifndef HASH_DETAIL_2020_05_18_H
+  #define HASH_DETAIL_2020_05_18_H
 
   #include <cstddef>
   #include <cstdint>
+  #include <limits>
 
   namespace math { namespace checksums { namespace hash { namespace detail {
 
-  template<const std::uint_fast8_t digits_shift,
+  template<std::uint_fast8_t digits_shift,
            typename arithmetic_type>
   constexpr auto circular_right_shift(arithmetic_type the_value) -> arithmetic_type
   {
@@ -24,7 +25,7 @@
       );
   }
 
-  template<const std::uint_fast8_t digits_shift,
+  template<std::uint_fast8_t digits_shift,
            typename arithmetic_type>
   constexpr auto circular_left_shift(arithmetic_type the_value) -> arithmetic_type
   {
@@ -36,7 +37,7 @@
       );
   }
 
-  inline auto convert_uint8_input_to_uint32_output(const std::uint8_t* in_begin, const std::uint8_t*  in_end, std::uint32_t* out_begin) -> void
+  constexpr auto convert_uint8_input_to_uint32_output(const std::uint8_t* in_begin, const std::uint8_t*  in_end, std::uint32_t* out_begin) -> void
   {
     // Decode the input uint8_t source into the output uint32_t destination.
     // This subroutine assumes that the length of the input is a multiple of 4.
@@ -60,7 +61,7 @@
     }
   }
 
-  inline auto convert_uint8_input_to_uint32_output_reverse(const std::uint8_t*  in_begin, const std::uint8_t*  in_end, std::uint32_t* out_begin) -> void
+  constexpr auto convert_uint8_input_to_uint32_output_reverse(const std::uint8_t*  in_begin, const std::uint8_t*  in_end, std::uint32_t* out_begin) -> void
   {
     // Decode the input uint8_t source into the output uint32_t destination.
     // This subroutine assumes that the length of the input is a multiple of 4.
@@ -84,7 +85,7 @@
     }
   }
 
-  inline auto convert_uint32_input_to_uint8_output(const std::uint32_t* in_begin, const std::uint32_t* in_end, std::uint8_t*  out_begin) -> void
+  constexpr auto convert_uint32_input_to_uint8_output(const std::uint32_t* in_begin, const std::uint32_t* in_end, std::uint8_t*  out_begin) -> void
   {
     // Encode the input uint32_t source into the output uint8_t destination.
     // This subroutine assumes that the length of the output is a multiple of 4.
@@ -104,7 +105,7 @@
     }
   }
 
-  inline auto convert_uint32_input_to_uint8_output_reverse(const std::uint32_t* in_begin, const std::uint32_t* in_end, std::uint8_t*  out_begin) -> void
+  constexpr auto convert_uint32_input_to_uint8_output_reverse(const std::uint32_t* in_begin, const std::uint32_t* in_end, std::uint8_t*  out_begin) -> void
   {
     // Encode the input uint32_t source into the output uint8_t destination.
     // This subroutine assumes that the length of the output is a multiple of 4.
@@ -126,4 +127,4 @@
 
   } } } } // namespace math::checksums::hash::detail
 
-#endif // HASH_DETAIL_2020_05_18_H_
+#endif // HASH_DETAIL_2020_05_18_H
